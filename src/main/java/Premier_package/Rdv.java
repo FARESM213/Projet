@@ -24,9 +24,6 @@ public class Rdv {
           etat=e;
     }
 
-    public Rdv() {
-
-    }
 
     void Set_id (int id) { id_rdv=id;}
     void Set_med (int med) {id_med=med;}
@@ -52,8 +49,8 @@ public class Rdv {
 
     @Override
     public String toString() {
-        String e="";
-        if (etat==true)
+        String e;
+        if (etat)
             e="Libre";
         else
             e="Reservé";

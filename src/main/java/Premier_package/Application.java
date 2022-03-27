@@ -2,8 +2,6 @@ package Premier_package;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +24,7 @@ public class Application {
     ChangementMdp mot;
 
     public void main(String[] s) throws SQLException, ClassNotFoundException {
-        Application tst = new Application(0);
-        //Log();
+        new Application(0);
     }
 
     public static void Log() throws SQLException, ClassNotFoundException
@@ -119,7 +116,7 @@ public class Application {
         String job = null;
 
         Med.add(new Medecin(id,nom,login,mdp,job));
-        maconnexion.ajouterElement("Medecin",Med.get(Med.size()-1));
+        maconnexion.ajouterElement(Med.get(Med.size()-1));
     }
     void AjouterPatient() throws SQLException {
         int id = 0;
@@ -127,7 +124,7 @@ public class Application {
         String login = null;
         String mdp = null;
         Pat.add(new Patient(id,nom,login,mdp));
-        maconnexion.ajouterElement("Patient",Pat.get(Pat.size()-1));
+        maconnexion.ajouterElement(Pat.get(Pat.size()-1));
     }
     void AjouterRdv() throws SQLException {
         int id=0;
@@ -140,66 +137,63 @@ public class Application {
         int horaire=0;
         boolean etat=true;
         Rendezvous.add(new Rdv(id,med,pat,date,motif,duree,horaire,lieu,etat));
-        maconnexion.ajouterElement("Rendez_vous",Rendezvous.get(Rendezvous.size()-1));
+        maconnexion.ajouterElement(Rendezvous.get(Rendezvous.size()-1));
     }
 
     public Application(int i) throws SQLException, ClassNotFoundException {
         init();
-        button1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int trouve=0;
-                if ( i==1)
+        button1.addActionListener(e -> {
+            int trouve=0;
+            if ( i==1)
+            {
+                for ( Patient N : Pat)
                 {
-                    for ( Patient N : Pat)
+                    if  ( (Objects.equals(N.Get_log(), textField1.getText()) ))
                     {
-                        if  ( (Objects.equals(N.Get_log(), textField1.getText()) ))
+                        if  ( (Objects.equals(N.Get_mdp(), String.valueOf(passwordField1.getPassword())) ))
                         {
-                            if  ( (Objects.equals(N.Get_mdp(), String.valueOf(passwordField1.getPassword())) ))
-                            {
-                                trouve=1;
-                                break;
-                            }
-                            else
-                            {
-                                trouve=2;
-                                break;
-                            }
+                            trouve=1;
+                            break;
+                        }
+                        else
+                        {
+                            trouve=2;
+                            break;
                         }
                     }
                 }
-                else {
-                    for (Medecin N : Med) {
-                        if ((Objects.equals(N.Get_log(), textField1.getText())))
-                        {
-                            if ((Objects.equals(N.Get_mdp(), String.valueOf(passwordField1.getPassword())))) {
-                                trouve = 1;
-                                break;
-                            } else {
-                                trouve = 2;
-                                break;
-                            }
+            }
+            else {
+                for (Medecin N : Med) {
+                    if ((Objects.equals(N.Get_log(), textField1.getText())))
+                    {
+                        if ((Objects.equals(N.Get_mdp(), String.valueOf(passwordField1.getPassword())))) {
+                            trouve = 1;
+                            break;
+                        } else {
+                            trouve = 2;
+                            break;
                         }
                     }
                 }
-                try {
-                    switch (trouve)
-                    {
-                        case 0 : {JOptionPane.showMessageDialog(null,"PAS DE COMPTE, CREER UN NOUVEAU ? ","Erreur",JOptionPane.INFORMATION_MESSAGE);} break;
-                        case 1 : {Login.setVisible(false); sui= new Suite(Application.this,i);System.out.println("Trouve LE COMPTE MON FRERE ");} break;
-                        case 2 :
-                        {
-                            if (JOptionPane.showConfirmDialog(null,"  Mot de passe incorrect... Voulez vous le modifier ?","Clear TextField",JOptionPane.YES_NO_OPTION)==0)
-                            {
-                                Login.setVisible(false);
-                                mot= new ChangementMdp(Application.this);
-                            }
-                        } break;
-                    }
-                } catch (SQLException | ClassNotFoundException ex)
+            }
+            try {
+                switch (trouve)
                 {
-                    ex.printStackTrace();
+                    case 0 : {JOptionPane.showMessageDialog(null,"PAS DE COMPTE, CREER UN NOUVEAU ? ","Erreur",JOptionPane.INFORMATION_MESSAGE);} break;
+                    case 1 : {Login.setVisible(false); sui= new Suite(Application.this,i);} break;
+                    case 2 :
+                    {
+                        if (JOptionPane.showConfirmDialog(null,"  Mot de passe incorrect... Voulez vous le modifier ?","Clear TextField",JOptionPane.YES_NO_OPTION)==0)
+                        {
+                            Login.setVisible(false);
+                            mot= new ChangementMdp(Application.this);
+                        }
+                    } break;
                 }
+            } catch (SQLException | ClassNotFoundException ex)
+            {
+                ex.printStackTrace();
             }
         });
     }

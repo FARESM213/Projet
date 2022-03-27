@@ -2,11 +2,8 @@ package Premier_package;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 public class Welcome {
     private JPanel panel1;
@@ -16,8 +13,7 @@ public class Welcome {
 
     static JFrame Suite = new JFrame("Suite");
 
-    public void Suu() throws SQLException, ClassNotFoundException
-    {
+    public void Suu() {
         Suite.setContentPane(panel1);
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Suite.setPreferredSize(new Dimension(500,500));
@@ -26,38 +22,28 @@ public class Welcome {
         Suite.setVisible(true);
     }
 
-    public  static void main(String[] s) throws SQLException, ClassNotFoundException {
-        Welcome tst = new Welcome();
+    public  static void main(String[] s) {
+        new Welcome();
     }
 
-    public Welcome() throws SQLException, ClassNotFoundException {
+    public Welcome() {
         Suu();
-        medecinCheckBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                    Suite.setVisible(false);try {
+        medecinCheckBox.addActionListener(e -> {
+                Suite.setVisible(false);try {
 
-                    Application App = new Application(1);
-                    App.Log();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                } catch (ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                }
+                new Application(1);
+                Application.Log();
+            } catch (SQLException | ClassNotFoundException ex) {
+                ex.printStackTrace();
             }
         });
-        patientCheckBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Suite.setVisible(false);
-                try {
-                    Application App = new Application(0);
-                    App.Log();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                } catch (ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                }
+        patientCheckBox.addActionListener(e -> {
+            Suite.setVisible(false);
+            try {
+                new Application(0);
+                Application.Log();
+            } catch (SQLException | ClassNotFoundException ex) {
+                ex.printStackTrace();
             }
         });
     }

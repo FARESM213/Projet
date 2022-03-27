@@ -4,7 +4,6 @@ package Premier_package;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Connexion {
@@ -12,7 +11,7 @@ public class Connexion {
     private final Connection conn;
     private Statement stmt;
     private ResultSet rset;
-    private ResultSetMetaData rsetMeta;
+
     /**
      * ArrayList public pour les tables
      */
@@ -45,7 +44,7 @@ public class Connexion {
     }
 
 
-    public void ajouterElement(String table, Object O) throws SQLException
+    public void ajouterElement(Object O) throws SQLException
     {
         stmt = conn.createStatement();
         if ( O.getClass()==Patient.class)
@@ -60,9 +59,6 @@ public class Connexion {
         {
             stmt.executeUpdate("INSERT INTO Rendez_vous VALUES ("+((Rdv) O).Get_id()+","+((Rdv) O).Get_med()+","+((Rdv) O).Get_pat()+",'"+((Rdv) O).Get_date()+"','"+ ((Rdv) O).Get_motif()+"',"+  ((Rdv) O).Get_duree()+","+ ((Rdv) O).Get_horaire()+",'"+((Rdv) O).Get_lieu()+",'"+((Rdv) O).Get_etat()+"')");
         }
-        // stmt.executeUpdate("CREATE TABLE joshua (Id INT, Message CHAR(20), Appreciation CHAR (20) )");
-        //stmt.executeUpdate("INSERT INTO joshua VALUES (500,'JOSHUA','EST UNE PUTE' )");
-        //stmt.executeUpdate("UPDATE joshua SET Appreciation='EST UNE GROSSE PUTE' WHERE Appreciation='EST UNE PUTE'");
     }
     public void UpdateElement(String table, String champ,Object Depart , Object Final,String genre,int id) throws SQLException
     {

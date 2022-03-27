@@ -27,15 +27,6 @@ public class Suite {
     Suite(Application App, int i) throws SQLException, ClassNotFoundException
     {
         this.Suu(App);
-
-    }
-
-
-    private JFrame createFrame() {
-        JFrame frame = new JFrame("JList Example");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(new Dimension(600, 300));
-        return frame;
     }
 
     private ListSelectionListener createListSelectionListener(JList<Rdv> list1,Application App) {
@@ -43,7 +34,6 @@ public class Suite {
             if (!e.getValueIsAdjusting()) {
                 String Patient="";
                 String Medecin="";
-
                 for (Patient N :App.Pat)
                 {
                     if(list1.getSelectedValue().Get_pat()==N.Get_id())
@@ -54,8 +44,7 @@ public class Suite {
                     if(list1.getSelectedValue().Get_med()==N.Get_id())
                         Medecin=N.Get_nom();
                 }
-                textArea1.setText(" Patient : "+Patient+"\n\n Medecin : "+Medecin+"\n\n "+String.valueOf(list1.getSelectedValue()));
-                System.out.println(list1.getSelectedValue());
+                textArea1.setText(" Patient : "+Patient+"\n\n Medecin : "+Medecin+"\n\n "+ list1.getSelectedValue());
             }
         };
     }
@@ -82,8 +71,7 @@ public class Suite {
         };
     }
 
-    public void Suu(Application App) throws SQLException, ClassNotFoundException
-    {
+    public void Suu(Application App) {
         try {
             createUIComponents(App);
         } catch (ParseException e) {
@@ -108,11 +96,6 @@ public class Suite {
         Liste.setModel(dlm);
         Liste.setCellRenderer(createListRenderer());
         Liste.addListSelectionListener(createListSelectionListener(Liste,App));
-
-        /*JFrame frame = createFrame();
-        frame.add(Liste);
-        frame.setVisible(true);*/
-
         SpinnerDateModel model = new SpinnerDateModel();
         spinner1.setModel(model);
         JSpinner.DateEditor editor = new JSpinner.DateEditor(spinner1, "dd-MM-yyyy");
