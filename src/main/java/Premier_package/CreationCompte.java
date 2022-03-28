@@ -24,10 +24,9 @@ public class CreationCompte {
         Suite.setResizable(false);
         Suite.pack();
         Suite.setVisible(true);
-        IFMEDECIN.setVisible(indice != 0);
+        IFMEDECIN.setVisible(indice != 1);
 
     }
-
 
     public CreationCompte( int indice) throws SQLException, ClassNotFoundException {
         Suu(indice);
@@ -37,41 +36,28 @@ public class CreationCompte {
 
                 String str = new String(MDPField.getPassword());
                 try {
-                    new Application(indice).AjouterMedecin(NomTextField.getText(),LoginTextField.getText(),str,SPEField.getText());
-                } catch (SQLException | ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                }
-
-                IFMEDECIN.setVisible(false);
-                Suite.setVisible(false);try {
-
                     Application App = new Application(indice);
+                    App.AjouterMedecin(NomTextField.getText(),LoginTextField.getText(),str,SPEField.getText());
                     App.Log();
-                } catch (SQLException | ClassNotFoundException ex) {
+                } catch (SQLException | ClassNotFoundException ex)
+                {
                     ex.printStackTrace();
                 }
-
-
+                Suite.setVisible(false);
             });
 
         } else {//PATIENT
 
             creerButton.addActionListener(e -> {
                 String str = new String(MDPField.getPassword());
-
                 try {
-                    new Application(indice).AjouterPatient(NomTextField.getText(),LoginTextField.getText(),str);
-                } catch (SQLException | ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                }
-
-                Suite.setVisible(false);try {
-
                     Application App = new Application(indice);
+                    App.AjouterPatient(NomTextField.getText(),LoginTextField.getText(),str);
                     App.Log();
                 } catch (SQLException | ClassNotFoundException ex) {
                     ex.printStackTrace();
                 }
+                Suite.setVisible(false);
             });
 
         }

@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Application {
 
     private JButton button1;
-    public JPanel PannelMain;
+    public  JPanel PannelMain;
     private JTextField textField1;
     private JPasswordField passwordField1;
 
@@ -26,13 +26,9 @@ public class Application {
     Suite sui;
     ChangementMdp mot;
 
-    public void main(String[] s) throws SQLException, ClassNotFoundException {
-        new Application(0);
-    }
-
-    public static void Log() throws SQLException, ClassNotFoundException
+    public void Log() throws SQLException, ClassNotFoundException
     {
-        Login.setContentPane(new Application(1).PannelMain);
+        Login.setContentPane(PannelMain);
         Login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Login.setPreferredSize(new Dimension(250,200));
         Login.setResizable(false);
@@ -180,6 +176,7 @@ public class Application {
 
     public Application(int i) throws SQLException, ClassNotFoundException {
         init();
+        System.out.println(i);
         button1.addActionListener(e -> {
             int trouve=0;
             if ( i==1)
@@ -191,13 +188,12 @@ public class Application {
                         if  ( (Objects.equals(N.Get_mdp(), String.valueOf(passwordField1.getPassword())) ))
                         {
                             trouve=1;
-                            break;
                         }
                         else
                         {
                             trouve=2;
-                            break;
                         }
+                        break;
                     }
                 }
             }
@@ -207,11 +203,10 @@ public class Application {
                     {
                         if ((Objects.equals(N.Get_mdp(), String.valueOf(passwordField1.getPassword())))) {
                             trouve = 1;
-                            break;
                         } else {
                             trouve = 2;
-                            break;
                         }
+                        break;
                     }
                 }
             }

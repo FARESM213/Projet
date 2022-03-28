@@ -26,47 +26,22 @@ public class Welcome2 {
         Suu();
         Connexion.addActionListener(e -> {
 
-            if (indice==1) {
-                Welcome2.setVisible(false);
-                try {
-
-                    Application App = new Application(indice);
-                    App.Log();
-                } catch (SQLException | ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                }
-            } else {
-                Welcome2.setVisible(false);
-                try {
-
-                    Application App = new Application(indice);
-                    App.Log();
-                } catch (SQLException | ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                }
+            Welcome2.setVisible(false);
+            try {
+                Application App = new Application(indice);
+                App.Log();
+            } catch (SQLException | ClassNotFoundException ex) {
+                ex.printStackTrace();
             }
+
         });
         CreerCompte.addActionListener(e -> {
 
-            if (indice==1)
-            {
-                Welcome2.setVisible(false);
-                try {
-
-                    new Welcome2(indice);
-
-                       } catch (SQLException | ClassNotFoundException ex) {
-                           ex.printStackTrace();
-                       }
-            }
-            else
-            {
-                Welcome2.setVisible(false);
-                try {
-                           new Welcome2(indice);
-                       } catch (SQLException | ClassNotFoundException ex) {
-                           ex.printStackTrace();
-                       }
+            Welcome2.setVisible(false);
+            try {
+                new CreationCompte(indice);
+            } catch (SQLException | ClassNotFoundException ex) {
+                ex.printStackTrace();
             }
         });
 }

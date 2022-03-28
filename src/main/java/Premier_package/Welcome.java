@@ -10,8 +10,6 @@ public class Welcome {
     private JCheckBox Medecin;
     private JCheckBox Patient;
 
-    int i=-1;
-
     static JFrame Suite = new JFrame("Suite");
 
     public void Suu() {
@@ -30,7 +28,8 @@ public class Welcome {
     public Welcome() {
         Suu();
         Medecin.addActionListener(e -> {
-            Suite.setVisible(false);try {
+            Suite.setVisible(false);
+            try {
 
                 new Welcome2(0);
             } catch (SQLException | ClassNotFoundException ex) {
