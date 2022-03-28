@@ -31,8 +31,8 @@ public class Application {
     {
         Login.setContentPane(new Application(1).PannelMain);
         Login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Login.setPreferredSize(new Dimension(250,200));
-        Login.setResizable(false);
+        Login.setPreferredSize(new Dimension(500,200));
+        Login.setResizable(true);
         Login.pack();
         Login.setVisible(true);
     }
@@ -108,22 +108,14 @@ public class Application {
         else{             System.out.println("PROBLEME");}
 
     }
-    void AjouterMedecin() throws SQLException {
+    void AjouterMedecin(String NOM, String LOGIN, String MDP, String JOB) throws SQLException {
         int id = 0;
-        String nom = null;
-        String login = null;
-        String mdp = null;
-        String job = null;
-
-        Med.add(new Medecin(id,nom,login,mdp,job));
+        Med.add(new Medecin(id,NOM,LOGIN,MDP,JOB));
         maconnexion.ajouterElement(Med.get(Med.size()-1));
     }
-    void AjouterPatient() throws SQLException {
+    void AjouterPatient(String NOM, String LOGIN, String MDP) throws SQLException {
         int id = 0;
-        String nom = null;
-        String login = null;
-        String mdp = null;
-        Pat.add(new Patient(id,nom,login,mdp));
+        Pat.add(new Patient(id,NOM,LOGIN,MDP));
         maconnexion.ajouterElement(Pat.get(Pat.size()-1));
     }
     void AjouterRdv() throws SQLException {

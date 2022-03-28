@@ -7,8 +7,9 @@ import java.sql.SQLException;
 
 public class Welcome {
     private JPanel panel1;
-    private JCheckBox patientCheckBox;
-    private JCheckBox medecinCheckBox;
+    private JCheckBox Medecin;
+    private JCheckBox Patient;
+
     int i=-1;
 
     static JFrame Suite = new JFrame("Suite");
@@ -16,7 +17,7 @@ public class Welcome {
     public void Suu() {
         Suite.setContentPane(panel1);
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Suite.setPreferredSize(new Dimension(500,500));
+        Suite.setPreferredSize(new Dimension(500,250));
         Suite.setResizable(false);
         Suite.pack();
         Suite.setVisible(true);
@@ -27,25 +28,26 @@ public class Welcome {
     }
 
     public Welcome() {
+
         Suu();
-        medecinCheckBox.addActionListener(e -> {
+        Medecin.addActionListener(e -> {
                 Suite.setVisible(false);try {
 
-                new Application(1);
-                Application.Log();
+                new Welcome2(1);
             } catch (SQLException | ClassNotFoundException ex) {
                 ex.printStackTrace();
             }
         });
-        patientCheckBox.addActionListener(e -> {
+        Patient.addActionListener(e -> {
             Suite.setVisible(false);
             try {
-                new Application(0);
-                Application.Log();
+                new Welcome2(0);
             } catch (SQLException | ClassNotFoundException ex) {
                 ex.printStackTrace();
             }
         });
+
+
     }
 
 }
