@@ -1,7 +1,9 @@
 package Premier_package;
 
+import javax.mail.MessagingException;
 import javax.swing.*;
 import java.awt.*;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 
 
@@ -54,7 +56,7 @@ public class CreationCompte {
                     Application App = new Application(indice);
                     App.AjouterPatient(NomTextField.getText(),LoginTextField.getText(),str);
                     App.Log();
-                } catch (SQLException | ClassNotFoundException ex) {
+                } catch (SQLException | ClassNotFoundException | UnsupportedEncodingException | MessagingException ex) {
                     ex.printStackTrace();
                 }
                 Suite.setVisible(false);

@@ -1,12 +1,24 @@
 package Premier_package;
 
+
+import javax.mail.*;
+
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessagePreparator;
+
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.*;
 import java.awt.*;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Objects;
 
 
 public class Application {
@@ -15,6 +27,49 @@ public class Application {
     public  JPanel PannelMain;
     private JTextField textField1;
     private JPasswordField passwordField1;
+    public JavaMailSender emailSender= new JavaMailSender() {
+        @Override
+        public void send(SimpleMailMessage simpleMailMessage) throws MailException {
+            send(new SimpleMailMessage[] {simpleMailMessage});
+            System.out.println("UI");
+        }
+        @Override
+        public void send(SimpleMailMessage... simpleMailMessages) throws MailException {
+
+        }
+
+        @Override
+        public MimeMessage createMimeMessage() {
+            return null;
+        }
+
+        @Override
+        public MimeMessage createMimeMessage(InputStream inputStream) throws MailException {
+            return null;
+        }
+
+        @Override
+        public void send(MimeMessage mimeMessage) throws MailException {
+
+        }
+
+        @Override
+        public void send(MimeMessage... mimeMessages) throws MailException {
+
+        }
+
+        @Override
+        public void send(MimeMessagePreparator mimeMessagePreparator) throws MailException {
+
+        }
+
+        @Override
+        public void send(MimeMessagePreparator... mimeMessagePreparators) throws MailException {
+
+        }
+
+    };
+
 
     public Connexion maconnexion;
     public final List<Patient> Pat = new ArrayList<>();
@@ -85,7 +140,7 @@ public class Application {
             maconnexion.SuppElement(Pat.get(i),id,mdp);
             Pat.remove(i);
         }
-        else{              System.out.println("PROBLEME");}
+        else{System.out.println("PROBLEME");}
     }
     void SuppRdv() throws SQLException {
         int idpat=0;
@@ -111,11 +166,21 @@ public class Application {
         int id = Med.size();
         Med.add(new Medecin(id,nom,login,mdp,job));
         maconnexion.ajouterElement(Med.get(Med.size()-1));
+        /// AJOUTER UN CHAMP MAIL POUR LES 2 ////
+        String mail = null;
+        EnvoyerEmail(mail);
     }
-    void AjouterPatient(String nom, String login, String mdp) throws SQLException {
+    void AjouterPatient(String nom, String login, String mdp) throws UnsupportedEncodingException, MessagingException {
         int id = Pat.size();
         Pat.add(new Patient(id,nom,login,mdp));
-        maconnexion.ajouterElement(Pat.get(Pat.size()-1));
+        try {
+            maconnexion.ajouterElement(Pat.get(Pat.size()-1));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        /// AJOUTER UN CHAMP MAIL POUR LES 2 ////
+        String mail = null;
+        EnvoyerEmail(mail);
     }
     void AjouterRdv() throws SQLException {
         int id=0;
@@ -130,53 +195,34 @@ public class Application {
         Rendezvous.add(new Rdv(id,med,pat,date,motif,duree,horaire,lieu,etat));
         maconnexion.ajouterElement(Rendezvous.get(Rendezvous.size()-1));
     }
-    /*void EnvoyerEmail()
+
+    void EnvoyerEmail(String Recever)
     {
-        String to = "fares.messaoudi@edu.ece.fr";
-        // Sender's email ID needs to be mentioned
-        String from = "infoprojet582@gmail.com";
-
-        // Assuming you are sending email from localhost
-        String host = "localhost";
-        // Get system properties
-        Properties properties = System.getProperties();
-
-        // Setup mail server
-        properties.setProperty("mail.smtp.host", host);
-
-        // Get the default Session object.
-        Session session = Session.getInstance(properties,null);
-
-        try {
-            // Create a default MimeMessage object.
-            MimeMessage message = new MimeMessage( (MimeMessage)session);
-
-            // Set From: header field of the header.
-            message.setFrom(new InternetAddress(from));
-
-            // Set To: header field of the header.
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-            // Set Subject: header field
-            message.setSubject("This is the Subject Line!");
-
-            // Now set the actual message
-            message.setText("This is actual message");
-
-            // Send message
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth","true");
+        properties.put("mail.smtp.starttls.enable","true");
+        properties.put("mail.smtp.host","smtp.gmail.com");
+        properties.put("mail.smtp.port","587");
+        Session session = Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(MailConfig.MyConstants.MY_EMAIL,MailConfig.MyConstants.MY_PASSWORD);
+            }
+        });
+        try{
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(MailConfig.MyConstants.MY_EMAIL));
+            message.addRecipient(Message.RecipientType.TO,new InternetAddress(Recever));
+            message.setSubject("Ping");
+            message.setText("Hello, this is example of sending email  ");
             Transport.send(message);
+            System.out.println("message sent successfully....");
 
-            System.out.println("Sent message successfully....");
-
-        } catch (MessagingException | javax.mail.MessagingException mex) {
-            mex.printStackTrace();
-        }
+        }catch (MessagingException mex) {mex.printStackTrace();}
     }
-*/
 
     public Application(int i) throws SQLException, ClassNotFoundException {
         init();
-        System.out.println(i);
         button1.addActionListener(e -> {
             int trouve=0;
             if ( i==1)

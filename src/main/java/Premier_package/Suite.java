@@ -93,7 +93,6 @@ public class Suite {
                 {
                     whouere+= "AND medno="+idmedcin;
                 }
-                System.out.println( whouere );
                 try
                 {
                     setDlm(whouere,App);
