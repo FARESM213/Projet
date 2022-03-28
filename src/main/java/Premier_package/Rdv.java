@@ -1,17 +1,20 @@
 package Premier_package;
+
+import java.time.LocalDate;
+
 public class Rdv {
 
     private int id_rdv;
     private int id_med;
     private int id_pat;
-    private String rdv_date;
+    private LocalDate rdv_date;
     private String rdv_lieu;
     private String rdv_motif;
     private int rdv_duree;
     private int rdv_horaire;
     private boolean etat;
 
-    Rdv( int id , int med,int pat, String date, String motif, int duree, int horaire,String lieu,boolean e)
+    Rdv(int id , int med, int pat, LocalDate date, String motif, int duree, int horaire, String lieu, boolean e)
     {
           id_rdv=id;
           id_med=med;
@@ -32,7 +35,7 @@ public class Rdv {
     void Set_motif (String motif) {rdv_motif=motif;}
     void Set_duree(int duree) {rdv_duree=duree;}
     void Set_horaire (int horarire) {rdv_horaire=horarire;}
-    void Set_date (String date) {rdv_date=date;}
+    void Set_date (LocalDate date) {rdv_date=date;}
     void Set_etat (boolean e) {etat=e;}
 
 
@@ -42,7 +45,7 @@ public class Rdv {
     int Get_pat () { return id_pat;}
     String Get_lieu () { return rdv_lieu;}
     String Get_motif () { return rdv_motif;}
-    String Get_date () { return rdv_date;}
+    LocalDate Get_date () { return rdv_date;}
     int Get_duree() { return rdv_duree;}
     int Get_horaire () { return rdv_horaire;}
     Boolean Get_etat () {return etat;}

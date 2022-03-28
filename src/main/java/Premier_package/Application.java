@@ -1,20 +1,12 @@
 package Premier_package;
 
-import com.mysql.cj.api.Session;
-import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
-import sun.plugin2.message.transport.Transport;
-
-import javax.mail.Message;
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Properties;
 
 
 public class Application {
@@ -116,24 +108,16 @@ public class Application {
             maconnexion.SuppElement(Rendezvous.get(i),idmed,idpat);
             Rendezvous.remove(i);
         }
-        else{             System.out.println("PROBLEME");}
+        else{System.out.println("PROBLEME");}
 
     }
-    void AjouterMedecin() throws SQLException {
-        int id = 0;
-        String nom = null;
-        String login = null;
-        String mdp = null;
-        String job = null;
-
+    void AjouterMedecin(String nom, String login, String mdp, String job) throws SQLException {
+        int id = Med.size();
         Med.add(new Medecin(id,nom,login,mdp,job));
         maconnexion.ajouterElement(Med.get(Med.size()-1));
     }
-    void AjouterPatient() throws SQLException {
-        int id = 0;
-        String nom = null;
-        String login = null;
-        String mdp = null;
+    void AjouterPatient(String nom, String login, String mdp) throws SQLException {
+        int id = Pat.size();
         Pat.add(new Patient(id,nom,login,mdp));
         maconnexion.ajouterElement(Pat.get(Pat.size()-1));
     }
@@ -141,7 +125,7 @@ public class Application {
         int id=0;
         int med=0;
         int pat=0;
-        String date=null;
+        LocalDate date=null;
         String lieu=null;
         String motif=null;
         int duree=0;

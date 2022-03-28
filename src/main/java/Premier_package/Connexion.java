@@ -39,7 +39,7 @@ public class Connexion {
         rset=stmt.executeQuery("SELECT * FROM Rendez_vous");
         while(rset.next())
         {
-            Rendezvous.add(new Rdv(rset.getInt(1), rset.getInt(2), rset.getInt(3), rset.getString(4),rset.getString(5), rset.getInt(6),rset.getInt(7),rset.getString(8),rset.getBoolean(9)));
+            Rendezvous.add(new Rdv(rset.getInt(1), rset.getInt(2), rset.getInt(3), rset.getDate(4).toLocalDate(),rset.getString(5), rset.getInt(6),rset.getInt(7),rset.getString(8),rset.getBoolean(9)));
         }
     }
 
@@ -81,6 +81,11 @@ public class Connexion {
         {
             stmt.executeUpdate("DELETE FROM Rendez_vous WHERE medno="+Final+" AND patno="+FinalB);
         }
+    }
+
+    public ResultSet Search (String table,String Elem,String whouere) throws SQLException {
+        stmt = conn.createStatement();
+        return  stmt.executeQuery("SELECT "+Elem+" FROM "+ table+" "+whouere);
     }
 }
 
