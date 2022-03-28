@@ -3,12 +3,20 @@ package Premier_package;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Objects;
+
 public class Suite {
     private JPanel Test;
-    private JComboBox<String> Med_cin;
+    private JComboBox<Medecin> Med_cin;
     private JComboBox Jour;
     private JButton appliquerButton;
     private JRadioButton libreRadioButton;
@@ -20,13 +28,70 @@ public class Suite {
     private JRadioButton duRadioButton;
     private JList<Rdv> Liste;
     private JTextArea textArea1;
+    ButtonGroup group2 = new ButtonGroup();
+
     static JFrame Suite = new JFrame("Suite");
+    ButtonGroup group = new ButtonGroup();
     DefaultListModel<Rdv> dlm = new DefaultListModel<>();
 
 
     Suite(Application App, int i) throws SQLException, ClassNotFoundException
     {
         this.Suu(App);
+        appliquerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String whouere="WHERE rdvno NOT NULL ";
+                String dateToStr1="";
+                String dateToStr2="";
+
+                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                Date date = new Date();
+                String dateToStr = dateFormat.format(date);
+
+
+                dateToStr1=dateFormat.format(spinner1.getValue());
+                dateToStr2=dateFormat.format(spinner2.getValue());
+                int idmedcin=-1;
+
+                if (Med_cin.getSelectedItem()!=null)
+                {
+                    Object O = Med_cin.getSelectedItem();
+                    idmedcin= ((Medecin) O).Get_id();
+                }
+
+                System.out.println(Med_cin.getSelectedItem());
+
+                if (libreRadioButton.isSelected())
+                {
+                    whouere+= " AND etat=1 ";
+                }
+                else if (reserveRadioButton.isSelected())
+                {
+                    whouere+= " AND etat=0 ";
+                }
+                else
+                {
+                    whouere+= " AND rdv_date < "+dateToStr;
+                }
+
+                if (toutLesRendezVousRadioButton.isSelected())
+                {
+                    whouere+= " AND rdv_date > "+dateToStr;
+                }
+                else
+                {
+                    whouere+= " AND rdv_date BETWEEN "+dateToStr2+ " AND "+dateToStr1;
+                }
+                if (idmedcin!=-1)
+                {
+                    whouere+= " AND medno="+idmedcin;
+                }
+
+                System.out.println( whouere );
+            }
+        });
     }
 
     private ListSelectionListener createListSelectionListener(JList<Rdv> list1,Application App) {
@@ -77,7 +142,6 @@ public class Suite {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         Suite.setContentPane(Test);
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Suite.setPreferredSize(new Dimension(800,600));
@@ -108,20 +172,18 @@ public class Suite {
         spinner2.setEditor(editor2);
         model2.setStart( editor2.getFormat().parse("26-02-2009") );
 
-        Med_cin.addItem("Choissiez un medecin");
+        Med_cin.addItem(null);
 
-        ButtonGroup group = new ButtonGroup();
         group.add(reserveRadioButton);
         group.add(libreRadioButton);
         group.add(passeRadioButton);
 
-        ButtonGroup group2 = new ButtonGroup();
         group2.add(duRadioButton);
         group2.add(toutLesRendezVousRadioButton);
 
         for(Medecin N : App.Med)
         {
-            Med_cin.addItem("Dr. "+N.toString());
+            Med_cin.addItem(N);
         }
     }
 }

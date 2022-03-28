@@ -1,11 +1,21 @@
 package Premier_package;
 
+import com.mysql.cj.api.Session;
+import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
+import sun.plugin2.message.transport.Transport;
+
+import javax.mail.Message;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Properties;
+
 
 public class Application {
 
@@ -18,6 +28,7 @@ public class Application {
     public final List<Patient> Pat = new ArrayList<>();
     public final List<Medecin> Med = new ArrayList<>();
     public final List<Rdv> Rendezvous = new ArrayList<>();
+
     public static JFrame Login = new JFrame("Login");
 
     Suite sui;
@@ -131,6 +142,49 @@ public class Application {
         Rendezvous.add(new Rdv(id,med,pat,date,motif,duree,horaire,lieu,etat));
         maconnexion.ajouterElement(Rendezvous.get(Rendezvous.size()-1));
     }
+    /*void EnvoyerEmail()
+    {
+        String to = "fares.messaoudi@edu.ece.fr";
+        // Sender's email ID needs to be mentioned
+        String from = "infoprojet582@gmail.com";
+
+        // Assuming you are sending email from localhost
+        String host = "localhost";
+        // Get system properties
+        Properties properties = System.getProperties();
+
+        // Setup mail server
+        properties.setProperty("mail.smtp.host", host);
+
+        // Get the default Session object.
+        Session session = Session.getInstance(properties,null);
+
+        try {
+            // Create a default MimeMessage object.
+            MimeMessage message = new MimeMessage( (MimeMessage)session);
+
+            // Set From: header field of the header.
+            message.setFrom(new InternetAddress(from));
+
+            // Set To: header field of the header.
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+            // Set Subject: header field
+            message.setSubject("This is the Subject Line!");
+
+            // Now set the actual message
+            message.setText("This is actual message");
+
+            // Send message
+            Transport.send(message);
+
+            System.out.println("Sent message successfully....");
+
+        } catch (MessagingException | javax.mail.MessagingException mex) {
+            mex.printStackTrace();
+        }
+    }
+*/
 
     public Application(int i) throws SQLException, ClassNotFoundException {
         init();
@@ -172,8 +226,14 @@ public class Application {
             try {
                 switch (trouve)
                 {
-                    case 0 : {JOptionPane.showMessageDialog(null,"PAS DE COMPTE, CREER UN NOUVEAU ? ","Erreur",JOptionPane.INFORMATION_MESSAGE);} break;
-                    case 1 : {Login.setVisible(false); sui= new Suite(Application.this,i);} break;
+                    case 0 :
+                    {
+                        JOptionPane.showMessageDialog(null,"PAS DE COMPTE, CREER UN NOUVEAU ? ","Erreur",JOptionPane.INFORMATION_MESSAGE);
+                    } break;
+                    case 1 :
+                    {
+                        Login.setVisible(false); sui= new Suite(Application.this,i);
+                    } break;
                     case 2 :
                     {
                         if (JOptionPane.showConfirmDialog(null,"  Mot de passe incorrect... Voulez vous le modifier ?","Clear TextField",JOptionPane.YES_NO_OPTION)==0)

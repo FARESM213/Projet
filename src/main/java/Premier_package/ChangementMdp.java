@@ -52,7 +52,6 @@ public class ChangementMdp {
                             App.maconnexion.UpdateElement("Patient","patpassword",mdp,String.valueOf(passwordField1.getPassword()),"patno",id);
                             MDP.setVisible(false);
                             App.init();
-
                             Application.Login.setVisible(true);
 
                         }break;}
