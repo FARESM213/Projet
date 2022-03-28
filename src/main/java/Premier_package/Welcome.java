@@ -33,7 +33,7 @@ public class Welcome {
         Medecin.addActionListener(e -> {
                 Suite.setVisible(false);try {
 
-                new Welcome2(1);
+                new Welcome2(0);
             } catch (SQLException | ClassNotFoundException ex) {
                 ex.printStackTrace();
             }
@@ -41,7 +41,7 @@ public class Welcome {
         Patient.addActionListener(e -> {
             Suite.setVisible(false);
             try {
-                new Welcome2(0);
+                new Welcome2(1);
             } catch (SQLException | ClassNotFoundException ex) {
                 ex.printStackTrace();
             }

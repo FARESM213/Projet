@@ -31,8 +31,8 @@ public class Welcome2 {
                 Suite.setVisible(false);
                 try {
 
-                    new Application(1);
-                    Application.Log();
+                    Application App = new Application(indice);
+                    App.Log();
                 } catch (SQLException | ClassNotFoundException ex) {
                     ex.printStackTrace();
                 }
@@ -40,21 +40,20 @@ public class Welcome2 {
                 Suite.setVisible(false);
                 try {
 
-                    new Application(0);
-                    Application.Log();
+                    Application App = new Application(indice);
+                    App.Log();
                 } catch (SQLException | ClassNotFoundException ex) {
                     ex.printStackTrace();
                 }
             }
         });
-
                CreerCompte.addActionListener(e -> {
 
                    if (indice==1) {
                        Suite.setVisible(false);
                        try {
 
-                           new CreationCompte(1);
+                           new CreationCompte(indice);
 
                        } catch (SQLException | ClassNotFoundException ex) {
                            ex.printStackTrace();
@@ -63,7 +62,7 @@ public class Welcome2 {
                        Suite.setVisible(false);
                        try {
 
-                           new CreationCompte(0);
+                           new CreationCompte(indice);
 
                        } catch (SQLException | ClassNotFoundException ex) {
                            ex.printStackTrace();

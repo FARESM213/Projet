@@ -2,7 +2,7 @@ package Premier_package;
 
 import com.mysql.cj.api.Session;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
-import sun.plugin2.message.transport.Transport;
+//import sun.plugin2.message.transport.Transport;
 
 import javax.mail.Message;
 import javax.mail.*;
@@ -20,7 +20,7 @@ import java.util.Properties;
 public class Application {
 
     private JButton button1;
-    public JPanel PannelMain;
+    public  JPanel PannelMain;
     private JTextField textField1;
     private JPasswordField passwordField1;
 
@@ -34,13 +34,10 @@ public class Application {
     Suite sui;
     ChangementMdp mot;
 
-    public void main(String[] s) throws SQLException, ClassNotFoundException {
-        new Application(0);
-    }
 
-    public static void Log() throws SQLException, ClassNotFoundException
+    public  void Log() throws SQLException, ClassNotFoundException
     {
-        Login.setContentPane(new Application(1).PannelMain);
+        Login.setContentPane(PannelMain);
         Login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Login.setPreferredSize(new Dimension(500,200));
         Login.setResizable(true);
@@ -120,12 +117,12 @@ public class Application {
 
     }
     void AjouterMedecin(String NOM, String LOGIN, String MDP, String JOB) throws SQLException {
-        int id = 0;
+        int id = Med.size()+1;
         Med.add(new Medecin(id,NOM,LOGIN,MDP,JOB));
         maconnexion.ajouterElement(Med.get(Med.size()-1));
     }
     void AjouterPatient(String NOM, String LOGIN, String MDP) throws SQLException {
-        int id = 0;
+        int id = Pat.size()+1;
         Pat.add(new Patient(id,NOM,LOGIN,MDP));
         maconnexion.ajouterElement(Pat.get(Pat.size()-1));
     }
@@ -188,6 +185,7 @@ public class Application {
 
     public Application(int i) throws SQLException, ClassNotFoundException {
         init();
+        System.out.println(i);
         button1.addActionListener(e -> {
             int trouve=0;
             if ( i==1)

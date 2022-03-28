@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 
+
 public class CreationCompte {
     private JPanel j;
     private JTextField LoginTextField;
@@ -33,14 +34,29 @@ public class CreationCompte {
     public CreationCompte( int indice) throws SQLException, ClassNotFoundException {
 
         Suu(indice);
-        if (indice==1){//MEDECIN
+        if (indice==0){//MEDECIN
 
             creerButton.addActionListener(e -> {
 
-                System.out.println(LoginTextField.getText());
-                System.out.println(NomTextField.getText());
-                System.out.println(MDPField.getPassword());
-                System.out.println(SPEField.getText());
+                String str = new String(MDPField.getPassword());
+
+                try {
+                    new Application(indice).AjouterMedecin(NomTextField.getText(),LoginTextField.getText(),str,SPEField.getText());
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+
+
+                IFMEDECIN.setVisible(false);
+                Suite.setVisible(false);try {
+
+                    Application App = new Application(indice);
+                    App.Log();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
 
 
             });
@@ -48,10 +64,27 @@ public class CreationCompte {
         } else {//PATIENT
 
             creerButton.addActionListener(e -> {
+                String str = new String(MDPField.getPassword());
 
-                System.out.println(LoginTextField.getText());
-                System.out.println(NomTextField.getText());
-                System.out.println(MDPField.getPassword());
+                try {
+                    new Application(indice).AjouterPatient(NomTextField.getText(),LoginTextField.getText(),str);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+
+                Suite.setVisible(false);try {
+
+                    Application App = new Application(indice);
+                    App.Log();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+
+
+
+
 
 
             });
