@@ -1,4 +1,4 @@
-package Premier_package;
+package Model;
 
 public class Medecin {
 
@@ -10,7 +10,7 @@ public class Medecin {
 
     Medecin(){}
 
-    Medecin(int id, String nom,String login , String mdp,String job)
+    public Medecin(int id, String nom, String login, String mdp, String job)
     {
         id_medecin=id;
         login_medecin=login;
@@ -24,11 +24,11 @@ public class Medecin {
     void Set_mdp (String mdp) {mdp_medecin=mdp;}
     void Set_job (String job) {med_job=job;}
 
-    int Get_id () { return id_medecin;}
-    String Get_nom () { return nom_medecin;}
-    String Get_log () { return login_medecin;}
-    String Get_mdp () { return mdp_medecin;}
-    String Get_job () { return med_job;}
+    public int Get_id() { return id_medecin;}
+    public String Get_nom () { return nom_medecin;}
+    public String Get_log() { return login_medecin;}
+    public String Get_mdp() { return mdp_medecin;}
+    public String Get_job () { return med_job;}
 
     @Override
     public String toString() {

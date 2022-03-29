@@ -1,19 +1,19 @@
-package Premier_package;
+package View;
+
+import Controller.Application;
+import Model.Medecin;
+import Model.Rdv;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
+public class Fenetre_Suite {
 
-public class Suite {
     private JPanel Test;
     private JComboBox<Medecin> Med_cin;
     private JComboBox Jour;
@@ -28,7 +28,6 @@ public class Suite {
     private JList<Rdv> Liste;
     private JTextArea textArea1;
     private JButton annulerButton;
-    private int clickCount = 0;
     ButtonGroup group2 = new ButtonGroup();
 
     static JFrame Suite = new JFrame("Suite");
@@ -36,86 +35,7 @@ public class Suite {
     DefaultListModel<Rdv> dlm = new DefaultListModel<>();
 
 
-    Suite(Application App, int i) throws SQLException, ClassNotFoundException
-    {
-        this.Suu(App);
-        appliquerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                String whouere="WHERE rdvno IS NOT NULL ";
-                Date dateToStr1;
-                Date dateToStr2;
-
-                LocalDate date = LocalDate.now();
-
-                dateToStr1= (Date) spinner1.getValue();
-                dateToStr2= (Date) spinner2.getValue();
-
-                LocalDate date1=dateToStr1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                LocalDate date2=dateToStr2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-                int idmedcin=-1;
-
-                if (Med_cin.getSelectedItem()!=null)
-                {
-                    Object O = Med_cin.getSelectedItem();
-                    idmedcin= ((Medecin) O).Get_id();
-                }
-
-                System.out.println(Med_cin.getSelectedItem());
-
-                if (libreRadioButton.isSelected())
-                {
-                    whouere+= "AND etat=true ";
-                    if (++clickCount % 2 == 0) {
-                        group.clearSelection();
-                    }
-                }
-                else if (reserveRadioButton.isSelected())
-                {
-                    whouere+= "AND etat=false ";
-                }
-                else
-                {
-                    whouere+= "AND rdv_date < '"+date+"' ";
-                }
-
-                if (toutLesRendezVousRadioButton.isSelected())
-                {
-                    whouere+= "AND rdv_date > '"+date+"' ";
-                }
-                else if (duRadioButton.isSelected())
-                {
-                    whouere+= "AND rdv_date BETWEEN '"+date1+ "' AND '"+date2+"' ";
-                }
-                if (idmedcin!=-1)
-                {
-                    whouere+= "AND medno="+idmedcin;
-                }
-                try
-                {
-                    setDlm(whouere,App);
-                }
-                catch (SQLException ex)
-                {
-                    ex.printStackTrace();
-                }
-            }
-        });
-        annulerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                group.clearSelection();
-                group2.clearSelection();
-                dlm.clear();
-                Liste.setModel(dlm);
-                textArea1.setText("");
-            }
-        });
-    }
-
-    void setDlm(String whouere ,Application App) throws SQLException {
+    public void setDlm(String whouere, Application App) throws SQLException {
         ResultSet rs;
         dlm.clear();
         rs=App.maconnexion.Search("rendez_vous","rdvno",whouere);
@@ -135,7 +55,7 @@ public class Suite {
 
     }
 
-    private ListSelectionListener createListSelectionListener(JList<Rdv> list1,Application App) {
+    private ListSelectionListener createListSelectionListener(JList<Rdv> list1, Application App) {
         return e -> {
             if (!e.getValueIsAdjusting()) {
 
@@ -143,8 +63,7 @@ public class Suite {
                 String Medecin="";
                 if (list1.getSelectedValue()!=null)
                 {
-
-                    for (Patient N :App.Pat)
+                    for (Model.Patient N :App.Pat)
                     {
                         if(list1.getSelectedValue().Get_pat()==N.Get_id())
                             Patient=N.Get_nom();
@@ -154,8 +73,8 @@ public class Suite {
                         if(list1.getSelectedValue().Get_med()==N.Get_id())
                             Medecin=N.Get_nom();
                     }
+                    textArea1.setText(" Patient : "+Patient+"\n\n Medecin : "+Medecin+"\n\n "+ list1.getSelectedValue());
                 }
-                textArea1.setText(" Patient : "+Patient+"\n\n Medecin : "+Medecin+"\n\n "+ list1.getSelectedValue());
             }
         };
     }
@@ -223,5 +142,64 @@ public class Suite {
         {
             Med_cin.addItem(N);
         }
+    }
+
+    public JButton getAppliquerButton() {
+        return appliquerButton;
+    }
+
+    public Object getSpinner1() {
+        return spinner1.getValue();
+    }
+
+    public Object getSpinner2() {
+        return spinner2.getValue();
+    }
+
+    public Object getMed_cin() {
+        return Med_cin.getSelectedItem();
+    }
+
+    public JRadioButton getLibreRadioButton() {
+        return libreRadioButton;
+    }
+
+    public JRadioButton getDuRadioButton() {
+        return duRadioButton;
+    }
+
+    public JRadioButton getPasseRadioButton() {
+        return passeRadioButton;
+    }
+
+    public JRadioButton getReserveRadioButton() {
+        return reserveRadioButton;
+    }
+    public JButton getAnnulerButton() {
+        return annulerButton;
+    }
+
+    public JTextArea getTextArea1() {
+        return textArea1;
+    }
+
+    public JRadioButton getToutLesRendezVousRadioButton() {
+        return toutLesRendezVousRadioButton;
+    }
+
+    public ButtonGroup getGroup() {
+        return group;
+    }
+
+    public ButtonGroup getGroup2() {
+        return group2;
+    }
+
+    public DefaultListModel<Rdv> getDlm() {
+        return dlm;
+    }
+
+    public JList<Rdv> getListe() {
+        return Liste;
     }
 }

@@ -1,4 +1,4 @@
-package Premier_package;
+package Model;
 
 import java.time.LocalDate;
 
@@ -14,7 +14,7 @@ public class Rdv {
     private int rdv_horaire;
     private boolean etat;
 
-    Rdv(int id , int med, int pat, LocalDate date, String motif, int duree, int horaire, String lieu, boolean e)
+    public Rdv(int id, int med, int pat, LocalDate date, String motif, int duree, int horaire, String lieu, boolean e)
     {
           id_rdv=id;
           id_med=med;
@@ -40,9 +40,9 @@ public class Rdv {
 
 
 
-    int Get_id () { return id_rdv;}
-    int Get_med () { return id_med;}
-    int Get_pat () { return id_pat;}
+    public int Get_id() { return id_rdv;}
+    public int Get_med() { return id_med;}
+    public int Get_pat() { return id_pat;}
     String Get_lieu () { return rdv_lieu;}
     String Get_motif () { return rdv_motif;}
     LocalDate Get_date () { return rdv_date;}

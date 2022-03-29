@@ -1,19 +1,15 @@
-package Premier_package;
+package Controller;
 
 
 import javax.mail.*;
 
-import org.springframework.mail.MailException;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessagePreparator;
+import Model.*;
+import View.Login;
 
-import javax.mail.internet.AddressException;
+
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.swing.*;
-import java.awt.*;
-import java.io.InputStream;
+
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -23,84 +19,26 @@ import java.util.List;
 
 public class Application {
 
-    private JButton button1;
-    public  JPanel PannelMain;
-    private JTextField textField1;
-    private JPasswordField passwordField1;
-    public JavaMailSender emailSender= new JavaMailSender() {
-        @Override
-        public void send(SimpleMailMessage simpleMailMessage) throws MailException {
-            send(new SimpleMailMessage[] {simpleMailMessage});
-            System.out.println("UI");
-        }
-        @Override
-        public void send(SimpleMailMessage... simpleMailMessages) throws MailException {
-
-        }
-
-        @Override
-        public MimeMessage createMimeMessage() {
-            return null;
-        }
-
-        @Override
-        public MimeMessage createMimeMessage(InputStream inputStream) throws MailException {
-            return null;
-        }
-
-        @Override
-        public void send(MimeMessage mimeMessage) throws MailException {
-
-        }
-
-        @Override
-        public void send(MimeMessage... mimeMessages) throws MailException {
-
-        }
-
-        @Override
-        public void send(MimeMessagePreparator mimeMessagePreparator) throws MailException {
-
-        }
-
-        @Override
-        public void send(MimeMessagePreparator... mimeMessagePreparators) throws MailException {
-
-        }
-
-    };
-
-
-    public Connexion maconnexion;
+    public DaoConnexionInterface maconnexion;
     public final List<Patient> Pat = new ArrayList<>();
     public final List<Medecin> Med = new ArrayList<>();
     public final List<Rdv> Rendezvous = new ArrayList<>();
 
-    public static JFrame Login = new JFrame("Login");
+    public static View.Login L =new Login();
 
     Suite sui;
     ChangementMdp mot;
 
-    public void Log() throws SQLException, ClassNotFoundException
+    public void wow () throws SQLException, ClassNotFoundException
     {
-        Login.setContentPane(PannelMain);
-        Login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Login.setPreferredSize(new Dimension(250,200));
-        Login.setResizable(false);
-        Login.pack();
-        Login.setVisible(true);
-    }
-        public void wow () throws SQLException, ClassNotFoundException {
         maconnexion = new Connexion("bdd", "root", "",Pat,Med,Rendezvous);
     }
-
-    void init () throws SQLException, ClassNotFoundException {
+    public void init() throws SQLException, ClassNotFoundException {
         Pat.clear();
         Med.clear();
         Rendezvous.clear();
         wow();
     }
-
     void SuppMedecin() throws SQLException {
         String id="null";
         String mdp="null";
@@ -162,7 +100,7 @@ public class Application {
         else{System.out.println("PROBLEME");}
 
     }
-    void AjouterMedecin(String nom, String login, String mdp, String job) throws SQLException {
+    public void AjouterMedecin(String nom, String login, String mdp, String job) throws SQLException {
         int id = Med.size();
         Med.add(new Medecin(id,nom,login,mdp,job));
         maconnexion.ajouterElement(Med.get(Med.size()-1));
@@ -170,7 +108,7 @@ public class Application {
         String mail = null;
         EnvoyerEmail(mail);
     }
-    void AjouterPatient(String nom, String login, String mdp) throws UnsupportedEncodingException, MessagingException {
+    public void AjouterPatient(String nom, String login, String mdp) throws UnsupportedEncodingException, MessagingException {
         int id = Pat.size();
         Pat.add(new Patient(id,nom,login,mdp));
         try {
@@ -195,7 +133,6 @@ public class Application {
         Rendezvous.add(new Rdv(id,med,pat,date,motif,duree,horaire,lieu,etat));
         maconnexion.ajouterElement(Rendezvous.get(Rendezvous.size()-1));
     }
-
     void EnvoyerEmail(String Recever)
     {
         Properties properties = new Properties();
@@ -216,22 +153,21 @@ public class Application {
             message.setSubject("Ping");
             message.setText("Hello, this is example of sending email  ");
             Transport.send(message);
-            System.out.println("message sent successfully....");
-
         }catch (MessagingException mex) {mex.printStackTrace();}
     }
 
     public Application(int i) throws SQLException, ClassNotFoundException {
         init();
-        button1.addActionListener(e -> {
+        L.Logt();
+        L.getButton1().addActionListener(e -> {
             int trouve=0;
             if ( i==1)
             {
                 for ( Patient N : Pat)
                 {
-                    if  ( (Objects.equals(N.Get_log(), textField1.getText()) ))
+                    if  ( (Objects.equals(N.Get_log(), L.getTextField1()) ))
                     {
-                        if  ( (Objects.equals(N.Get_mdp(), String.valueOf(passwordField1.getPassword())) ))
+                        if  ( (Objects.equals(N.Get_mdp(), L.getPasswordField1()) ))
                         {
                             trouve=1;
                         }
@@ -245,9 +181,9 @@ public class Application {
             }
             else {
                 for (Medecin N : Med) {
-                    if ((Objects.equals(N.Get_log(), textField1.getText())))
+                    if ((Objects.equals(N.Get_log(), L.getTextField1())))
                     {
-                        if ((Objects.equals(N.Get_mdp(), String.valueOf(passwordField1.getPassword())))) {
+                        if ((Objects.equals(N.Get_mdp(),  L.getPasswordField1() ))) {
                             trouve = 1;
                         } else {
                             trouve = 2;
@@ -261,17 +197,19 @@ public class Application {
                 {
                     case 0 :
                     {
-                        JOptionPane.showMessageDialog(null,"PAS DE COMPTE, CREER UN NOUVEAU ? ","Erreur",JOptionPane.INFORMATION_MESSAGE);
+                        L.Fentre_Erreur();
                     } break;
                     case 1 :
                     {
-                        Login.setVisible(false); sui= new Suite(Application.this,i);
+                        L.SetView(false);
+                        sui= new Suite(Application.this,i);
+
                     } break;
                     case 2 :
                     {
-                        if (JOptionPane.showConfirmDialog(null,"  Mot de passe incorrect... Voulez vous le modifier ?","Clear TextField",JOptionPane.YES_NO_OPTION)==0)
+                        if (L.Fenetre_confirm()==0)
                         {
-                            Login.setVisible(false);
+                            L.SetView(false);
                             mot= new ChangementMdp(Application.this);
                         }
                     } break;

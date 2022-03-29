@@ -1,4 +1,4 @@
-package Premier_package;
+package Model;
 
 import java.util.Properties;
 

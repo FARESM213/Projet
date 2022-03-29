@@ -1,4 +1,4 @@
-package Premier_package;
+package Model;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import java.sql.*;
 import java.util.List;
 
-public class Connexion {
+public class Connexion implements DaoConnexionInterface {
 
     private final Connection conn;
     private Statement stmt;
@@ -17,7 +17,7 @@ public class Connexion {
      */
 
 
-    public Connexion(String nameDatabase, String loginDatabase, String passwordDatabase,List<Patient> Pat,List<Medecin> Med ,List<Rdv> Rendezvous ) throws SQLException, ClassNotFoundException {
+    public Connexion(String nameDatabase, String loginDatabase, String passwordDatabase, List<Patient> Pat, List<Medecin> Med , List<Rdv> Rendezvous ) throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         String urlDatabase =  "jdbc:mysql://localhost:3306/" + nameDatabase+"?useUnicode=true\n" +
                 "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&\n" +
