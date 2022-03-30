@@ -7,7 +7,8 @@ import Model.Rdv;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.sql.Date;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -16,7 +17,6 @@ public class Fenetre_Suite {
 
     private JPanel Test;
     private JComboBox<Medecin> Med_cin;
-    private JComboBox Jour;
     private JButton appliquerButton;
     private JRadioButton libreRadioButton;
     private JRadioButton reserveRadioButton;
@@ -28,12 +28,15 @@ public class Fenetre_Suite {
     private JList<Rdv> Liste;
     private JTextArea textArea1;
     private JButton annulerButton;
+    private JButton consulterProfilButton;
     ButtonGroup group2 = new ButtonGroup();
 
-    static JFrame Suite = new JFrame("Suite");
+    public static JFrame Suite = new JFrame("Suite");
     ButtonGroup group = new ButtonGroup();
     DefaultListModel<Rdv> dlm = new DefaultListModel<>();
 
+
+    public Fenetre_Suite() {}
 
     public void setDlm(String whouere, Application App) throws SQLException {
         ResultSet rs;
@@ -90,7 +93,16 @@ public class Fenetre_Suite {
                 if (c instanceof JLabel) {
                     JLabel label = (JLabel) c;
                     Rdv emp = (Rdv) value;
-                    label.setText(String.format("%d [%d]", emp.Get_med(), emp.Get_pat()));
+                    String etat;
+                    if (emp.Get_etat())
+                    {
+                        etat= "Libre";
+                    }
+                    else
+                    {
+                        etat= "Reservé";
+                    }
+                    label.setText(String.format("  Numero :  %d \t       Etat : %s ", emp.Get_id(), etat));
                     if (!isSelected) {
                         label.setBackground(index % 2 == 0 ? background : defaultBackground);
                     }
@@ -142,6 +154,10 @@ public class Fenetre_Suite {
         {
             Med_cin.addItem(N);
         }
+    }
+
+    public void setSuite(boolean suite) {
+        Suite.setVisible(suite);
     }
 
     public JButton getAppliquerButton() {
@@ -201,5 +217,9 @@ public class Fenetre_Suite {
 
     public JList<Rdv> getListe() {
         return Liste;
+    }
+
+    public JButton getConsulterProfilButton() {
+        return consulterProfilButton;
     }
 }

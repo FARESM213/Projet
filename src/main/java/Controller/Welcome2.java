@@ -13,7 +13,7 @@ public class Welcome2 {
             Fenetre.SetView(false);
             try {
                 Application App = new Application(indice);
-                App.L.Logt();
+                App.Loggg();
             } catch (SQLException | ClassNotFoundException ex) {
                 ex.printStackTrace();
             }

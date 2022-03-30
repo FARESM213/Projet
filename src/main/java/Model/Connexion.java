@@ -29,12 +29,12 @@ public class Connexion implements DaoConnexionInterface {
 
         while(rset.next())
         {
-            Pat.add(new Patient(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4)));
+            Pat.add(new Patient(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4),rset.getString(5)));
         }
         rset=stmt.executeQuery("SELECT * FROM Medecin");
         while(rset.next())
         {
-            Med.add(new Medecin(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4),rset.getString(5)));
+            Med.add(new Medecin(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4),rset.getString(5),rset.getString(6)));
         }
         rset=stmt.executeQuery("SELECT * FROM Rendez_vous");
         while(rset.next())
@@ -49,11 +49,11 @@ public class Connexion implements DaoConnexionInterface {
         stmt = conn.createStatement();
         if ( O.getClass()==Patient.class)
         {
-            stmt.executeUpdate("INSERT INTO Patient VALUES ("+((Patient) O).Get_id()+",'"+((Patient) O).Get_nom()+"','"+((Patient) O).Get_log()+"','"+((Patient) O).Get_mdp()+"' )");
+            stmt.executeUpdate("INSERT INTO Patient VALUES ("+((Patient) O).Get_id()+",'"+((Patient) O).Get_nom()+"','"+((Patient) O).Get_log()+"','"+((Patient) O).Get_mdp()+"','"+((Patient) O).Get_Mail()+"' )");
         }
         else if ( O.getClass()==Medecin.class)
         {
-            stmt.executeUpdate("INSERT INTO Medecin VALUES ("+((Medecin) O).Get_id()+",'"+((Medecin) O).Get_nom()+"','"+((Medecin) O).Get_log()+"','"+((Medecin) O).Get_mdp()+"','"+ ((Medecin) O).Get_job()+"')");
+            stmt.executeUpdate("INSERT INTO Medecin VALUES ("+((Medecin) O).Get_id()+",'"+((Medecin) O).Get_nom()+"','"+((Medecin) O).Get_log()+"','"+((Medecin) O).Get_mdp()+"','"+ ((Medecin) O).Get_job()+"','"+ ((Medecin) O).Get_mail()+"')");
         }
         else
         {
@@ -71,11 +71,13 @@ public class Connexion implements DaoConnexionInterface {
         stmt = conn.createStatement();
         if ( O.getClass()==Patient.class)
         {
-            stmt.executeUpdate("DELETE FROM Patient WHERE patlogin="+Final+" AND patpassword="+FinalB);
+            stmt.executeUpdate("DELETE FROM Patient WHERE patno="+Final+" AND patpassword='"+FinalB+"'");
+            stmt.executeUpdate("DELETE FROM rendez_vous WHERE patno="+Final);
         }
         else if ( O.getClass()==Medecin.class)
         {
-            stmt.executeUpdate("DELETE FROM Medecin WHERE medlogin="+Final+" AND medpassword="+FinalB);
+            stmt.executeUpdate("DELETE FROM Medecin WHERE medno="+Final+" AND medpassword='"+FinalB+"'");
+            stmt.executeUpdate("DELETE FROM rendez_vous WHERE medno="+Final);
         }
         else
         {

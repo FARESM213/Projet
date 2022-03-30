@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Medecin;
 import View.Fenetre_Suite;
+
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -9,9 +10,9 @@ import java.util.Date;
 
 public class Suite {
 
-    Fenetre_Suite Fenetre = new Fenetre_Suite();
+    public Fenetre_Suite Fenetre = new Fenetre_Suite();
 
-    public Suite(Application App, int i) throws SQLException, ClassNotFoundException
+    public Suite(Application App, int i,Object A) throws SQLException, ClassNotFoundException
     {
         Fenetre.Suu(App);
         Fenetre.getAppliquerButton().addActionListener(e -> {
@@ -69,11 +70,21 @@ public class Suite {
             }
         });
         Fenetre.getAnnulerButton().addActionListener(e -> {
+
             Fenetre.getGroup().clearSelection();
             Fenetre.getGroup2().clearSelection();
             Fenetre.getDlm().clear();
             Fenetre.getListe().setModel(Fenetre.getDlm());
             Fenetre.getTextArea1().setText("");
+
+        });
+
+        Suite S= this;
+        Fenetre.getConsulterProfilButton().addActionListener(e -> {
+
+            Fenetre.setSuite(false);
+            Profil F = new Profil(App,A,S);
+            F.Fenetre.SetView(true);
         });
     }
 

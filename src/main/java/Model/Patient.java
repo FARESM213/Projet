@@ -5,13 +5,17 @@ public class Patient {
     private String nom_patient;
     private String login_patient;
     private String mdp_patient;
+    private String email_patient;
 
-    public Patient(int id, String nom, String login, String mdp)
+
+
+    public Patient(int id, String nom, String login, String mdp,String email)
     {
         id_patient=id;
         login_patient=login;
         nom_patient=nom;
         mdp_patient=mdp;
+        email_patient=email;
     }
     void Set_id (int id) { id_patient=id;}
     void Set_nom (String nom) {nom_patient=nom;}
@@ -23,9 +27,21 @@ public class Patient {
     public String Get_log() { return login_patient;}
     public String Get_mdp() { return mdp_patient;}
 
-    @Override
-    public String toString() {
-        return nom_patient;
+    public String Get_Mail() {
+        return email_patient;
     }
 
+    @Override
+    public String toString() {
+        return nom_patient+" " +mdp_patient;
+    }
+
+    public void set(Patient B)
+    {
+        id_patient=B.id_patient;
+        login_patient=B.login_patient;
+        nom_patient=B.nom_patient;
+        mdp_patient=B.mdp_patient;
+        email_patient=B.email_patient;
+    }
 }

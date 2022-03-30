@@ -12,10 +12,11 @@ public class Fenetre_Creat {
     private JPasswordField MDPField;
     private JTextField SPEField;
     private JPanel IFMEDECIN;
+    private JTextField textField1;
 
     static JFrame Suite = new JFrame("Suite");
 
-    public Fenetre_Creat(){};
+    public Fenetre_Creat(){}
 
 
     public void Suu(int indice) {
@@ -52,4 +53,7 @@ public class Fenetre_Creat {
         Suite.setVisible(etat);
     }
 
+    public String getTextField1() {
+        return textField1.getText();
+    }
 }

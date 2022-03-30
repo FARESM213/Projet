@@ -45,10 +45,10 @@ public class Rdv {
     public int Get_pat() { return id_pat;}
     String Get_lieu () { return rdv_lieu;}
     String Get_motif () { return rdv_motif;}
-    LocalDate Get_date () { return rdv_date;}
+    public LocalDate Get_date() { return rdv_date;}
     int Get_duree() { return rdv_duree;}
     int Get_horaire () { return rdv_horaire;}
-    Boolean Get_etat () {return etat;}
+    public Boolean Get_etat() {return etat;}
 
     @Override
     public String toString() {

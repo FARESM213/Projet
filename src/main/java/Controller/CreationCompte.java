@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class CreationCompte {
 
-    private Fenetre_Creat Fenetre = new Fenetre_Creat();
+    private final Fenetre_Creat Fenetre = new Fenetre_Creat();
 
     public CreationCompte( int indice) throws SQLException, ClassNotFoundException {
         Fenetre.Suu(indice);
@@ -17,8 +17,8 @@ public class CreationCompte {
                 String str = Fenetre.MDPField();
                 try {
                     Application App = new Application(indice);
-                    App.AjouterMedecin(Fenetre.NomTextField(),Fenetre.LoginTextField(),str,Fenetre.SPEField());
-                    App.L.Logt();
+                    App.AjouterMedecin(Fenetre.NomTextField(),Fenetre.LoginTextField(),str,Fenetre.SPEField(),Fenetre.getTextField1());
+                    App.Loggg();
                 } catch (SQLException | ClassNotFoundException ex)
                 {
                     ex.printStackTrace();
@@ -32,8 +32,9 @@ public class CreationCompte {
                 String str =  Fenetre.MDPField();
                 try {
                     Application App = new Application(indice);
-                    App.AjouterPatient(Fenetre.NomTextField(),Fenetre.LoginTextField(),str);
-                    App.L.Logt();
+                    String email = Fenetre.getTextField1();
+                    App.AjouterPatient(Fenetre.NomTextField(),Fenetre.LoginTextField(),str,email);
+                    App.Loggg();
                 } catch (SQLException | ClassNotFoundException | UnsupportedEncodingException | MessagingException ex) {
                     ex.printStackTrace();
                 }

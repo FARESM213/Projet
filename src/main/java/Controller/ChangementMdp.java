@@ -47,7 +47,7 @@ public class ChangementMdp {
                             App.maconnexion.UpdateElement("Patient","patpassword",mdp,F.getPasswordField1(),"patno",id);
                             F.setMDP(false);
                             App.init();
-                            App.L.SetView(true);
+                            App.Set_frame(true);
 
                         }break;}
                     case 2 : {F.Fentre_Erreur("Le mot de passe n'as pas été correctement confirmé, reesayez !");} break;

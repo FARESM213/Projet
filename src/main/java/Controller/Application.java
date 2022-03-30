@@ -2,14 +2,10 @@ package Controller;
 
 
 import javax.mail.*;
-
 import Model.*;
 import View.Login;
-
-
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -23,15 +19,42 @@ public class Application {
     public final List<Patient> Pat = new ArrayList<>();
     public final List<Medecin> Med = new ArrayList<>();
     public final List<Rdv> Rendezvous = new ArrayList<>();
+    private int ind;
 
     public static View.Login L =new Login();
+    public Suite sui;
+    public ChangementMdp mot;
 
-    Suite sui;
-    ChangementMdp mot;
 
     public void wow () throws SQLException, ClassNotFoundException
     {
         maconnexion = new Connexion("bdd", "root", "",Pat,Med,Rendezvous);
+    }
+
+    public void  Update_Medecin(Medecin A,Medecin B) throws SQLException {
+        maconnexion.UpdateElement("Medecin","medname",A.Get_nom(),B.Get_nom(),"medno",A.Get_id());
+        maconnexion.UpdateElement("Medecin","medlogin",A.Get_log(),B.Get_log(),"medno",A.Get_id());
+        maconnexion.UpdateElement("Medecin","medpassword",A.Get_mdp(),B.Get_mdp(),"medno",A.Get_id());
+        maconnexion.UpdateElement("Medecin","medjob",A.Get_job(),B.Get_job(),"medno",A.Get_id());
+        maconnexion.UpdateElement("Medecin","email",A.Get_mail(),B.Get_mail(),"medno",A.Get_id());
+        try {
+            init();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    public void  Update_Patient(Patient A,Patient B) throws SQLException {
+
+        maconnexion.UpdateElement("Patient","patname",A.Get_nom(),B.Get_nom(),"patno",A.Get_id());
+        maconnexion.UpdateElement("Patient","patlogin",A.Get_log(),B.Get_log(),"patno",A.Get_id());
+        maconnexion.UpdateElement("Patient","patpassword",A.Get_mdp(),B.Get_mdp(),"patno",A.Get_id());
+        maconnexion.UpdateElement("Patient","email",A.Get_Mail(),B.Get_Mail(),"patno",A.Get_id());
+        try {
+            init();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
     public void init() throws SQLException, ClassNotFoundException {
         Pat.clear();
@@ -39,9 +62,7 @@ public class Application {
         Rendezvous.clear();
         wow();
     }
-    void SuppMedecin() throws SQLException {
-        String id="null";
-        String mdp="null";
+    public void SuppMedecin(int id, String mdp) throws SQLException {
         int i=-1;
         for(int a=0;a<Med.size();a++)
         {
@@ -60,14 +81,20 @@ public class Application {
         {
             System.out.println("PROBLEME");
         }
+
+
+        try {
+            init();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
-    void SuppPatient() throws SQLException {
-        String id="null";
-        String mdp="null";
+    public void SuppPatient(int id, String mdp) throws SQLException {
+
         int i=-1;
         for(int a=0;a<Pat.size();a++)
         {
-            if ( (Pat.get(a).Get_log().equals(id)) && (Pat.get(a).Get_mdp().equals(mdp)) )
+            if ( Pat.get(a).Get_id()==id)
             {
                 i=a;
                 break;
@@ -75,12 +102,20 @@ public class Application {
         }
         if (i!=-1)
         {
+
             maconnexion.SuppElement(Pat.get(i),id,mdp);
             Pat.remove(i);
         }
         else{System.out.println("PROBLEME");}
+
+
+        try {
+            init();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
-    void SuppRdv() throws SQLException {
+    public void SuppRdv() throws SQLException {
         int idpat=0;
         int idmed=0;
         int i=-1;
@@ -100,25 +135,34 @@ public class Application {
         else{System.out.println("PROBLEME");}
 
     }
-    public void AjouterMedecin(String nom, String login, String mdp, String job) throws SQLException {
-        int id = Med.size();
-        Med.add(new Medecin(id,nom,login,mdp,job));
+    public void AjouterMedecin(String nom, String login, String mdp, String job,String mail) throws SQLException {
+
+        int id = Med.get(Med.size()-1).Get_id()+1;
+        Med.add(new Medecin(id,nom,login,mdp,job,mail));
         maconnexion.ajouterElement(Med.get(Med.size()-1));
-        /// AJOUTER UN CHAMP MAIL POUR LES 2 ////
-        String mail = null;
-        EnvoyerEmail(mail);
+        EnvoyerEmail(mail,nom);
+
+        try {
+            init();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
-    public void AjouterPatient(String nom, String login, String mdp) throws UnsupportedEncodingException, MessagingException {
-        int id = Pat.size();
-        Pat.add(new Patient(id,nom,login,mdp));
+    public void AjouterPatient(String nom, String login, String mdp,String email) throws UnsupportedEncodingException, MessagingException {
+        int id = Pat.get(Pat.size()-1).Get_id()+1;
+        Pat.add(new Patient(id,nom,login,mdp,email));
         try {
             maconnexion.ajouterElement(Pat.get(Pat.size()-1));
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        /// AJOUTER UN CHAMP MAIL POUR LES 2 ////
-        String mail = null;
-        EnvoyerEmail(mail);
+        EnvoyerEmail(email,nom);
+
+        try {
+            init();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
     }
     void AjouterRdv() throws SQLException {
         int id=0;
@@ -133,7 +177,7 @@ public class Application {
         Rendezvous.add(new Rdv(id,med,pat,date,motif,duree,horaire,lieu,etat));
         maconnexion.ajouterElement(Rendezvous.get(Rendezvous.size()-1));
     }
-    void EnvoyerEmail(String Recever)
+    void EnvoyerEmail(String Recever,String nom)
     {
         Properties properties = new Properties();
         properties.put("mail.smtp.auth","true");
@@ -150,8 +194,8 @@ public class Application {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(MailConfig.MyConstants.MY_EMAIL));
             message.addRecipient(Message.RecipientType.TO,new InternetAddress(Recever));
-            message.setSubject("Ping");
-            message.setText("Hello, this is example of sending email  ");
+            message.setSubject("Confirmation");
+            message.setText("Bonjour  "+nom +"\n Nous vous confirmons la creation de votre compte.");
             Transport.send(message);
         }catch (MessagingException mex) {mex.printStackTrace();}
     }
@@ -177,6 +221,10 @@ public class Application {
                         }
                         break;
                     }
+                    else
+                    {
+                        ind++;
+                    }
                 }
             }
             else {
@@ -190,6 +238,10 @@ public class Application {
                         }
                         break;
                     }
+                    else
+                    {
+                        ind++;
+                    }
                 }
             }
             try {
@@ -198,11 +250,17 @@ public class Application {
                     case 0 :
                     {
                         L.Fentre_Erreur();
+                        ind=0;
                     } break;
                     case 1 :
                     {
                         L.SetView(false);
-                        sui= new Suite(Application.this,i);
+                        if(i==1)
+                             sui= new Suite(Application.this,i,Pat.get(ind));
+                        else
+                            sui= new Suite(Application.this,i,Med.get(ind));
+
+                        ind=0;
 
                     } break;
                     case 2 :
@@ -212,6 +270,7 @@ public class Application {
                             L.SetView(false);
                             mot= new ChangementMdp(Application.this);
                         }
+                        ind=0;
                     } break;
                 }
             } catch (SQLException | ClassNotFoundException ex)
@@ -221,4 +280,22 @@ public class Application {
         });
     }
 
+     public void Set_frame(boolean state)
+    {
+        L.SetView(state);
+    }
+
+     public void Loggg()
+    {
+        L.Logt();
+    }
+
+    @Override
+    public String toString() {
+        return "Application{" +
+                ", Pat=" + Pat +
+                ", Med=" + Med +
+                ", Rendezvous=" + Rendezvous +
+                '}';
+    }
 }
