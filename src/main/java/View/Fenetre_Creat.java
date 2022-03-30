@@ -16,14 +16,15 @@ public class Fenetre_Creat {
 
     static JFrame Suite = new JFrame("Suite");
 
-    public Fenetre_Creat(){}
+    public Fenetre_Creat() {
+    }
 
 
     public void Suu(int indice) {
 
         Suite.setContentPane(j);
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Suite.setPreferredSize(new Dimension(500,500));
+        Suite.setPreferredSize(new Dimension(500, 500));
         Suite.setResizable(false);
         Suite.pack();
         Suite.setVisible(true);
@@ -34,9 +35,11 @@ public class Fenetre_Creat {
     public JButton creerButton() {
         return creerButton;
     }
+
     public String LoginTextField() {
         return LoginTextField.getText();
     }
+
     public String SPEField() {
         return SPEField.getText();
     }
@@ -44,12 +47,12 @@ public class Fenetre_Creat {
     public String NomTextField() {
         return NomTextField.getText();
     }
+
     public String MDPField() {
         return String.valueOf(MDPField.getPassword());
     }
 
-    public void SetView(boolean etat)
-    {
+    public void SetView(boolean etat) {
         Suite.setVisible(etat);
     }
 
@@ -57,3 +60,12 @@ public class Fenetre_Creat {
         return textField1.getText();
     }
 }
+
+    /*public byte[] get_img() {
+
+        Icon icon;
+
+
+        return icon.toBytes();
+    }
+}*/

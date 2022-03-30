@@ -6,7 +6,7 @@ import Model.*;
 import View.Login;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
@@ -16,12 +16,13 @@ import java.util.List;
 public class Application {
 
     public DaoConnexionInterface maconnexion;
+
     public final List<Patient> Pat = new ArrayList<>();
     public final List<Medecin> Med = new ArrayList<>();
     public final List<Rdv> Rendezvous = new ArrayList<>();
     private int ind;
-
     public static View.Login L =new Login();
+
     public Suite sui;
     public ChangementMdp mot;
 
@@ -31,7 +32,7 @@ public class Application {
         maconnexion = new Connexion("bdd", "root", "",Pat,Med,Rendezvous);
     }
 
-    public void  Update_Medecin(Medecin A,Medecin B) throws SQLException {
+    public void Update_Medecin(Medecin A,Medecin B) throws SQLException {
         maconnexion.UpdateElement("Medecin","medname",A.Get_nom(),B.Get_nom(),"medno",A.Get_id());
         maconnexion.UpdateElement("Medecin","medlogin",A.Get_log(),B.Get_log(),"medno",A.Get_id());
         maconnexion.UpdateElement("Medecin","medpassword",A.Get_mdp(),B.Get_mdp(),"medno",A.Get_id());
@@ -43,7 +44,7 @@ public class Application {
             e.printStackTrace();
         }
     }
-    public void  Update_Patient(Patient A,Patient B) throws SQLException {
+    public void Update_Patient(Patient A,Patient B) throws SQLException {
 
         maconnexion.UpdateElement("Patient","patname",A.Get_nom(),B.Get_nom(),"patno",A.Get_id());
         maconnexion.UpdateElement("Patient","patlogin",A.Get_log(),B.Get_log(),"patno",A.Get_id());
@@ -81,8 +82,6 @@ public class Application {
         {
             System.out.println("PROBLEME");
         }
-
-
         try {
             init();
         } catch (ClassNotFoundException e) {
@@ -135,29 +134,27 @@ public class Application {
         else{System.out.println("PROBLEME");}
 
     }
-    public void AjouterMedecin(String nom, String login, String mdp, String job,String mail) throws SQLException {
+    public void AjouterMedecin(String nom, String login, String mdp, String job,String mail,byte [ ] img) throws SQLException {
 
         int id = Med.get(Med.size()-1).Get_id()+1;
-        Med.add(new Medecin(id,nom,login,mdp,job,mail));
+        Med.add(new Medecin(id,nom,login,mdp,job,mail,img));
         maconnexion.ajouterElement(Med.get(Med.size()-1));
         EnvoyerEmail(mail,nom);
-
         try {
             init();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
-    public void AjouterPatient(String nom, String login, String mdp,String email) throws UnsupportedEncodingException, MessagingException {
+    public void AjouterPatient(String nom, String login, String mdp,String email,byte[] img) throws UnsupportedEncodingException, MessagingException {
         int id = Pat.get(Pat.size()-1).Get_id()+1;
-        Pat.add(new Patient(id,nom,login,mdp,email));
+        Pat.add(new Patient(id,nom,login,mdp,email,img));
         try {
             maconnexion.ajouterElement(Pat.get(Pat.size()-1));
         } catch (SQLException e) {
             e.printStackTrace();
         }
         EnvoyerEmail(email,nom);
-
         try {
             init();
         } catch (ClassNotFoundException | SQLException e) {
@@ -201,6 +198,16 @@ public class Application {
     }
 
     public Application(int i) throws SQLException, ClassNotFoundException {
+
+       maconnexion= new Connexion();
+        maconnexion.coco("bdd","root","");
+       try {
+            maconnexion.tst();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //maconnexion.createUIComponents();
+
         init();
         L.Logt();
         L.getButton1().addActionListener(e -> {

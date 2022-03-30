@@ -8,6 +8,8 @@ import Model.Rdv;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -32,10 +34,11 @@ public class Fenetre_Profil
     private JLabel speLabel;
     private JLabel specialiteLabel;
     private JButton modifierButton;
+    private JLabel tssLabel;
+    private JButton choisirUneImageButton;
     public static JFrame Suite = new JFrame("Suite");
 
     DefaultListModel<Rdv> dlm = new DefaultListModel<>();
-
 
 
     public Fenetre_Profil() {
@@ -55,6 +58,7 @@ public class Fenetre_Profil
         Login.setVisible(true);
         Mdp.setVisible(true);
         Email.setVisible(true);
+        choisirUneImageButton.setVisible(true);
 
         if(P.getClass()==Medecin.class)
             Spec.setVisible(true);
@@ -72,9 +76,30 @@ public class Fenetre_Profil
         Suite.setVisible(etat);
     }
 
+
+    public  void renit( Object P)
+    {
+        Image img;
+        if(P.getClass()==Patient.class)
+        {
+             img =Toolkit.getDefaultToolkit().createImage(((Patient)P).getImage());
+        }
+        else
+        {
+             img =Toolkit.getDefaultToolkit().createImage(((Medecin)P).getImage());
+        }
+        ImageIcon icone;
+        Image newimg = img.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        icone = new ImageIcon(newimg);  // transform it back
+        tssLabel.setText("");
+        tssLabel.setIcon(icone);
+
+    }
+
     public void Suu(Application App, Object P) {
 
         createUIComponents(P);
+        renit(P);
         Suite.setContentPane(T);
         list1.setVisible(false);
         textArea1.setVisible(false);
@@ -93,6 +118,7 @@ public class Fenetre_Profil
         Email.setVisible(false);
         Spec.setVisible(false);
         modifierButton.setVisible(false);
+        choisirUneImageButton.setVisible(false);
 
         if(O.getClass()==Medecin.class)
         {
@@ -232,6 +258,12 @@ public class Fenetre_Profil
 
     }
 
+
+    public JButton getchoisirUneImageButton()
+    {
+        return choisirUneImageButton;
+    }
+
     public void setDlm(String whouere, Application App) throws SQLException {
         ResultSet rs;
         dlm.clear();
@@ -250,7 +282,6 @@ public class Fenetre_Profil
         list1.setCellRenderer(createListRenderer());
         list1.addListSelectionListener(createListSelectionListener(list1,App));
     }
-
 
     private ListSelectionListener createListSelectionListener(JList<Rdv> list1, Application App) {
         return e -> {
@@ -304,4 +335,5 @@ public class Fenetre_Profil
             }
         };
     }
+
 }

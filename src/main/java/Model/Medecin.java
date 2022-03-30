@@ -8,6 +8,7 @@ public class Medecin {
     private String mdp_medecin;
     private String med_job;
     private String email_med;
+    private byte[] image;
 
     public void set(Medecin B)
     {
@@ -17,9 +18,10 @@ public class Medecin {
         mdp_medecin=B.mdp_medecin;
         med_job=B.med_job;
         email_med=B.email_med;
+        image=B.image;
     }
 
-    public Medecin(int id, String nom, String login, String mdp, String job,String mail)
+    public Medecin(int id, String nom, String login, String mdp, String job,String mail,byte[] img)
     {
         id_medecin=id;
         login_medecin=login;
@@ -27,6 +29,7 @@ public class Medecin {
         mdp_medecin=mdp;
         med_job=job;
         email_med=mail;
+        image=img;
     }
     void Set_id (int id) { id_medecin=id;}
     void Set_nom (String nom) {nom_medecin=nom;}
@@ -41,6 +44,14 @@ public class Medecin {
     public String Get_job () { return med_job;}
     public String Get_mail () { return email_med;}
 
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
 
     @Override
     public String toString() {

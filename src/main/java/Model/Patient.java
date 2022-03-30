@@ -7,15 +7,18 @@ public class Patient {
     private String mdp_patient;
     private String email_patient;
 
+    private byte[] image;
 
 
-    public Patient(int id, String nom, String login, String mdp,String email)
+
+    public Patient(int id, String nom, String login, String mdp, String email, byte[] bytes)
     {
         id_patient=id;
         login_patient=login;
         nom_patient=nom;
         mdp_patient=mdp;
         email_patient=email;
+        image=bytes;
     }
     void Set_id (int id) { id_patient=id;}
     void Set_nom (String nom) {nom_patient=nom;}
@@ -30,6 +33,9 @@ public class Patient {
     public String Get_Mail() {
         return email_patient;
     }
+    public byte[] getImage() {
+        return image;
+    }
 
     @Override
     public String toString() {
@@ -43,5 +49,10 @@ public class Patient {
         nom_patient=B.nom_patient;
         mdp_patient=B.mdp_patient;
         email_patient=B.email_patient;
+        image=B.image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }
