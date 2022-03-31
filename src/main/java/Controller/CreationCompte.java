@@ -4,6 +4,7 @@ import View.Fenetre_Creat;
 import javax.mail.MessagingException;
 import java.io.*;
 import java.sql.SQLException;
+import java.util.Objects;
 
 
 public class CreationCompte {
@@ -55,7 +56,7 @@ public class CreationCompte {
         }
         final ByteArrayOutputStream bos = new ByteArrayOutputStream();
         byte [] buf = new byte[1024];
-        for (int number; (number = fis.read(buf))!=-1;)
+        for (int number; (number = Objects.requireNonNull(fis).read(buf))!=-1;)
         {
             bos.write(buf,0,number);
         }

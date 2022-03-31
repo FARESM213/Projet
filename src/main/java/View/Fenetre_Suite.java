@@ -7,8 +7,6 @@ import Model.Rdv;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -30,6 +28,7 @@ public class Fenetre_Suite {
     private JButton annulerButton;
     private JButton consulterProfilButton;
     private JComboBox comboBox1;
+    private JButton statistiquesButton;
     ButtonGroup group2 = new ButtonGroup();
 
     public static JFrame Suite = new JFrame("Suite");
@@ -121,7 +120,7 @@ public class Fenetre_Suite {
         }
         Suite.setContentPane(Test);
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Suite.setPreferredSize(new Dimension(800,600));
+        Suite.setPreferredSize(new Dimension(820,680));
         Suite.setResizable(false);
         Suite.pack();
         Suite.setVisible(true);
@@ -229,5 +228,9 @@ public class Fenetre_Suite {
 
     public JButton getConsulterProfilButton() {
         return consulterProfilButton;
+    }
+
+    public JButton getStatistiquesButton() {
+        return statistiquesButton;
     }
 }

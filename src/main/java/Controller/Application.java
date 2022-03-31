@@ -67,7 +67,7 @@ public class Application {
         int i=-1;
         for(int a=0;a<Med.size();a++)
         {
-            if ( (Med.get(a).Get_log().equals(id)) && (Med.get(a).Get_mdp().equals(mdp)) )
+            if ( (Med.get(a).Get_id()==(id)) && (Med.get(a).Get_mdp().equals(mdp)) )
             {
                 i=a;
                 break;
@@ -199,6 +199,7 @@ public class Application {
     }
 
     public Application(int i) throws SQLException, ClassNotFoundException {
+
         init();
         L.Logt();
         L.getButton1().addActionListener(e -> {

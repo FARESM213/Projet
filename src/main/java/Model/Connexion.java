@@ -1,14 +1,14 @@
 package Model;
 
-
-import javafx.stage.FileChooser;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Connexion implements DaoConnexionInterface {
 
@@ -16,11 +16,6 @@ public class Connexion implements DaoConnexionInterface {
     private Statement stmt;
     private ResultSet rset;
     private PreparedStatement ps;
-    private JPanel panel1;
-    private JLabel L = new JLabel();
-
-    static JFrame T = new JFrame("Tesr");
-
     public Connexion() {
 
     }
@@ -85,7 +80,7 @@ public class Connexion implements DaoConnexionInterface {
         }
         final ByteArrayOutputStream bos = new ByteArrayOutputStream();
         byte [] buf = new byte[1024];
-        for (int number; (number = fis.read(buf))!=-1;)
+        for (int number; (number = Objects.requireNonNull(fis).read(buf))!=-1;)
         {
             bos.write(buf,0,number);
         }
@@ -133,15 +128,16 @@ public class Connexion implements DaoConnexionInterface {
     @Override
     public void tst() throws SQLException, IOException {
 
-        JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(null);
-        File f = chooser.getSelectedFile();
-        String filename = f.getAbsolutePath();
-        File file = new File(filename);
-        FileInputStream fis = new FileInputStream(file);
+        File file = new File("C:\\Users\\33783\\Desktop\\preview-_1_.png");
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         final ByteArrayOutputStream bos = new ByteArrayOutputStream();
         byte [] buf = new byte[1024];
-        for (int number; (number = fis.read(buf))!=-1;)
+        for (int number; (number = Objects.requireNonNull(fis).read(buf))!=-1;)
         {
             bos.write(buf,0,number);
         }
@@ -159,21 +155,15 @@ public class Connexion implements DaoConnexionInterface {
         ps.close();
     }
 
-    public void tst2() throws SQLException
-    {
-
-        PreparedStatement statement = conn.prepareStatement("SELECT Image FROM Patient WHERE patno =1");
-        ResultSet res = statement.executeQuery();
-        byte[] image = null;
-        while (res.next()) {
-            image = res.getBytes("Image");
-        }
-        //créer l'image
-        Image img = Toolkit.getDefaultToolkit().createImage(image);
-        ImageIcon icone = new ImageIcon(img);
-
-        System.out.println(icone);
-
+        public ArrayList<Object> Selection_distinct(String Table, String Champ) throws SQLException
+        {
+            ArrayList <Object> test = new ArrayList<>();
+            rset = stmt.executeQuery("SELECT DISTINCT "+Champ+" FROM "+Table+" ");
+            while (rset.next())
+            {
+                test.add(rset.getObject(1));
+            }
+            return test;
         }
 
 }

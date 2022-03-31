@@ -47,7 +47,7 @@ public class Rdv {
     public int Get_id() { return id_rdv;}
     public int Get_med() { return id_med;}
     public int Get_pat() { return id_pat;}
-    String Get_lieu () { return rdv_lieu;}
+    public String Get_lieu() { return rdv_lieu;}
     String Get_motif () { return rdv_motif;}
     public LocalDate Get_date() { return rdv_date;}
     int Get_duree() { return rdv_duree;}

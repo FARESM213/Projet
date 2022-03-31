@@ -4,8 +4,6 @@ import Model.Medecin;
 import Model.Patient;
 import View.Fenetre_Profil;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -73,30 +71,26 @@ public class Profil
             }
         });
 
-        Fenetre.getchoisirUneImageButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e)
+        Fenetre.getchoisirUneImageButton().addActionListener(e -> {
+            if (P.getClass()==Patient.class)
             {
-                if (P.getClass()==Patient.class)
+                try
                 {
-                    try
-                    {
-                        App.maconnexion.UpdateImage("Patient","Image","","","patno",((Patient) P).Get_id(),P);
-                        App.init();
-                        Fenetre.renit(P);
-                    } catch (SQLException | ClassNotFoundException | IOException ex) {
-                        ex.printStackTrace();
-                    }
+                    App.maconnexion.UpdateImage("Patient","Image","","","patno",((Patient) P).Get_id(),P);
+                    App.init();
+                    Fenetre.renit(P);
+                } catch (SQLException | ClassNotFoundException | IOException ex) {
+                    ex.printStackTrace();
                 }
-                else
-                {
-                    try {
-                        App.maconnexion.UpdateImage("Medecin","Image","","","medno",((Medecin) P).Get_id(),P);
-                        App.init();
-                        Fenetre.renit(P);
-                    } catch (SQLException | ClassNotFoundException | IOException ex) {
-                        ex.printStackTrace();
-                    }
+            }
+            else
+            {
+                try {
+                    App.maconnexion.UpdateImage("Medecin","Image","","","medno",((Medecin) P).Get_id(),P);
+                    App.init();
+                    Fenetre.renit(P);
+                } catch (SQLException | ClassNotFoundException | IOException ex) {
+                    ex.printStackTrace();
                 }
             }
         });

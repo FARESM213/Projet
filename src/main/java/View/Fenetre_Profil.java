@@ -73,7 +73,10 @@ public class Fenetre_Profil
         emlLabel.setVisible(false);
         speLabel.setVisible(false);
         hptlLabel.setVisible(false);
+        list1.setVisible(false);
+        textArea1.setVisible(false);
         modifierButton.setVisible(true);
+        afficherRdvRadioButton.setVisible(false);
     }
 
     public  void SetView(boolean etat)

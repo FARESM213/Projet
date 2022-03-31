@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Medecin;
 import View.Fenetre_Suite;
+import View.PieChartExample;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -110,6 +111,12 @@ public class Suite {
             Fenetre.setSuite(false);
             Profil F = new Profil(App,A,S);
             F.Fenetre.SetView(true);
+        });
+        Fenetre.getStatistiquesButton().addActionListener(e->{
+
+            PieChartExample Chart;
+            Chart = new PieChartExample();
+            Chart.Plot(App);
         });
     }
 
