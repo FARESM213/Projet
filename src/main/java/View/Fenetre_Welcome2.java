@@ -13,6 +13,12 @@ public class Fenetre_Welcome2 {
 
     public void Suu() {
 
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+
         Welcome2.setContentPane(P);
         Welcome2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Welcome2.setPreferredSize(new Dimension(500,500));

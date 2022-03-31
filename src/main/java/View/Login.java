@@ -12,6 +12,11 @@ public class Login {
 
     public  void Logt()
     {
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
         Log.setContentPane(PannelMain);
         Log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Log.setPreferredSize(new Dimension(250,200));

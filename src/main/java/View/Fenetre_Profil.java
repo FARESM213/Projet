@@ -11,6 +11,7 @@ import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 public class Fenetre_Profil
 {
     private JPanel T;
@@ -40,8 +41,6 @@ public class Fenetre_Profil
     public static JFrame Suite = new JFrame("Suite");
 
     DefaultListModel<Rdv> dlm = new DefaultListModel<>();
-
-
     public Fenetre_Profil() {
 
     }
@@ -55,6 +54,7 @@ public class Fenetre_Profil
 
     public  void Visible(Object P)
     {
+
         Nom.setVisible(true);
         Login.setVisible(true);
         Mdp.setVisible(true);
@@ -106,6 +106,11 @@ public class Fenetre_Profil
 
     public void Suu(Application App, Object P) {
 
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
         createUIComponents(P);
         renit(P);
         Suite.setContentPane(T);

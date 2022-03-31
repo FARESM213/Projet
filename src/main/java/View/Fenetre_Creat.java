@@ -23,6 +23,12 @@ public class Fenetre_Creat {
 
     public void Suu(int indice) {
 
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+
         Suite.setContentPane(j);
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Suite.setPreferredSize(new Dimension(500, 500));
@@ -65,12 +71,3 @@ public class Fenetre_Creat {
         return textField2.getText();
     }
 }
-
-    /*public byte[] get_img() {
-
-        Icon icon;
-
-
-        return icon.toBytes();
-    }
-}*/

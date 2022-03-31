@@ -44,7 +44,7 @@ public class PieChartExample extends JFrame {
 
         ArrayList<Object> Localite;
         Localite=App.maconnexion.Selection_distinct("Rendez_vous","loc");
-        ArrayList<Integer> Types = new ArrayList<Integer>();
+        ArrayList<Integer> Types = new ArrayList<>();
         for (int i=0;i<Localite.size();i++)
         {
             Types.add(0);
@@ -71,6 +71,12 @@ public class PieChartExample extends JFrame {
 
     public void Plot(Application App)
     {
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+
         SwingUtilities.invokeLater(() -> {
             PieChartExample example = null;
             try {
@@ -78,6 +84,7 @@ public class PieChartExample extends JFrame {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            assert example != null;
             example.setSize(800, 400);
             example.setLocationRelativeTo(null);
             example.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);

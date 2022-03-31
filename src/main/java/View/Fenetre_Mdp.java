@@ -16,6 +16,11 @@ public class Fenetre_Mdp {
 
     public void Suu()
     {
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
         MDP.setContentPane(Wow);
         MDP.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         MDP.setPreferredSize(new Dimension(300,300));
