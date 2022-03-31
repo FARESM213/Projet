@@ -29,6 +29,7 @@ public class Fenetre_Suite {
     private JButton consulterProfilButton;
     private JComboBox comboBox1;
     private JButton statistiquesButton;
+    private JButton SUPP;
     ButtonGroup group2 = new ButtonGroup();
 
     public static JFrame Suite = new JFrame("Suite");
@@ -232,5 +233,9 @@ public class Fenetre_Suite {
 
     public JButton getStatistiquesButton() {
         return statistiquesButton;
+    }
+
+    public JButton getSupprimer() {
+        return SUPP;
     }
 }

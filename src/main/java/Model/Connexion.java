@@ -109,6 +109,7 @@ public class Connexion implements DaoConnexionInterface {
 
     public void SuppElement(@NotNull Object O, Object Final, Object FinalB) throws SQLException {
         stmt = conn.createStatement();
+        System.out.println(Patient.class);
         if (O.getClass() == Patient.class) {
             stmt.executeUpdate("DELETE FROM Patient WHERE patno=" + Final + " AND patpassword='" + FinalB + "'");
             stmt.executeUpdate("DELETE FROM rendez_vous WHERE patno=" + Final);

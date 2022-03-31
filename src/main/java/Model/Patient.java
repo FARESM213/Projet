@@ -20,6 +20,14 @@ public class Patient {
         email_patient=email;
         image=bytes;
     }
+    public Patient(Patient P){
+        id_patient=P.Get_id();
+        login_patient=P.Get_log();
+        nom_patient=P.Get_nom();
+        mdp_patient=P.Get_mdp();
+        email_patient=P.Get_Mail();
+        image=null;
+    }
     void Set_id (int id) { id_patient=id;}
     void Set_nom (String nom) {nom_patient=nom;}
     void Set_log (String login) {login_patient=login;}

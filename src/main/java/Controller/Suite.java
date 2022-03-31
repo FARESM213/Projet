@@ -1,9 +1,12 @@
 package Controller;
 
+import Model.Connexion;
 import Model.Medecin;
+import Model.Patient;
 import View.Fenetre_Suite;
 import View.PieChartExample;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -13,7 +16,7 @@ public class Suite {
 
     public Fenetre_Suite Fenetre = new Fenetre_Suite();
 
-    public Suite(Application App, int i,Object A) throws SQLException, ClassNotFoundException
+    public Suite(Application App, int i,Object A, int classe) throws SQLException, ClassNotFoundException
     {
         Fenetre.Suu(App);
         Fenetre.getAppliquerButton().addActionListener(e -> {
@@ -118,6 +121,10 @@ public class Suite {
             Chart = new PieChartExample();
             Chart.Plot(App);
         });
+
+
     }
+
+
 
 }

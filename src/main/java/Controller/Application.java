@@ -255,9 +255,9 @@ public class Application {
                     {
                         L.SetView(false);
                         if(i==1)
-                             sui= new Suite(Application.this,i,Pat.get(ind));
+                             sui= new Suite(Application.this,ind,Pat.get(ind),1);
                         else
-                            sui= new Suite(Application.this,i,Med.get(ind));
+                            sui= new Suite(Application.this,ind,Med.get(ind),0);
 
                         ind=0;
 
