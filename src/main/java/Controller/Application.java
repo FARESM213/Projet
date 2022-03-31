@@ -162,7 +162,7 @@ public class Application {
         else{System.out.println("PROBLEME");}
 
     }
-    public void AjouterMedecin(String nom, String login, String mdp, String job,String mail,byte[ ] img,String hopital) throws SQLException {
+    public void AjouterMedecin(String nom, String login, String mdp, String job,String mail,byte [ ] img,String hopital) throws SQLException {
 
         int id = Med.get(Med.size()-1).Get_id()+1;
         Med.add(new Medecin(id,nom,login,mdp,job,mail,img,hopital));
@@ -289,9 +289,9 @@ public class Application {
                     {
                         L.SetView(false);
                         if(i==1)
-                             sui= new Suite(Application.this,ind,Pat.get(ind),1);
+                             sui= new Suite(Application.this,i,Pat.get(ind));
                         else
-                            sui= new Suite(Application.this,ind,Med.get(ind),0);
+                            sui= new Suite(Application.this,i,Med.get(ind));
 
                         ind=0;
 

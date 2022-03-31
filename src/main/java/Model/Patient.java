@@ -28,6 +28,11 @@ public class Patient {
         email_patient=P.Get_Mail();
         image=null;
     }
+
+    public Patient() {
+
+    }
+
     void Set_id (int id) { id_patient=id;}
     void Set_nom (String nom) {nom_patient=nom;}
     void Set_log (String login) {login_patient=login;}

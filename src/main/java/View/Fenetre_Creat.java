@@ -32,7 +32,6 @@ public class Fenetre_Creat {
     public Fenetre_Creat() {
     }
 
-
     public void Suu(int indice) {
 
         try {
@@ -40,7 +39,6 @@ public class Fenetre_Creat {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-
         Suite.setContentPane(j);
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Suite.setPreferredSize(new Dimension(500, 500));
@@ -54,54 +52,39 @@ public class Fenetre_Creat {
         HOPME.setVisible(false);
         mdpME.setVisible(false);
         EMAILME.setVisible(false);
-
     }
 
     public JButton creerButton() {
         return creerButton;
     }
-
     public String LoginTextField() {
         return LoginTextField.getText();
     }
-
     public String SPEField() {
         return SPEField.getText();
     }
-
     public String NomTextField() {
         return NomTextField.getText();
     }
-
     public String MDPField() {
         return String.valueOf(MDPField.getPassword());
     }
-
     public void SetView(boolean etat) {
         Suite.setVisible(etat);
     }
-
     public String getTextField1() {
         return textField1.getText();
     }
-
     public String getTextField2() {
         return textField2.getText();
     }
 
     public void setLoginTextField(String log) {LoginTextField.setText(log);}
-
     public void setSPEField(String spe) {SPEField.setText(spe);}
-
     public void sethopField(String log) {textField2.setText(log);}
-
     public void setMdpField(String spe) {MDPField.setText(spe);}
-
     public void setEmailField(String log) {textField1.setText(log);}
-
     public void setNomField(String spe) {NomTextField.setText(spe);}
-
-
 
     public void MENOM(boolean indice){NOMME.setVisible(indice);}
     public void MELOGIN(boolean indice){LOGINME.setVisible(indice);}
@@ -109,7 +92,6 @@ public class Fenetre_Creat {
     public void MESPE(boolean indice){SPEME.setVisible(indice);}
     public void MEmdp(boolean indice){mdpME.setVisible(indice);}
     public void MEHOP(boolean indice){HOPME.setVisible(indice);}
-
 
 
 }

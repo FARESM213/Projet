@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Medecin;
+import Model.Patient;
 import View.Fenetre_Creat;
 import javax.mail.MessagingException;
 import java.io.*;
@@ -12,46 +14,44 @@ import java.lang.String;
 public class CreationCompte {
 
     private final Fenetre_Creat Fenetre = new Fenetre_Creat();
+    Application Appli = new Application();
 
     public CreationCompte( int indice) throws SQLException, ClassNotFoundException {
         Fenetre.Suu(indice);
-
-
-
+        Appli.wow();
         if (indice==0){//MEDECIN
             Fenetre.creerButton().addActionListener(e -> {
                         String str = Fenetre.MDPField();
+                        Medecin A = new Medecin();
                 int buff=0;
-                 if (isValidText(Fenetre.NomTextField())==true){Fenetre.MENOM(false);}else {
+                 if (isValidText(Fenetre.NomTextField())){Fenetre.MENOM(false);}else {
                      buff++;
                      Fenetre.setNomField("");
                      Fenetre.MENOM(true);}
-                 if (isValidText(Fenetre.LoginTextField())==true){Fenetre.MELOGIN(false);}else {
+                 if (isValidText_1(Fenetre.LoginTextField(),Appli,A)){Fenetre.MELOGIN(false);}else {
                      buff++;
                      Fenetre.setLoginTextField("");
                      Fenetre.MELOGIN(true);}
-                 if (isValidText(Fenetre.SPEField())==true){Fenetre.MESPE(false);}else{
+                 if (isValidText(Fenetre.SPEField())){Fenetre.MESPE(false);}else{
                      buff++;
                      Fenetre.setSPEField("");
                      Fenetre.MESPE(true);}
-                 if (isValidText(Fenetre.getTextField1())==true){Fenetre.MEEMAIL(false);}else {
+                 if (isValidText(Fenetre.getTextField1())){Fenetre.MEEMAIL(false);}else {
                      buff++;
                      Fenetre.setEmailField("");
                      Fenetre.MEEMAIL(true);}
-                 if (isValidText(Fenetre.getTextField2())==true){Fenetre.MEHOP(false);}else {
+                 if (isValidText(Fenetre.getTextField2())){Fenetre.MEHOP(false);}else {
                      buff++;
                      Fenetre.sethopField("");
                      Fenetre.MEHOP(true);}
-                 if (isValidText(str)==true){Fenetre.MEmdp(false);}else {
+                 if (isValidText(str)){Fenetre.MEmdp(false);}else {
                      buff++;
                      Fenetre.setMdpField("");
                      Fenetre.MEmdp(true);}
 
                     if (buff == 0){try {
                         Application App = new Application(indice);
-                        System.out.println("COUCOU");
                         App.AjouterMedecin(Fenetre.NomTextField(), Fenetre.LoginTextField(), str, Fenetre.SPEField(), Fenetre.getTextField1(), Photo_const(), Fenetre.getTextField2());
-                        System.out.println("COUCOU");
                         App.Loggg();
                     } catch (SQLException | ClassNotFoundException | IOException ex) {
                         ex.printStackTrace();
@@ -63,40 +63,37 @@ public class CreationCompte {
         } else if(indice==1){//PATIENT
             Fenetre.creerButton().addActionListener(e ->
             {
-                    String str = Fenetre.MDPField();
+                Patient B = new Patient();
+                String str = Fenetre.MDPField();
                    int buff=0;
-                if (isValidText(Fenetre.NomTextField())==true){Fenetre.MENOM(false);}else {
+                if (isValidText(Fenetre.NomTextField())){Fenetre.MENOM(false);}else {
                     buff++;
                     Fenetre.setNomField("");
                     Fenetre.MENOM(true);}
-                if (isValidText(Fenetre.LoginTextField())==true){Fenetre.MELOGIN(false);}else{
+                if (isValidText_1(Fenetre.LoginTextField(),Appli,B)){Fenetre.MELOGIN(false);}else{
                     buff++;
                     Fenetre.setLoginTextField("");
                     Fenetre.MELOGIN(true);}
-                if (isValidText(Fenetre.getTextField1())==true){Fenetre.MEEMAIL(false);}else {
+                if (isValidText(Fenetre.getTextField1())){Fenetre.MEEMAIL(false);}else {
                     Fenetre.setEmailField("");
                     buff++;
                     Fenetre.MEEMAIL(true);}
-                if (isValidText(str)==true){Fenetre.MEmdp(false);}else{
+                if (isValidText(str)){Fenetre.MEmdp(false);}
 
+                else{
                     Fenetre.setMdpField("");
                     buff++;
                     Fenetre.MEmdp(true);}
-
-
                         if (buff==0){
                             try {
                                 Application App = new Application(indice);
                                 String email = Fenetre.getTextField1();
-                                System.out.println("COUCOU");
                                 App.AjouterPatient(Fenetre.NomTextField(),Fenetre.LoginTextField(),str,email,Photo_const());
-                                System.out.println("COUCOU");
                                 App.Loggg();}
                         catch (SQLException | ClassNotFoundException | MessagingException | IOException ex) {ex.printStackTrace();}
                     Fenetre.SetView(false);}
 
             });
-
 
                  }else {
 
@@ -124,13 +121,36 @@ public class CreationCompte {
     }
 
 
-
-
     public static boolean isValidText(String obj){
-        if (obj.length()>3){
-            return true;
+        return obj.length() > 3;
+    }
+
+    public static boolean isValidText_1(String obj,Application App,Object O){
+
+        int oui=0;
+        if (O.getClass()==Medecin.class)
+        {
+            for (Medecin N : App.Med) {
+                if (Objects.equals(N.Get_log(), obj))
+                {
+                    oui=1;
+                    System.out.println(" PSEUDO DEJA PRIS ");
+
+                }
+            }
         }
-        return false;
+        else
+        {
+            for (Patient N : App.Pat)
+            {
+                if (Objects.equals(N.Get_log(), obj))
+                {
+                    oui=1;
+                    System.out.println(" PSEUDO DEJA PRIS ");
+                }
+            }
+        }
+        return (obj.length() > 3) && (oui == 0);
     }
 
 
@@ -150,7 +170,6 @@ public class CreationCompte {
     public static boolean isValidPassword(String password)
     {
 
-        // Regex to check valid password.
         String regex = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
                 + "(?=.*[@#$%^&+=])"

@@ -102,7 +102,7 @@ public class Connexion implements DaoConnexionInterface {
 
     public void UpdateElement(String table, String champ, Object Depart, Object Final, String genre, int id) throws SQLException {
         stmt = conn.createStatement();
-        stmt.executeUpdate("UPDATE " + table + " SET " + champ + "='" + Final + "' WHERE " + champ + "='" + Depart + "' " + genre + "=" + id);
+        stmt.executeUpdate("UPDATE " + table + " SET " + champ + "='" + Final + "' WHERE " + champ + "='" + Depart + "' AND " + genre + "='" + id+"'");
     }
 
     public void SuppElement(@NotNull Object O, Object Final, Object FinalB) throws SQLException {

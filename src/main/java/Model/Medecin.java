@@ -11,6 +11,10 @@ public class Medecin {
     private byte[] image;
     private String hopital;
 
+    public Medecin() {
+
+    }
+
     public void set(Medecin B)
     {
         id_medecin=B.id_medecin;
