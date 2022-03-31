@@ -9,6 +9,7 @@ public class Medecin {
     private String med_job;
     private String email_med;
     private byte[] image;
+    private String hopital;
 
     public void set(Medecin B)
     {
@@ -19,9 +20,10 @@ public class Medecin {
         med_job=B.med_job;
         email_med=B.email_med;
         image=B.image;
+        hopital=B.hopital;
     }
 
-    public Medecin(int id, String nom, String login, String mdp, String job,String mail,byte[] img)
+    public Medecin(int id, String nom, String login, String mdp, String job,String mail,byte[] img,String h)
     {
         id_medecin=id;
         login_medecin=login;
@@ -30,6 +32,7 @@ public class Medecin {
         med_job=job;
         email_med=mail;
         image=img;
+        hopital=h;
     }
     void Set_id (int id) { id_medecin=id;}
     void Set_nom (String nom) {nom_medecin=nom;}
@@ -43,7 +46,9 @@ public class Medecin {
     public String Get_mdp() { return mdp_medecin;}
     public String Get_job () { return med_job;}
     public String Get_mail () { return email_med;}
-
+    public String getHopital() {
+        return hopital;
+    }
 
     public void setImage(byte[] image) {
         this.image = image;

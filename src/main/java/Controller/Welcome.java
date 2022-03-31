@@ -27,7 +27,6 @@ public class Welcome {
         Fenetre.getPatient().addActionListener(e -> {
             Fenetre.SetView(false);
             try {
-               // new Fenetre_test();
                 new Welcome2(1);
             } catch (SQLException | ClassNotFoundException ex) {
                 ex.printStackTrace();

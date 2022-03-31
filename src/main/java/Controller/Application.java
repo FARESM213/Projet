@@ -134,10 +134,10 @@ public class Application {
         else{System.out.println("PROBLEME");}
 
     }
-    public void AjouterMedecin(String nom, String login, String mdp, String job,String mail,byte [ ] img) throws SQLException {
+    public void AjouterMedecin(String nom, String login, String mdp, String job,String mail,byte [ ] img,String hopital) throws SQLException {
 
         int id = Med.get(Med.size()-1).Get_id()+1;
-        Med.add(new Medecin(id,nom,login,mdp,job,mail,img));
+        Med.add(new Medecin(id,nom,login,mdp,job,mail,img,hopital));
         maconnexion.ajouterElement(Med.get(Med.size()-1));
         EnvoyerEmail(mail,nom);
         try {
@@ -168,10 +168,11 @@ public class Application {
         LocalDate date=null;
         String lieu=null;
         String motif=null;
+        String type=null;
         int duree=0;
         int horaire=0;
         boolean etat=true;
-        Rendezvous.add(new Rdv(id,med,pat,date,motif,duree,horaire,lieu,etat));
+        Rendezvous.add(new Rdv(id,med,pat,date,motif,duree,horaire,lieu,etat,type));
         maconnexion.ajouterElement(Rendezvous.get(Rendezvous.size()-1));
     }
     void EnvoyerEmail(String Recever,String nom)
@@ -198,16 +199,6 @@ public class Application {
     }
 
     public Application(int i) throws SQLException, ClassNotFoundException {
-
-       maconnexion= new Connexion();
-        maconnexion.coco("bdd","root","");
-       try {
-            maconnexion.tst();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //maconnexion.createUIComponents();
-
         init();
         L.Logt();
         L.getButton1().addActionListener(e -> {

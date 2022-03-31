@@ -13,6 +13,7 @@ public class Fenetre_Creat {
     private JTextField SPEField;
     private JPanel IFMEDECIN;
     private JTextField textField1;
+    private JTextField textField2;
 
     static JFrame Suite = new JFrame("Suite");
 
@@ -58,6 +59,10 @@ public class Fenetre_Creat {
 
     public String getTextField1() {
         return textField1.getText();
+    }
+
+    public String getTextField2() {
+        return textField2.getText();
     }
 }
 

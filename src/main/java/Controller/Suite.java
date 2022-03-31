@@ -16,7 +16,42 @@ public class Suite {
     {
         Fenetre.Suu(App);
         Fenetre.getAppliquerButton().addActionListener(e -> {
-            String whouere="WHERE rdvno IS NOT NULL ";
+
+            String whouere="";
+
+            String spe=null;
+            int idmedcin=-1;
+
+            if (Fenetre.getCombo()!=null)
+            {
+                spe=(String)Fenetre.getCombo();
+            }
+
+            if (Fenetre.getMed_cin()!=null)
+            {
+                Object O = Fenetre.getMed_cin();
+                idmedcin= ((Medecin) O).Get_id();
+            }
+
+            if(spe!=null )
+            {
+                whouere+="INNER JOIN Medecin WHERE loc='"+spe+"' AND loc=hopital ";
+            }
+            else
+            {
+                whouere+="WHERE rdvno IS NOT NULL ";
+            }
+
+            if (idmedcin!=-1 &&(spe!=null))
+            {
+                whouere+= "AND rendez_vous.medno="+idmedcin;
+            }
+
+            else if (idmedcin!=-1)
+            {
+                whouere+= "AND medno="+idmedcin;
+            }
+
             Date dateToStr1;
             Date dateToStr2;
             LocalDate date = LocalDate.now();
@@ -27,13 +62,6 @@ public class Suite {
             LocalDate date1=dateToStr1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate date2=dateToStr2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-            int idmedcin=-1;
-
-            if (Fenetre.getMed_cin()!=null)
-            {
-                Object O = Fenetre.getMed_cin();
-                idmedcin= ((Medecin) O).Get_id();
-            }
 
             if (Fenetre.getLibreRadioButton().isSelected())
             {
@@ -56,10 +84,7 @@ public class Suite {
             {
                 whouere+= "AND rdv_date BETWEEN '"+date1+ "' AND '"+date2+"' ";
             }
-            if (idmedcin!=-1)
-            {
-                whouere+= "AND medno="+idmedcin;
-            }
+
             try
             {
                 Fenetre.setDlm(whouere,App);

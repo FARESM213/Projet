@@ -17,7 +17,7 @@ public class CreationCompte {
                 String str = Fenetre.MDPField();
                 try {
                     Application App = new Application(indice);
-                    App.AjouterMedecin(Fenetre.NomTextField(),Fenetre.LoginTextField(),str,Fenetre.SPEField(),Fenetre.getTextField1(),Photo_const());
+                    App.AjouterMedecin(Fenetre.NomTextField(),Fenetre.LoginTextField(),str,Fenetre.SPEField(),Fenetre.getTextField1(),Photo_const(),Fenetre.getTextField2());
                     App.Loggg();
                 } catch (SQLException | ClassNotFoundException | IOException ex)
                 {

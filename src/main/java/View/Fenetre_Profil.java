@@ -8,8 +8,6 @@ import Model.Rdv;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -36,6 +34,9 @@ public class Fenetre_Profil
     private JButton modifierButton;
     private JLabel tssLabel;
     private JButton choisirUneImageButton;
+    private JTextField hospi;
+    private JLabel hptlLabel;
+    private JLabel hopitalLabel;
     public static JFrame Suite = new JFrame("Suite");
 
     DefaultListModel<Rdv> dlm = new DefaultListModel<>();
@@ -61,13 +62,17 @@ public class Fenetre_Profil
         choisirUneImageButton.setVisible(true);
 
         if(P.getClass()==Medecin.class)
+        {
             Spec.setVisible(true);
+            hospi.setVisible(true);
+        }
 
         nmLabel.setVisible(false);
         lgLabel.setVisible(false);
         mpLabel.setVisible(false);
         emlLabel.setVisible(false);
         speLabel.setVisible(false);
+        hptlLabel.setVisible(false);
         modifierButton.setVisible(true);
     }
 
@@ -119,6 +124,7 @@ public class Fenetre_Profil
         Spec.setVisible(false);
         modifierButton.setVisible(false);
         choisirUneImageButton.setVisible(false);
+        hospi.setVisible(false);
 
         if(O.getClass()==Medecin.class)
         {
@@ -127,7 +133,9 @@ public class Fenetre_Profil
             mpLabel.setText(((Medecin) O).Get_mdp());
             emlLabel.setText(((Medecin) O).Get_mail());
             speLabel.setText(((Medecin) O).Get_job());
+            hptlLabel.setText(((Medecin) O).getHopital());
             specialiteLabel.setVisible(true);
+            hopitalLabel.setVisible(true);
         }
         else
         {
@@ -137,6 +145,8 @@ public class Fenetre_Profil
             emlLabel.setText(((Patient) O).Get_Mail());
             speLabel.setVisible(false);
             specialiteLabel.setVisible(false);
+            hopitalLabel.setVisible(false);
+            hptlLabel.setVisible(false);
         }
 
         if(O.getClass()==Medecin.class)
@@ -146,6 +156,7 @@ public class Fenetre_Profil
             Mdp.setText(((Medecin) O).Get_mdp());
             Email.setText(((Medecin) O).Get_mail());
             Spec.setText(((Medecin) O).Get_job());
+            hospi.setText(((Medecin) O).getHopital());
         }
         else
         {
@@ -154,7 +165,6 @@ public class Fenetre_Profil
             Mdp.setText(((Patient) O).Get_mdp());
             Email.setText(((Patient) O).Get_Mail());
         }
-
     }
 
     public JPanel getT() {
@@ -237,7 +247,11 @@ public class Fenetre_Profil
         return Suite;
     }
 
-    public void radio(Application App,Object O)  {
+    public String getHospi() {
+        return hospi.getText();
+    }
+
+    public void radio(Application App, Object O)  {
 
         list1.setVisible(true);
         textArea1.setVisible(true);

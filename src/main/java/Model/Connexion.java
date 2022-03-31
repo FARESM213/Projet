@@ -50,11 +50,11 @@ public class Connexion implements DaoConnexionInterface {
         }
         rset = stmt.executeQuery("SELECT * FROM Medecin");
         while (rset.next()) {
-            Med.add(new Medecin(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4), rset.getString(5), rset.getString(6),rset.getBytes(7)));
+            Med.add(new Medecin(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4), rset.getString(5), rset.getString(6),rset.getBytes(7),rset.getString(8)));
         }
         rset = stmt.executeQuery("SELECT * FROM Rendez_vous");
         while (rset.next()) {
-            Rendezvous.add(new Rdv(rset.getInt(1), rset.getInt(2), rset.getInt(3), rset.getDate(4).toLocalDate(), rset.getString(5), rset.getInt(6), rset.getInt(7), rset.getString(8), rset.getBoolean(9)));
+            Rendezvous.add(new Rdv(rset.getInt(1), rset.getInt(2), rset.getInt(3), rset.getDate(4).toLocalDate(), rset.getString(5), rset.getInt(6), rset.getInt(7), rset.getString(8), rset.getBoolean(9), rset.getString(10)));
         }
     }
 
@@ -64,9 +64,9 @@ public class Connexion implements DaoConnexionInterface {
         if (O.getClass() == Patient.class) {
             stmt.executeUpdate("INSERT INTO Patient VALUES (" + ((Patient) O).Get_id() + ",'" + ((Patient) O).Get_nom() + "','" + ((Patient) O).Get_log() + "','" + ((Patient) O).Get_mdp() + "','" + ((Patient) O).Get_Mail() + "','" + ((Patient) O).getImage() + "' )");
         } else if (O.getClass() == Medecin.class) {
-            stmt.executeUpdate("INSERT INTO Medecin VALUES (" + ((Medecin) O).Get_id() + ",'" + ((Medecin) O).Get_nom() + "','" + ((Medecin) O).Get_log() + "','" + ((Medecin) O).Get_mdp() + "','" + ((Medecin) O).Get_job() + "','" + ((Medecin) O).Get_mail() +  "','" + ((Medecin) O).getImage() + "')");
+            stmt.executeUpdate("INSERT INTO Medecin VALUES (" + ((Medecin) O).Get_id() + ",'" + ((Medecin) O).Get_nom() + "','" + ((Medecin) O).Get_log() + "','" + ((Medecin) O).Get_mdp() + "','" + ((Medecin) O).Get_job() + "','" + ((Medecin) O).Get_mail() +  "','" + ((Medecin) O).getImage() + "','" + ((Medecin) O).getHopital() + "')");
         } else {
-            stmt.executeUpdate("INSERT INTO Rendez_vous VALUES (" + ((Rdv) O).Get_id() + "," + ((Rdv) O).Get_med() + "," + ((Rdv) O).Get_pat() + ",'" + ((Rdv) O).Get_date() + "','" + ((Rdv) O).Get_motif() + "'," + ((Rdv) O).Get_duree() + "," + ((Rdv) O).Get_horaire() + ",'" + ((Rdv) O).Get_lieu() + ",'" + ((Rdv) O).Get_etat() + "')");
+            stmt.executeUpdate("INSERT INTO Rendez_vous VALUES (" + ((Rdv) O).Get_id() + "," + ((Rdv) O).Get_med() + "," + ((Rdv) O).Get_pat() + ",'" + ((Rdv) O).Get_date() + "','" + ((Rdv) O).Get_motif() + "'," + ((Rdv) O).Get_duree() + "," + ((Rdv) O).Get_horaire() + ",'" + ((Rdv) O).Get_lieu() + ",'" + ((Rdv) O).Get_etat() +  ",'" + ((Rdv) O).getType() + "')");
         }
     }
 

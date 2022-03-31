@@ -45,7 +45,7 @@ public class Profil
         Fenetre.getAfficherRdvRadioButton().addActionListener(e -> Fenetre.radio(App,P));
         Fenetre.getModifierButton().addActionListener(e -> {
             if (P.getClass()==Medecin.class) {
-                Medecin B= new Medecin(((Medecin) P).Get_id(),Fenetre.getNom(),Fenetre.getLogin(),Fenetre.getMdp(),Fenetre.getSpec(),Fenetre.getEmail(),((Medecin) P).getImage());
+                Medecin B= new Medecin(((Medecin) P).Get_id(),Fenetre.getNom(),Fenetre.getLogin(),Fenetre.getMdp(),Fenetre.getSpec(),Fenetre.getEmail(),((Medecin) P).getImage(),Fenetre.getHospi());
                 try
                 {
                     App.Update_Medecin((Medecin) P, B);

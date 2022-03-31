@@ -16,7 +16,7 @@ import java.text.ParseException;
 public class Fenetre_Suite {
 
     private JPanel Test;
-    private JComboBox<Medecin> Med_cin;
+    private JComboBox <Medecin>Med_cin;
     private JButton appliquerButton;
     private JRadioButton libreRadioButton;
     private JRadioButton reserveRadioButton;
@@ -29,6 +29,7 @@ public class Fenetre_Suite {
     private JTextArea textArea1;
     private JButton annulerButton;
     private JButton consulterProfilButton;
+    private JComboBox comboBox1;
     ButtonGroup group2 = new ButtonGroup();
 
     public static JFrame Suite = new JFrame("Suite");
@@ -142,6 +143,7 @@ public class Fenetre_Suite {
         model2.setStart( editor2.getFormat().parse("2009-02-26") );
 
         Med_cin.addItem(null);
+        comboBox1.addItem(null);
 
         group.add(reserveRadioButton);
         group.add(libreRadioButton);
@@ -153,6 +155,7 @@ public class Fenetre_Suite {
         for(Medecin N : App.Med)
         {
             Med_cin.addItem(N);
+            comboBox1.addItem(N.getHopital());
         }
     }
 
@@ -175,6 +178,11 @@ public class Fenetre_Suite {
     public Object getMed_cin() {
         return Med_cin.getSelectedItem();
     }
+
+    public Object getCombo() {
+        return comboBox1.getSelectedItem();
+    }
+
 
     public JRadioButton getLibreRadioButton() {
         return libreRadioButton;

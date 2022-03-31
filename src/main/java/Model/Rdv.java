@@ -14,7 +14,10 @@ public class Rdv {
     private int rdv_horaire;
     private boolean etat;
 
-    public Rdv(int id, int med, int pat, LocalDate date, String motif, int duree, int horaire, String lieu, boolean e)
+    private String  Type;
+
+
+    public Rdv(int id, int med, int pat, LocalDate date, String motif, int duree, int horaire, String lieu, boolean e,String t)
     {
           id_rdv=id;
           id_med=med;
@@ -25,6 +28,7 @@ public class Rdv {
           rdv_duree=duree;
           rdv_horaire=horaire;
           etat=e;
+          Type=t;
     }
 
 
@@ -49,6 +53,10 @@ public class Rdv {
     int Get_duree() { return rdv_duree;}
     int Get_horaire () { return rdv_horaire;}
     public Boolean Get_etat() {return etat;}
+
+    public String getType() {
+        return Type;
+    }
 
     @Override
     public String toString() {
