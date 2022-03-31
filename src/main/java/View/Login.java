@@ -37,12 +37,12 @@ public class Login {
         return button1;
     }
 
-    public void Fentre_Erreur() {
-        JOptionPane.showMessageDialog(null,"PAS DE COMPTE, CREER UN NOUVEAU ? ","Erreur",JOptionPane.INFORMATION_MESSAGE);
+    public int Fentre_Erreur() {
+        return JOptionPane.showConfirmDialog(null,"PAS DE COMPTE, CREER UN NOUVEAU ? ","Erreur",JOptionPane.YES_NO_OPTION);
     }
 
     public int Fenetre_confirm() {
-        return JOptionPane.showConfirmDialog(null,"  Mot de passe incorrect... Voulez vous le modifier ?","Clear TextField",JOptionPane.YES_NO_OPTION);
+        return JOptionPane.showConfirmDialog(null,"  Mot de passe incorrect... Voulez vous le modifier ?","Error mdp",JOptionPane.YES_NO_OPTION);
     }
 
     public String getPasswordField1() {

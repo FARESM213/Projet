@@ -1,8 +1,6 @@
 package Model;
 import org.springframework.context.annotation.Configuration;
 
-import java.io.*;
-
 @Configuration
 public class MailConfig {
 

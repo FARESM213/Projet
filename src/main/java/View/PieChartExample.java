@@ -22,8 +22,6 @@ import org.jfree.data.general.PieDataset;
  */
 public class PieChartExample extends JFrame {
     private static final long serialVersionUID = 6294689542092367723L;
-
-
     public PieChartExample(String title,Application App) throws SQLException {
         super(title);
         PieDataset dataset = createDataset(App);
@@ -92,5 +90,4 @@ public class PieChartExample extends JFrame {
         });
         add(new JButton());
     }
-
 }

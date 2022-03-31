@@ -1,7 +1,6 @@
 package Controller;
 
 import View.Fenetre_Welcome;
-
 import java.sql.SQLException;
 
 public class Welcome {

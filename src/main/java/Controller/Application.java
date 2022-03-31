@@ -26,13 +26,15 @@ public class Application {
     public Suite sui;
     public ChangementMdp mot;
 
+    public Application() {}
 
     public void wow () throws SQLException, ClassNotFoundException
     {
         maconnexion = new Connexion("bdd", "root", "",Pat,Med,Rendezvous);
     }
 
-    public void Update_Medecin(Medecin A,Medecin B) throws SQLException {
+    public void Update_Medecin(Medecin A,Medecin B) throws SQLException
+    {
         maconnexion.UpdateElement("Medecin","medname",A.Get_nom(),B.Get_nom(),"medno",A.Get_id());
         maconnexion.UpdateElement("Medecin","medlogin",A.Get_log(),B.Get_log(),"medno",A.Get_id());
         maconnexion.UpdateElement("Medecin","medpassword",A.Get_mdp(),B.Get_mdp(),"medno",A.Get_id());
@@ -44,6 +46,7 @@ public class Application {
             e.printStackTrace();
         }
     }
+
     public void Update_Patient(Patient A,Patient B) throws SQLException {
 
         maconnexion.UpdateElement("Patient","patname",A.Get_nom(),B.Get_nom(),"patno",A.Get_id());
@@ -57,13 +60,36 @@ public class Application {
         }
 
     }
-    public void init() throws SQLException, ClassNotFoundException {
+
+    public void Update_Rdv(Rdv A, Object selectedItem, String text, Object p) throws SQLException {
+
+        int durree=A.Get_horaire()+A.Get_duree();
+
+        maconnexion.ExecuteRequest("UPDATE Rendez_vous SET etat=0 WHERE rdvno='"+A.Get_id()+"'");
+        maconnexion.ExecuteRequest("UPDATE Rendez_vous SET rdv_duree='"+selectedItem+"' WHERE rdvno='"+A.Get_id()+"'");
+        maconnexion.ExecuteRequest("UPDATE Rendez_vous SET rdv_motif='"+text+"' WHERE rdvno='"+A.Get_id()+"'");
+        maconnexion.ExecuteRequest("DELETE FROM Rendez_vous WHERE rdv_date='"+A.Get_date()+"' AND rdv_horaire BETWEEN '"+A.Get_horaire() +"' AND '"+ durree+"' AND rdvno!='"+A.Get_id()+"'");
+        if (Patient.class== p.getClass())
+        {
+            maconnexion.ExecuteRequest("UPDATE Rendez_vous SET patno='"+((Patient) p).Get_id()+"'");
+        }
+        try {
+            init();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void init() throws SQLException, ClassNotFoundException
+        {
         Pat.clear();
         Med.clear();
         Rendezvous.clear();
         wow();
     }
-    public void SuppMedecin(int id, String mdp) throws SQLException {
+
+    public void SuppMedecin(int id, String mdp) throws SQLException
+    {
         int i=-1;
         for(int a=0;a<Med.size();a++)
         {
@@ -88,6 +114,7 @@ public class Application {
             e.printStackTrace();
         }
     }
+
     public void SuppPatient(int id, String mdp) throws SQLException {
 
         int i=-1;
@@ -114,7 +141,8 @@ public class Application {
             e.printStackTrace();
         }
     }
-    public void SuppRdv() throws SQLException {
+    public void SuppRdv() throws SQLException
+    {
         int idpat=0;
         int idmed=0;
         int i=-1;
@@ -146,7 +174,8 @@ public class Application {
             e.printStackTrace();
         }
     }
-    public void AjouterPatient(String nom, String login, String mdp,String email,byte[] img) throws UnsupportedEncodingException, MessagingException {
+    public void AjouterPatient(String nom, String login, String mdp,String email,byte[] img) throws UnsupportedEncodingException, MessagingException
+    {
         int id = Pat.get(Pat.size()-1).Get_id()+1;
         Pat.add(new Patient(id,nom,login,mdp,email,img));
         try {
@@ -161,7 +190,8 @@ public class Application {
             e.printStackTrace();
         }
     }
-    void AjouterRdv() throws SQLException {
+    void AjouterRdv() throws SQLException
+    {
         int id=0;
         int med=0;
         int pat=0;
@@ -248,7 +278,11 @@ public class Application {
                 {
                     case 0 :
                     {
-                        L.Fentre_Erreur();
+                        if (L.Fentre_Erreur()==0)
+                        {
+                            L.SetView(false);
+                            new CreationCompte_2(i,this);
+                        }
                         ind=0;
                     } break;
                     case 1 :

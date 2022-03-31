@@ -1,0 +1,72 @@
+package View;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class Fentre_Creat_2 {
+
+    private JPanel j;
+    private JTextField LoginTextField;
+    private JTextField NomTextField;
+    private JButton creerButton;
+    private JPasswordField MDPField;
+    private JTextField SPEField;
+    private JPanel IFMEDECIN;
+    private JTextField textField1;
+    private JTextField textField2;
+
+    static JFrame Suite = new JFrame("Suite");
+
+    public Fentre_Creat_2() {
+    }
+
+    public void Suu(int indice) {
+
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+
+        Suite.setContentPane(j);
+        Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Suite.setPreferredSize(new Dimension(500, 500));
+        Suite.setResizable(false);
+        Suite.pack();
+        Suite.setVisible(true);
+        IFMEDECIN.setVisible(indice != 1);
+
+    }
+
+    public JButton creerButton() {
+        return creerButton;
+    }
+
+    public String LoginTextField() {
+        return LoginTextField.getText();
+    }
+
+    public String SPEField() {
+        return SPEField.getText();
+    }
+
+    public String NomTextField() {
+        return NomTextField.getText();
+    }
+
+    public String MDPField() {
+        return String.valueOf(MDPField.getPassword());
+    }
+
+    public void SetView(boolean etat) {
+        Suite.setVisible(etat);
+    }
+
+    public String getTextField1() {
+        return textField1.getText();
+    }
+
+    public String getTextField2() {
+        return textField2.getText();
+    }
+}

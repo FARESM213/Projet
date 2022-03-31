@@ -3,7 +3,6 @@ package Controller;
 import Model.Medecin;
 import Model.Patient;
 import View.Fenetre_Profil;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -69,6 +68,9 @@ public class Profil
             } catch (SQLException | ClassNotFoundException ex) {
                 ex.printStackTrace();
             }
+
+            Fenetre.SetView(false);
+            S.Fenetre.setSuite(true);
         });
 
         Fenetre.getchoisirUneImageButton().addActionListener(e -> {

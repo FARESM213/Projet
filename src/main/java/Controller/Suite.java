@@ -4,7 +4,10 @@ import Model.Medecin;
 import View.Fenetre_Suite;
 import View.PieChartExample;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -63,7 +66,6 @@ public class Suite {
             LocalDate date1=dateToStr1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate date2=dateToStr2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-
             if (Fenetre.getLibreRadioButton().isSelected())
             {
                 whouere+= "AND etat=true ";
@@ -83,7 +85,7 @@ public class Suite {
             }
             else if (Fenetre.getDuRadioButton().isSelected())
             {
-                whouere+= "AND rdv_date BETWEEN '"+date1+ "' AND '"+date2+"' ";
+                whouere+= "AND rdv_date BETWEEN '"+date1+ "' AND '"+date2+"'  ";
             }
 
             try
@@ -117,6 +119,23 @@ public class Suite {
             PieChartExample Chart;
             Chart = new PieChartExample();
             Chart.Plot(App);
+        });
+
+        Fenetre.getReserverButton().addActionListener(e -> {
+            if (!Fenetre.getElementListe())
+            {
+                Fenetre.Fentre_Erreur();
+            }
+            else
+            {
+                try {
+                    Fenetre.setSuite(false);
+                    PriseRendezVous F =new PriseRendezVous(i,App,Fenetre.getListe().getSelectedValue(),S,A);
+                    F.Fenetre.SetView(true);
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
+                }
+            }
         });
     }
 

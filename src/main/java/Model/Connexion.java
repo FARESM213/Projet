@@ -3,7 +3,6 @@ package Model;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -66,7 +65,6 @@ public class Connexion implements DaoConnexionInterface {
     }
 
     public void UpdateImage (String table, String champ, Object Depart, Object Final, String genre, int id,Object O) throws SQLException, IOException {
-
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
@@ -103,7 +101,7 @@ public class Connexion implements DaoConnexionInterface {
 
     public void UpdateElement(String table, String champ, Object Depart, Object Final, String genre, int id) throws SQLException {
         stmt = conn.createStatement();
-        stmt.executeUpdate("UPDATE " + table + " SET " + champ + "='" + Final + "' WHERE " + champ + "='" + Depart + "' AND " + genre + "=" + id);
+        stmt.executeUpdate("UPDATE " + table + " SET " + champ + "='" + Final + "' WHERE " + champ + "='" + Depart + "' " + genre + "=" + id);
     }
 
     public void SuppElement(@NotNull Object O, Object Final, Object FinalB) throws SQLException {
@@ -122,6 +120,7 @@ public class Connexion implements DaoConnexionInterface {
 
     public ResultSet Search(String table, String Elem, String whouere) throws SQLException {
         stmt = conn.createStatement();
+        System.out.println("SELECT " + Elem + " FROM " + table + " " + whouere);
         return stmt.executeQuery("SELECT " + Elem + " FROM " + table + " " + whouere);
     }
 
@@ -155,8 +154,8 @@ public class Connexion implements DaoConnexionInterface {
         ps.close();
     }
 
-        public ArrayList<Object> Selection_distinct(String Table, String Champ) throws SQLException
-        {
+    public ArrayList<Object> Selection_distinct(String Table, String Champ) throws SQLException
+    {
             ArrayList <Object> test = new ArrayList<>();
             rset = stmt.executeQuery("SELECT DISTINCT "+Champ+" FROM "+Table+" ");
             while (rset.next())
@@ -164,8 +163,18 @@ public class Connexion implements DaoConnexionInterface {
                 test.add(rset.getObject(1));
             }
             return test;
-        }
+    }
 
+    public void SuppressionRdvInter(Rdv O) throws SQLException {
+
+        stmt = conn.createStatement();
+        stmt.executeUpdate("DELETE FROM Rendez_vous WHERE rdv_date='" + O.Get_date() + "' AND rdv_horaire BEETWEEN "+O.Get_horaire()+ "AND "+O.Get_horaire()+ O.Get_duree());
+    }
+
+    public void ExecuteRequest(String S ) throws SQLException {
+        stmt.executeUpdate(S);
+
+    }
 }
 
 

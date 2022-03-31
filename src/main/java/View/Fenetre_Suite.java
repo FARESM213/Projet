@@ -29,6 +29,7 @@ public class Fenetre_Suite {
     private JButton consulterProfilButton;
     private JComboBox comboBox1;
     private JButton statistiquesButton;
+    private JButton reserverButton;
     ButtonGroup group2 = new ButtonGroup();
 
     public static JFrame Suite = new JFrame("Suite");
@@ -36,7 +37,8 @@ public class Fenetre_Suite {
     DefaultListModel<Rdv> dlm = new DefaultListModel<>();
 
 
-    public Fenetre_Suite() {}
+    public Fenetre_Suite() {
+    }
 
     public void setDlm(String whouere, Application App) throws SQLException {
         ResultSet rs;
@@ -55,7 +57,6 @@ public class Fenetre_Suite {
         Liste.setModel(dlm);
         Liste.setCellRenderer(createListRenderer());
         Liste.addListSelectionListener(createListSelectionListener(Liste,App));
-
     }
 
     private ListSelectionListener createListSelectionListener(JList<Rdv> list1, Application App) {
@@ -134,16 +135,13 @@ public class Fenetre_Suite {
         JSpinner.DateEditor editor = new JSpinner.DateEditor(spinner1, "yyyy-MM-dd");
         spinner1.setEditor(editor);
         model.setStart( editor.getFormat().parse("2009-02-26") );
-
         SpinnerDateModel model2 = new SpinnerDateModel();
         spinner2.setModel(model2);
         JSpinner.DateEditor editor2 = new JSpinner.DateEditor(spinner2, "yyyy-MM-dd");
         spinner2.setEditor(editor2);
         model2.setStart( editor2.getFormat().parse("2009-02-26") );
-
         Med_cin.addItem(null);
         comboBox1.addItem(null);
-
         group.add(reserveRadioButton);
         group.add(libreRadioButton);
         group.add(passeRadioButton);
@@ -226,6 +224,10 @@ public class Fenetre_Suite {
         return Liste;
     }
 
+    public boolean getElementListe() {
+        return Liste.getSelectedValue().Get_etat();
+    }
+
     public JButton getConsulterProfilButton() {
         return consulterProfilButton;
     }
@@ -233,4 +235,27 @@ public class Fenetre_Suite {
     public JButton getStatistiquesButton() {
         return statistiquesButton;
     }
+
+    public JButton getReserverButton() {
+        return reserverButton;
+    }
+
+    public void Fentre_Erreur() {
+        JOptionPane.showMessageDialog(null,"Rendez-vous deja reservé...","Erreur",JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public int Fenetre_confirm() {
+        return JOptionPane.showConfirmDialog(null,"  Mot de passe incorrect... Voulez vous le modifier ?","Clear TextField",JOptionPane.YES_NO_OPTION);
+    }
+
+    public void SetView(boolean etat,Application App)
+    {
+        Suite.setVisible(etat);
+        try {
+            setDlm("WHERE 1",App);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

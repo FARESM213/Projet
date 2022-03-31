@@ -31,6 +31,10 @@ public class Rdv {
           Type=t;
     }
 
+    public Rdv() {
+
+    }
+
 
     void Set_id (int id) { id_rdv=id;}
     void Set_med (int med) {id_med=med;}
@@ -50,8 +54,8 @@ public class Rdv {
     public String Get_lieu() { return rdv_lieu;}
     String Get_motif () { return rdv_motif;}
     public LocalDate Get_date() { return rdv_date;}
-    int Get_duree() { return rdv_duree;}
-    int Get_horaire () { return rdv_horaire;}
+    public int Get_duree() { return rdv_duree;}
+    public int Get_horaire() { return rdv_horaire;}
     public Boolean Get_etat() {return etat;}
 
     public String getType() {
