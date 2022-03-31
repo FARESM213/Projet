@@ -14,6 +14,18 @@ public class Fenetre_Creat {
     private JPanel IFMEDECIN;
     private JTextField textField1;
     private JTextField textField2;
+    private JLabel loginME;
+    private JLabel MDPME;
+    private JLabel emailME;
+    private JLabel specialiteME;
+    private JLabel hopitalME;
+    private JLabel NomME;
+    private JPanel NOMME;
+    private JPanel LOGINME;
+    private JPanel mdpME;
+    private JPanel EMAILME;
+    private JPanel SPEME;
+    private JPanel HOPME;
 
     static JFrame Suite = new JFrame("Suite");
 
@@ -36,6 +48,12 @@ public class Fenetre_Creat {
         Suite.pack();
         Suite.setVisible(true);
         IFMEDECIN.setVisible(indice != 1);
+        NOMME.setVisible(false);
+        LOGINME.setVisible(false);
+        SPEME.setVisible(false);
+        HOPME.setVisible(false);
+        mdpME.setVisible(false);
+        EMAILME.setVisible(false);
 
     }
 
@@ -70,4 +88,28 @@ public class Fenetre_Creat {
     public String getTextField2() {
         return textField2.getText();
     }
+
+    public void setLoginTextField(String log) {LoginTextField.setText(log);}
+
+    public void setSPEField(String spe) {SPEField.setText(spe);}
+
+    public void sethopField(String log) {textField2.setText(log);}
+
+    public void setMdpField(String spe) {MDPField.setText(spe);}
+
+    public void setEmailField(String log) {textField1.setText(log);}
+
+    public void setNomField(String spe) {NomTextField.setText(spe);}
+
+
+
+    public void MENOM(boolean indice){NOMME.setVisible(indice);}
+    public void MELOGIN(boolean indice){LOGINME.setVisible(indice);}
+    public void MEEMAIL(boolean indice){EMAILME.setVisible(indice);}
+    public void MESPE(boolean indice){SPEME.setVisible(indice);}
+    public void MEmdp(boolean indice){mdpME.setVisible(indice);}
+    public void MEHOP(boolean indice){HOPME.setVisible(indice);}
+
+
+
 }
