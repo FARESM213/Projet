@@ -6,14 +6,14 @@ import java.awt.*;
 public class Fenetre_Creat {
 
     private JPanel j;
-    private JTextField LoginTextField;
-    private JTextField NomTextField;
+    public JTextField LoginTextField;
+    public JTextField NomTextField;
     private JButton creerButton;
-    private JPasswordField MDPField;
-    private JTextField SPEField;
+    public JPasswordField MDPField;
+    public JTextField SPEField;
     private JPanel IFMEDECIN;
-    private JTextField textField1;
-    private JTextField textField2;
+    public JTextField textField1;
+    public JTextField textField2;
     private JLabel loginME;
     private JLabel MDPME;
     private JLabel emailME;
@@ -86,12 +86,21 @@ public class Fenetre_Creat {
     public void setEmailField(String log) {textField1.setText(log);}
     public void setNomField(String spe) {NomTextField.setText(spe);}
 
-    public void MENOM(boolean indice){NOMME.setVisible(indice);}
-    public void MELOGIN(boolean indice){LOGINME.setVisible(indice);}
-    public void MEEMAIL(boolean indice){EMAILME.setVisible(indice);}
-    public void MESPE(boolean indice){SPEME.setVisible(indice);}
-    public void MEmdp(boolean indice){mdpME.setVisible(indice);}
-    public void MEHOP(boolean indice){HOPME.setVisible(indice);}
+    public void MENOM(boolean indice,JTextField F){NOMME.setVisible(indice);Color(F,indice);}
+    public void MELOGIN(boolean indice,JTextField F){LOGINME.setVisible(indice);Color(F,indice);}
+    public void MEEMAIL(boolean indice,JTextField F){EMAILME.setVisible(indice);Color(F,indice);}
+    public void MESPE(boolean indice,JTextField F){SPEME.setVisible(indice);Color(F,indice);}
+    public void MEmdp(boolean indice,JTextField F){mdpME.setVisible(indice);Color(F,indice);}
+    public void MEHOP(boolean indice,JTextField F){HOPME.setVisible(indice);Color(F,indice);}
+
+
+    public void Color(JTextField F,boolean C){
+        if(C==true)F.setBackground(Color.RED);
+        else if (C==false)F.setBackground(Color.GREEN);
+    }
+
+
+
 
 
 }

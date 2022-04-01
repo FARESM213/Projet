@@ -153,7 +153,7 @@
                 </constraints>
                 <properties>
                   <foreground color="-4516319"/>
-                  <text value="Saisie du login incorrecte"/>
+                  <text value="Saisie du login incorrecte ou deja utilisé"/>
                 </properties>
               </component>
             </children>
