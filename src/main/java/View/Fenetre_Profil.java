@@ -8,8 +8,6 @@ import Model.Rdv;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -18,11 +16,12 @@ public class Fenetre_Profil
 {
     private JPanel T;
     private JButton supprimerCompteButton;
-    private JTextField Nom;
-    private JTextField Login;
-    private JTextField Mdp;
-    private JTextField Email;
-    private JTextField Spec;
+    public JTextField Nom;
+    public JTextField Login;
+    public JPasswordField mdp;
+    public JTextField hospi;
+    public JTextField Email;
+    public JTextField Spec;
     private JRadioButton afficherRdvRadioButton;
     private JList<Rdv> list1;
     private JTextArea textArea1;
@@ -37,10 +36,17 @@ public class Fenetre_Profil
     private JButton modifierButton;
     private JLabel tssLabel;
     private JButton choisirUneImageButton;
-    private JTextField hospi;
+
     private JLabel hptlLabel;
     private JLabel hopitalLabel;
     private JButton supprimerRdvButton;
+    private JPanel MENOM;
+    private JPanel MELOGIN;
+    private JPanel MEMDP;
+    private JPanel MEEMAIL;
+    private JPanel MESPE;
+    private JPanel MEHOP;
+
     public static JFrame Suite = new JFrame("Suite");
 
     DefaultListModel<Rdv> dlm = new DefaultListModel<>();
@@ -60,7 +66,7 @@ public class Fenetre_Profil
 
         Nom.setVisible(true);
         Login.setVisible(true);
-        Mdp.setVisible(true);
+        mdp.setVisible(true);
         Email.setVisible(true);
         choisirUneImageButton.setVisible(true);
 
@@ -80,6 +86,12 @@ public class Fenetre_Profil
         textArea1.setVisible(false);
         modifierButton.setVisible(true);
         afficherRdvRadioButton.setVisible(false);
+        MENOM.setVisible(false);
+        MELOGIN.setVisible(false);
+        MESPE.setVisible(false);
+        MEHOP.setVisible(false);
+        MEMDP.setVisible(false);
+        MEEMAIL.setVisible(false);
     }
 
     public  void SetView(boolean etat)
@@ -87,6 +99,20 @@ public class Fenetre_Profil
         Suite.setVisible(etat);
     }
 
+
+
+    public void MessNOM(boolean indice,JTextField F){MENOM.setVisible(indice);Color(F,indice);}
+    public void MessLOGIN(boolean indice,JTextField F){MELOGIN.setVisible(indice);Color(F,indice);}
+    public void MessEMAIL(boolean indice,JTextField F){MEEMAIL.setVisible(indice);Color(F,indice);}
+    public void MessSPE(boolean indice,JTextField F){MESPE.setVisible(indice);Color(F,indice);}
+    public void Messmdp(boolean indice,JTextField F){MEMDP.setVisible(indice);Color(F,indice);}
+    public void MessHOP(boolean indice,JTextField F){MEHOP.setVisible(indice);Color(F,indice);}
+
+
+    public void Color(JTextField F,boolean C){
+        if(C==true)F.setBackground(Color.RED);
+        else if (C==false)F.setBackground(Color.GREEN);
+    }
 
     public  void renit( Object P)
     {
@@ -130,13 +156,19 @@ public class Fenetre_Profil
 
         Nom.setVisible(false);
         Login.setVisible(false);
-        Mdp.setVisible(false);
+        mdp.setVisible(false);
         Email.setVisible(false);
         Spec.setVisible(false);
         modifierButton.setVisible(false);
         choisirUneImageButton.setVisible(false);
         hospi.setVisible(false);
         supprimerRdvButton.setVisible(false);
+        MENOM.setVisible(false);
+        MELOGIN.setVisible(false);
+        MESPE.setVisible(false);
+        MEHOP.setVisible(false);
+        MEMDP.setVisible(false);
+        MEEMAIL.setVisible(false);
 
         if(O.getClass()==Medecin.class)
         {
@@ -165,7 +197,7 @@ public class Fenetre_Profil
         {
             Nom.setText(((Medecin) O).Get_nom());
             Login.setText(((Medecin) O).Get_log());
-            Mdp.setText(((Medecin) O).Get_mdp());
+            mdp.setText(((Medecin) O).Get_mdp());
             Email.setText(((Medecin) O).Get_mail());
             Spec.setText(((Medecin) O).Get_job());
             hospi.setText(((Medecin) O).getHopital());
@@ -174,7 +206,7 @@ public class Fenetre_Profil
         {
             Nom.setText(((Patient) O).Get_nom());
             Login.setText(((Patient) O).Get_log());
-            Mdp.setText(((Patient) O).Get_mdp());
+            mdp.setText(((Patient) O).Get_mdp());
             Email.setText(((Patient) O).Get_Mail());
         }
     }
@@ -196,7 +228,7 @@ public class Fenetre_Profil
     }
 
     public String getMdp() {
-        return Mdp.getText();
+        return String.valueOf(mdp.getPassword());
     }
 
     public String getEmail() {
