@@ -27,7 +27,7 @@ public class Fenetre_Suite {
     private JTextArea textArea1;
     private JButton annulerButton;
     private JButton consulterProfilButton;
-    private JComboBox comboBox1;
+    private JComboBox<String> comboBox1;
     private JButton statistiquesButton;
     private JButton reserverButton;
     ButtonGroup group2 = new ButtonGroup();
@@ -140,6 +140,7 @@ public class Fenetre_Suite {
         JSpinner.DateEditor editor2 = new JSpinner.DateEditor(spinner2, "yyyy-MM-dd");
         spinner2.setEditor(editor2);
         model2.setStart( editor2.getFormat().parse("2009-02-26") );
+
         Med_cin.addItem(null);
         comboBox1.addItem(null);
         group.add(reserveRadioButton);
@@ -154,6 +155,11 @@ public class Fenetre_Suite {
             Med_cin.addItem(N);
             comboBox1.addItem(N.getHopital());
         }
+
+    }
+    public  void setButton( String str)
+    {
+        reserveRadioButton.setText(str);
     }
 
     public void setSuite(boolean suite) {
@@ -257,5 +263,4 @@ public class Fenetre_Suite {
             e.printStackTrace();
         }
     }
-
 }

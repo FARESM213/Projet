@@ -2,7 +2,12 @@ package Controller;
 
 import Model.Medecin;
 import Model.Patient;
+import Model.Rdv;
 import View.Fenetre_Profil;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -94,6 +99,22 @@ public class Profil
                 } catch (SQLException | ClassNotFoundException | IOException ex) {
                     ex.printStackTrace();
                 }
+            }
+        });
+
+        Fenetre.getSupprimerRdvButton().addActionListener(e -> {
+
+            Rdv A = (Rdv) Fenetre.getList1().getSelectedValue();
+            try {
+                App.SuppRdv(A);
+                App.init();
+                DefaultListModel model = (DefaultListModel) Fenetre.getList1().getModel();
+                int selectedIndex = Fenetre.getList1().getSelectedIndex();
+                if (selectedIndex != -1) {
+                    model.remove(selectedIndex);
+                }
+            } catch (SQLException | ClassNotFoundException ex) {
+                ex.printStackTrace();
             }
         });
     }

@@ -61,7 +61,9 @@ public class Connexion implements DaoConnexionInterface {
         } else if (O.getClass() == Medecin.class) {
             stmt.executeUpdate("INSERT INTO Medecin VALUES (" + ((Medecin) O).Get_id() + ",'" + ((Medecin) O).Get_nom() + "','" + ((Medecin) O).Get_log() + "','" + ((Medecin) O).Get_mdp() + "','" + ((Medecin) O).Get_job() + "','" + ((Medecin) O).Get_mail() +  "','" + ((Medecin) O).getImage() + "','" + ((Medecin) O).getHopital() + "')");
         } else {
-            stmt.executeUpdate("INSERT INTO Rendez_vous VALUES (" + ((Rdv) O).Get_id() + "," + ((Rdv) O).Get_med() + "," + ((Rdv) O).Get_pat() + ",'" + ((Rdv) O).Get_date() + "','" + ((Rdv) O).Get_motif() + "'," + ((Rdv) O).Get_duree() + "," + ((Rdv) O).Get_horaire() + ",'" + ((Rdv) O).Get_lieu() + ",'" + ((Rdv) O).Get_etat() +  ",'" + ((Rdv) O).getType() + "')");
+
+            System.out.println("INSERT INTO Rendez_vous VALUES (" + ((Rdv) O).Get_id() + "," + ((Rdv) O).Get_med() + ",null,'" + ((Rdv) O).Get_date() + "','" + ((Rdv) O).Get_motif() + "'," + ((Rdv) O).Get_duree() + "," + ((Rdv) O).Get_horaire() + ",'" + ((Rdv) O).Get_lieu() + ",'" + ((Rdv) O).Get_etat() +  ",'" + ((Rdv) O).getType() + "')");
+            stmt.executeUpdate("INSERT INTO Rendez_vous VALUES (" + ((Rdv) O).Get_id() + "," + ((Rdv) O).Get_med() + ",0,'" + ((Rdv) O).Get_date() + "',' '," + ((Rdv) O).Get_duree() + "," + ((Rdv) O).Get_horaire() + ",'" + ((Rdv) O).Get_lieu() + "',1,'" + ((Rdv) O).getType() + "')");
         }
     }
 
@@ -116,7 +118,7 @@ public class Connexion implements DaoConnexionInterface {
             stmt.executeUpdate("DELETE FROM rendez_vous WHERE medno=" + Final);
         } else
         {
-            stmt.executeUpdate("DELETE FROM Rendez_vous WHERE medno=" + Final + " AND patno=" + FinalB);
+            stmt.executeUpdate("DELETE FROM Rendez_vous WHERE rdvno="+Final+" ");
         }
     }
 

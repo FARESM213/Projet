@@ -8,6 +8,8 @@ import Model.Rdv;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -38,6 +40,7 @@ public class Fenetre_Profil
     private JTextField hospi;
     private JLabel hptlLabel;
     private JLabel hopitalLabel;
+    private JButton supprimerRdvButton;
     public static JFrame Suite = new JFrame("Suite");
 
     DefaultListModel<Rdv> dlm = new DefaultListModel<>();
@@ -117,7 +120,7 @@ public class Fenetre_Profil
         list1.setVisible(false);
         textArea1.setVisible(false);
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Suite.setPreferredSize(new Dimension(800,600));
+        Suite.setPreferredSize(new Dimension(820,680));
         Suite.setResizable(false);
         Suite.pack();
         Suite.setVisible(true);
@@ -133,6 +136,7 @@ public class Fenetre_Profil
         modifierButton.setVisible(false);
         choisirUneImageButton.setVisible(false);
         hospi.setVisible(false);
+        supprimerRdvButton.setVisible(false);
 
         if(O.getClass()==Medecin.class)
         {
@@ -263,6 +267,7 @@ public class Fenetre_Profil
 
         list1.setVisible(true);
         textArea1.setVisible(true);
+        supprimerRdvButton.setVisible(true);
         if(O.getClass()==Medecin.class) {
             try {
                 setDlm("WHERE medno= "+((Medecin) O).Get_id(),App);
@@ -358,4 +363,7 @@ public class Fenetre_Profil
         };
     }
 
+    public JButton getSupprimerRdvButton() {
+        return supprimerRdvButton;
+    }
 }

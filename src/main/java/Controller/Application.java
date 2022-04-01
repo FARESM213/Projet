@@ -141,14 +141,14 @@ public class Application {
             e.printStackTrace();
         }
     }
-    public void SuppRdv() throws SQLException
+    public void SuppRdv(Rdv R) throws SQLException
     {
         int idpat=0;
         int idmed=0;
         int i=-1;
         for(int a=0;a<Rendezvous.size();a++)
         {
-            if ( (Rendezvous.get(a).Get_pat()==idpat) && (Rendezvous.get(a).Get_med()==idmed) )
+            if ((Rendezvous.get(a).Get_id()==R.Get_id()))
             {
                 i=a;
                 break;
@@ -156,7 +156,7 @@ public class Application {
         }
         if (i!=-1)
         {
-            maconnexion.SuppElement(Rendezvous.get(i),idmed,idpat);
+            maconnexion.SuppElement(Rendezvous.get(i),R.Get_id(),idpat);
             Rendezvous.remove(i);
         }
         else{System.out.println("PROBLEME");}
@@ -190,19 +190,9 @@ public class Application {
             e.printStackTrace();
         }
     }
-    void AjouterRdv() throws SQLException
+    void AjouterRdv(int id , int med , Integer pat , LocalDate date , String lieu , String motif , String type , int duree , int horaire, boolean etat) throws SQLException
     {
-        int id=0;
-        int med=0;
-        int pat=0;
-        LocalDate date=null;
-        String lieu=null;
-        String motif=null;
-        String type=null;
-        int duree=0;
-        int horaire=0;
-        boolean etat=true;
-        Rendezvous.add(new Rdv(id,med,pat,date,motif,duree,horaire,lieu,etat,type));
+        Rendezvous.add(new Rdv(id,med,0,date,motif,duree,horaire,lieu,etat,type));
         maconnexion.ajouterElement(Rendezvous.get(Rendezvous.size()-1));
     }
     void EnvoyerEmail(String Recever,String nom)
