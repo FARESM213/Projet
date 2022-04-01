@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.Objects;
 
 public class Fenetre_PriseRdv {
@@ -33,6 +34,7 @@ public class Fenetre_PriseRdv {
 
     private JSpinner spinner1;
     private JSpinner spinner2;
+    private JLabel dureeLabel;
 
     static JFrame Suite = new JFrame("Suite");
 
@@ -76,7 +78,6 @@ public class Fenetre_PriseRdv {
             hptLabel.setText(O.Get_lieu());
             prendreLeRendezVousButton.setText("Prendre le Rendez-vous");
 
-
             int min=3;
             for (Rdv N :App.Rendezvous)
             {
@@ -84,6 +85,7 @@ public class Fenetre_PriseRdv {
                 {
                     if ((!N.Get_etat())&& (N.Get_horaire()-O.Get_horaire() < min)&& (N.Get_med()==O.Get_med()))
                     {
+                        System.out.println(N.Get_horaire()+"   "+ O.Get_horaire());
                         min =N.Get_horaire()-O.Get_horaire();
                     }
                 }
@@ -102,6 +104,8 @@ public class Fenetre_PriseRdv {
             hrrLabel.setVisible(false);
             motifLabel1.setText("Type :");
             hptLabel.setText(((Medecin)M).getHopital());
+            dureeLabel.setVisible(false);
+            comboBox1.setVisible(false);
 
             int min=3;
             for( int i=1;i<min+1;i++)
@@ -136,7 +140,11 @@ public class Fenetre_PriseRdv {
             spinner1.setModel(model);
             JSpinner.DateEditor editor = new JSpinner.DateEditor(spinner1, "yyyy-MM-dd");
             spinner1.setEditor(editor);
-            model.setStart( editor.getFormat().parse("2009-02-26") );
+
+            Date dateToStr1= new Date();
+            LocalDate date1=dateToStr1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            model.setStart( editor.getFormat().parse(String.valueOf(date1)) );
             SpinnerDateModel model2 = new SpinnerDateModel();
             spinner2.setModel(model2);
             JSpinner.DateEditor editor2 = new JSpinner.DateEditor(spinner2, "HH");
@@ -162,5 +170,6 @@ public class Fenetre_PriseRdv {
         JOptionPane.showMessageDialog(null,"Il semblerait que vous ayez deja un rdv programmé a "+min+"","Erreur",JOptionPane.INFORMATION_MESSAGE);
 
     }
+
 }
 

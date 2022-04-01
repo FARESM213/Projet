@@ -65,10 +65,12 @@ public class Application {
 
         int durree=A.Get_horaire()+A.Get_duree();
 
+        //System.out.println(durree);
         maconnexion.ExecuteRequest("UPDATE Rendez_vous SET etat=0 WHERE rdvno='"+A.Get_id()+"'");
         maconnexion.ExecuteRequest("UPDATE Rendez_vous SET rdv_duree='"+selectedItem+"' WHERE rdvno='"+A.Get_id()+"'");
         maconnexion.ExecuteRequest("UPDATE Rendez_vous SET rdv_motif='"+text+"' WHERE rdvno='"+A.Get_id()+"'");
         maconnexion.ExecuteRequest("DELETE FROM Rendez_vous WHERE rdv_date='"+A.Get_date()+"' AND rdv_horaire BETWEEN '"+A.Get_horaire() +"' AND '"+ durree+"' AND rdvno!='"+A.Get_id()+"'");
+
         if (Patient.class== p.getClass())
         {
             maconnexion.ExecuteRequest("UPDATE Rendez_vous SET patno='"+((Patient) p).Get_id()+"'");
@@ -143,8 +145,6 @@ public class Application {
     }
     public void SuppRdv(Rdv R) throws SQLException
     {
-        int idpat=0;
-        int idmed=0;
         int i=-1;
         for(int a=0;a<Rendezvous.size();a++)
         {
@@ -156,10 +156,13 @@ public class Application {
         }
         if (i!=-1)
         {
-            maconnexion.SuppElement(Rendezvous.get(i),R.Get_id(),idpat);
+            maconnexion.SuppElement(Rendezvous.get(i),R.Get_id(),R.Get_pat());
             Rendezvous.remove(i);
         }
-        else{System.out.println("PROBLEME");}
+        else
+        {
+            System.out.println("PROBLEME");
+        }
 
     }
     public void AjouterMedecin(String nom, String login, String mdp, String job,String mail,byte [ ] img,String hopital) throws SQLException {

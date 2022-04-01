@@ -7,8 +7,12 @@ import View.PieChartExample;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
+
+import static java.util.Calendar.*;
 
 public class Suite {
 
@@ -70,20 +74,30 @@ public class Suite {
 
             if (Fenetre.getLibreRadioButton().isSelected())
             {
-                whouere+= " AND etat='true' ";
+                whouere+= " AND etat='1' ";
             }
             else if (Fenetre.getReserveRadioButton().isSelected())
             {
-                whouere+= " AND etat='false' ";
+                whouere+= " AND etat='0'";
             }
             else if (Fenetre.getPasseRadioButton().isSelected())
             {
-                whouere+= " AND rdv_date < '"+date+"' ";
+                LocalTime time = LocalTime.now(ZoneId.systemDefault());
+                int h =time.getHour();
+                whouere+= " AND CASE " +
+                        "WHEN rdv_date ='"+date+"' THEN rdv_date <= '"+date+"' AND rdv_horaire <='"+h+"'" +
+                        "WHEN rdv_date <'"+date+"' THEN rdv_date < '"+date+"'"+
+                        "   END";
             }
 
             if (Fenetre.getToutLesRendezVousRadioButton().isSelected())
             {
-                whouere+= " AND rdv_date > '"+date+"' ";
+                LocalTime time = LocalTime.now(ZoneId.systemDefault());
+                int h =time.getHour()+1;
+                whouere+= " AND CASE " +
+                        "WHEN rdv_date ='"+date+"' THEN rdv_date >= '"+date+"' AND rdv_horaire >='"+h+"'" +
+                        "WHEN rdv_date >'"+date+"' THEN rdv_date > '"+date+"'"+
+                        "   END";
             }
             else if (Fenetre.getDuRadioButton().isSelected())
             {

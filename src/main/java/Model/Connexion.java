@@ -122,7 +122,8 @@ public class Connexion implements DaoConnexionInterface {
         }
     }
 
-    public ResultSet Search(String table, String Elem, String whouere) throws SQLException {
+    public ResultSet Search(String table, String Elem, String whouere) throws SQLException
+    {
         stmt = conn.createStatement();
         System.out.println("SELECT " + Elem + " FROM " + table + " " + whouere);
         return stmt.executeQuery("SELECT " + Elem + " FROM " + table + " " + whouere);

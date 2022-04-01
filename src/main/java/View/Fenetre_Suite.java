@@ -32,6 +32,8 @@ public class Fenetre_Suite {
     private JButton reserverButton;
     ButtonGroup group2 = new ButtonGroup();
 
+    ButtonGroup group3 = new ButtonGroup();
+
     public static JFrame Suite = new JFrame("Suite");
     ButtonGroup group = new ButtonGroup();
     DefaultListModel<Rdv> dlm = new DefaultListModel<>();
@@ -134,12 +136,12 @@ public class Fenetre_Suite {
         spinner1.setModel(model);
         JSpinner.DateEditor editor = new JSpinner.DateEditor(spinner1, "yyyy-MM-dd");
         spinner1.setEditor(editor);
-        model.setStart( editor.getFormat().parse("2009-02-26") );
+        model.setStart( editor.getFormat().parse("1995-02-26") );
         SpinnerDateModel model2 = new SpinnerDateModel();
         spinner2.setModel(model2);
         JSpinner.DateEditor editor2 = new JSpinner.DateEditor(spinner2, "yyyy-MM-dd");
         spinner2.setEditor(editor2);
-        model2.setStart( editor2.getFormat().parse("2009-02-26") );
+        model2.setStart( editor2.getFormat().parse("1995-02-26") );
 
         Med_cin.addItem(null);
         comboBox1.addItem(null);

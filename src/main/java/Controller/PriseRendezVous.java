@@ -36,42 +36,37 @@ public class PriseRendezVous
             else
             {
                 try {
-                    String A = (String)Fenetre.getComboBox1().getSelectedItem();
-                    assert A != null;
-
-                    String B= String.valueOf(A.charAt(0));
-                    int duree = Integer.parseInt(B);
 
                     Date dateToStr1= (Date) Fenetre.getSpinner1();
                     Date dateToStr2= (Date) Fenetre.getSpinner2();
-
                     LocalDate date1=dateToStr1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
                     SimpleDateFormat sdf = new SimpleDateFormat("HH");
                     int horaire = Integer.parseInt(sdf.format(dateToStr2));
 
-                    int min=3;
+                    boolean trouver=false;
+
                     for (Rdv N :App.Rendezvous)
                     {
-                        if (Objects.equals(N.Get_date(), date1) &&(N.Get_horaire()>horaire))
+                        if (Objects.equals(N.Get_date(), date1))
                         {
-                            if ( (N.Get_med()==((Medecin)P).Get_id()) &&( min > (N.Get_horaire()-horaire)))
+                            if ( (N.Get_med()==((Medecin)P).Get_id())  &&(N.Get_horaire()==horaire))
                             {
-                                min =(N.Get_horaire()-horaire);
+                                trouver=true;
                             }
                         }
                     }
 
-                    if(duree<=min)
+                    if(!trouver)
                     {
-                        App.AjouterRdv(App.Rendezvous.get(App.Rendezvous.size()-1).Get_id()+1,((Medecin)P).Get_id(),0,date1,((Medecin)P).getHopital(),null,Fenetre.getTextField3().getText(),duree,horaire,false);
+                        App.AjouterRdv(App.Rendezvous.get(App.Rendezvous.size()-1).Get_id()+1,((Medecin)P).Get_id(),0,date1,((Medecin)P).getHopital(),null,Fenetre.getTextField3().getText(),0,horaire,false);
                         Fenetre.SetView(false);
                         App.init();
                         s.Fenetre.SetView(true,App);
                     }
                     else
                     {
-                        Fenetre.Erreur(horaire+min);
+                        Fenetre.Erreur(horaire);
                     }
 
                 } catch (SQLException | ClassNotFoundException ex) {
