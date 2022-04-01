@@ -22,7 +22,9 @@ import org.jfree.data.general.PieDataset;
  */
 public class PieChartExample extends JFrame {
     private static final long serialVersionUID = 6294689542092367723L;
-    public PieChartExample(String title,Application App) throws SQLException {
+
+    public PieChartExample(String title,Application App) throws SQLException
+    {
         super(title);
         PieDataset dataset = createDataset(App);
         JFreeChart chart = ChartFactory.createPieChart("Repartition des rendez_vous  : ("+App.Rendezvous.size()+")", dataset, true, true, false);

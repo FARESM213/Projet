@@ -74,6 +74,8 @@ public class Fenetre_PriseRdv {
             dtLabel.setText(String.valueOf(O.Get_date()));
             hrrLabel.setText(O.Get_horaire()+" h ");
             hptLabel.setText(O.Get_lieu());
+            prendreLeRendezVousButton.setText("Prendre le Rendez-vous");
+
 
             int min=3;
             for (Rdv N :App.Rendezvous)
@@ -140,6 +142,11 @@ public class Fenetre_PriseRdv {
             JSpinner.DateEditor editor2 = new JSpinner.DateEditor(spinner2, "HH");
             spinner2.setEditor(editor2);
             model2.setStart( editor2.getFormat().parse("0") );
+        }
+        else
+        {
+            spinner1.setVisible(false);
+            spinner2.setVisible(false);
         }
     }
 

@@ -55,7 +55,6 @@ public class PriseRendezVous
                     {
                         if (Objects.equals(N.Get_date(), date1) &&(N.Get_horaire()>horaire))
                         {
-                            System.out.println("OUIIII");
                             if ( (N.Get_med()==((Medecin)P).Get_id()) &&( min > (N.Get_horaire()-horaire)))
                             {
                                 min =(N.Get_horaire()-horaire);

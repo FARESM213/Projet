@@ -53,7 +53,6 @@ public class Suite {
             {
                 whouere+= "AND rendez_vous.medno="+idmedcin;
             }
-
             else if (idmedcin!=-1)
             {
                 whouere+= "AND medno="+idmedcin;
@@ -71,24 +70,24 @@ public class Suite {
 
             if (Fenetre.getLibreRadioButton().isSelected())
             {
-                whouere+= "AND etat=true ";
+                whouere+= " AND etat='true' ";
             }
             else if (Fenetre.getReserveRadioButton().isSelected())
             {
-                whouere+= "AND etat=false ";
+                whouere+= " AND etat='false' ";
             }
             else if (Fenetre.getPasseRadioButton().isSelected())
             {
-                whouere+= "AND rdv_date < '"+date+"' ";
+                whouere+= " AND rdv_date < '"+date+"' ";
             }
 
             if (Fenetre.getToutLesRendezVousRadioButton().isSelected())
             {
-                whouere+= "AND rdv_date > '"+date+"' ";
+                whouere+= " AND rdv_date > '"+date+"' ";
             }
             else if (Fenetre.getDuRadioButton().isSelected())
             {
-                whouere+= "AND rdv_date BETWEEN '"+date1+ "' AND '"+date2+"'  ";
+                whouere+= " AND rdv_date BETWEEN '"+date1+ "' AND '"+date2+"'  ";
             }
 
             try
@@ -136,9 +135,9 @@ public class Suite {
                     try {
                         Fenetre.setSuite(false);
                         PriseRendezVous F =new PriseRendezVous(i,App,Fenetre.getListe().getSelectedValue(),S,A);
-                        F.Fenetre.getPrendreLeRendezVousButton().setText("Creer le creneau");
+                        F.Fenetre.getPrendreLeRendezVousButton().setText("Prendre le Rendez-vous");
+                        Fenetre.getTextArea1().setText("");
                         F.Fenetre.SetView(true);
-
                     } catch (ParseException ex) {
                         ex.printStackTrace();
                     }
