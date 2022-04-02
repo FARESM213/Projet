@@ -4,19 +4,13 @@ import Model.Medecin;
 import Model.Patient;
 import Model.Rdv;
 import View.Fenetre_Profil;
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
-
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.lang.String;
-import java.util.regex.*;
-
 
 public class Profil
 {

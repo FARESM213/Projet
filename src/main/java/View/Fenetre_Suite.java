@@ -3,11 +3,12 @@ package View;
 import Controller.Application;
 import Model.Medecin;
 import Model.Rdv;
-import javafx.scene.control.RadioButton;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -31,6 +32,7 @@ public class Fenetre_Suite {
     private JComboBox<String> comboBox1;
     private JButton statistiquesButton;
     private JButton reserverButton;
+    private JButton retourButton;
     ButtonGroup group2 = new ButtonGroup();
 
     public static JFrame Suite = new JFrame("Suite");
@@ -40,6 +42,46 @@ public class Fenetre_Suite {
     DefaultListModel<Rdv> dlm = new DefaultListModel<>();
 
     public Fenetre_Suite() {
+        toutLesRendezVousRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            SetIcons(toutLesRendezVousRadioButton,toutLesRendezVousRadioButton.isSelected());
+            SetIcons(duRadioButton,duRadioButton.isSelected());
+            }
+        });
+        duRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SetIcons(duRadioButton,duRadioButton.isSelected());
+                SetIcons(toutLesRendezVousRadioButton,toutLesRendezVousRadioButton.isSelected());
+            }
+        });
+        libreRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SetIcons(libreRadioButton,libreRadioButton.isSelected());
+                SetIcons(reserveRadioButton,reserveRadioButton.isSelected());
+                SetIcons(passeRadioButton,passeRadioButton.isSelected());
+
+            }
+        });
+        reserveRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SetIcons(libreRadioButton,libreRadioButton.isSelected());
+                SetIcons(reserveRadioButton,reserveRadioButton.isSelected());
+                SetIcons(passeRadioButton,passeRadioButton.isSelected());
+            }
+        });
+        passeRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SetIcons(libreRadioButton,libreRadioButton.isSelected());
+                SetIcons(reserveRadioButton,reserveRadioButton.isSelected());
+                SetIcons(passeRadioButton,passeRadioButton.isSelected());
+            }
+        });
+
     }
 
     public void setDlm(String whouere, Application App) throws SQLException {
@@ -115,17 +157,12 @@ public class Fenetre_Suite {
         };
     }
 
-    public void Suu(Application App) {
+    public void Suu(Application App,int a ) {
         try {
-            createUIComponents(App);
+            createUIComponents(App, a);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        reserveRadioButton =   new JRadioButton(Resize("Images\\RadioOui.png",67,22));
-        passeRadioButton =  new JRadioButton(Resize("Images\\RadioOui.png",67,22));
-        toutLesRendezVousRadioButton =  new JRadioButton(Resize("Images\\RadioOui.png",67,22));
-        duRadioButton =  new JRadioButton(Resize("Images\\RadioOui.png",67,22));
 
         Suite.setContentPane(Test);
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -136,7 +173,29 @@ public class Fenetre_Suite {
     }
 
 
-    private void createUIComponents(Application App) throws ParseException {
+    private void createUIComponents(Application App,int i ) throws ParseException {
+
+
+        if (i==1)
+        {
+            reserverButton.setIcon(Resize("Images\\Reserver.png",20,20));
+            reserverButton.setIconTextGap(10);
+        }
+        else
+        {
+            reserverButton.setIcon(Resize("Images\\Creer.png",20,20));
+            reserverButton.setIconTextGap(10);
+        }
+
+        consulterProfilButton.setIcon(Resize("Images\\docteur.png",20,20));
+        consulterProfilButton.setIconTextGap(10);
+
+        retourButton.setIcon(Resize("Images\\return.png",20,20));
+        libreRadioButton.setIcon(Resize("Images\\Off.png",28,13));
+        reserveRadioButton.setIcon(Resize("Images\\Off.png",28,13));
+        passeRadioButton.setIcon(Resize("Images\\Off.png",28,13));
+        toutLesRendezVousRadioButton.setIcon(Resize("Images\\Off.png",28,13));
+        duRadioButton.setIcon(Resize("Images\\Off.png",28,13));
 
 
         SpinnerDateModel model = new SpinnerDateModel();
@@ -172,6 +231,10 @@ public class Fenetre_Suite {
 
     public void setSuite(boolean suite) {
         Suite.setVisible(suite);
+    }
+
+    public JButton getRetourButton() {
+        return retourButton;
     }
 
     public JButton getAppliquerButton() {
@@ -277,13 +340,11 @@ public class Fenetre_Suite {
     {
         if (etat)
         {
-            B= new JRadioButton(Resize("Images\\RadioOui.png",67,22));
-
+            B.setIcon(Resize("Images\\On.png",28,13));
         }
         else
         {
-            System.out.println("JE passe ici" );
-            B= new JRadioButton(Resize("Images\\RadioNon.png",67,22));
+            B.setIcon(Resize("Images\\Off.png",28,13));
         }
     }
 
@@ -295,5 +356,15 @@ public class Fenetre_Suite {
         Image newimg = image.getScaledInstance(W, H,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         imageIcon = new ImageIcon(newimg);
         return imageIcon;
+    }
+
+    public void ResetButton() {
+
+        SetIcons(toutLesRendezVousRadioButton,false);
+        SetIcons(duRadioButton,false);
+        SetIcons(libreRadioButton,false);
+        SetIcons(reserveRadioButton,false);
+        SetIcons(passeRadioButton,false);
+
     }
 }

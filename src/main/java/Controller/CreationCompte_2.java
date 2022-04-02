@@ -5,6 +5,8 @@ import Model.Patient;
 import View.Fentre_Creat_2;
 
 import javax.mail.MessagingException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -90,9 +92,14 @@ public class CreationCompte_2 {
                     Fenetre.SetView(false);}
             });
 
-        }else {
-
         }
+        Fenetre.getRetourButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                App.Set_frame(true);
+                Fenetre.SetView(false);
+            }
+        });
     }
 
 

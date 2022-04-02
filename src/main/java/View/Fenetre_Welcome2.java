@@ -2,6 +2,8 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Fenetre_Welcome2{
 
@@ -10,9 +12,13 @@ public class Fenetre_Welcome2{
     private JButton CreerCompte;
     private JPanel P;
     private JLabel Crr;
+    private JButton retourButton;
     static JFrame Welcome2 = new JFrame("Welcome2");
 
 
+    public Fenetre_Welcome2() {
+
+    }
 
     public void Suu() {
 
@@ -22,12 +28,18 @@ public class Fenetre_Welcome2{
             e.printStackTrace();
         }
 
+        retourButton.setIcon(Resize("Images\\return.png",20,20));
         Welcome2.setContentPane(P);
         Welcome2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Welcome2.setPreferredSize(new Dimension(900,650));
         Welcome2.setResizable(false);
         Welcome2.pack();
         Welcome2.setVisible(true);
+    }
+
+
+    public JButton getRetourButton() {
+        return retourButton;
     }
 
     public JButton getCreerCompte() {
@@ -58,6 +70,5 @@ public class Fenetre_Welcome2{
         Connexion= new JButton(Resize("Images\\Pillule.png",64,64));
         CreerCompte= new JButton(Resize("Images\\Valise.png",64,64));
         Crr = new JLabel(Resize("Images\\Creation.jpg",544,385));
-
     }
 }

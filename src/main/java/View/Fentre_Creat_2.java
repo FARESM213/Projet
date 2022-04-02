@@ -2,6 +2,8 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Fentre_Creat_2 {
 
@@ -29,10 +31,15 @@ public class Fentre_Creat_2 {
     private JLabel specialiteME;
     private JLabel hopitalME;
     private JLabel Lbl;
+    private JButton retourButton;
 
     static JFrame Suite = new JFrame("Suite");
 
     public Fentre_Creat_2() {
+    }
+
+    public JButton getRetourButton() {
+        return retourButton;
     }
 
     public void Suu(int indice) {
@@ -44,7 +51,8 @@ public class Fentre_Creat_2 {
         }
         Suite.add(j, BorderLayout.CENTER);
         Suite.add(panel1, BorderLayout.WEST);
-        //Suite.setContentPane(j);
+
+        retourButton.setIcon(Resize("Images\\return.png",20,20));
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Suite.setPreferredSize(new Dimension(800, 500));
         Suite.setResizable(false);

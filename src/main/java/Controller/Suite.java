@@ -4,6 +4,9 @@ import Model.Medecin;
 import Model.Patient;
 import View.Fenetre_Suite;
 import View.PieChartExample;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -25,7 +28,7 @@ public class Suite {
         {
             Fenetre.getReserverButton().setText("Creer");
         }
-        Fenetre.Suu(App);
+        Fenetre.Suu(App,i);
         Fenetre.getAppliquerButton().addActionListener(e -> {
 
             String whouere="";
@@ -74,25 +77,15 @@ public class Suite {
 
             if (Fenetre.getLibreRadioButton().isSelected())
             {
-                Fenetre.SetIcons(Fenetre.getLibreRadioButton(),true);
-                Fenetre.SetIcons(Fenetre.getReserveRadioButton(),false);
-                Fenetre.SetIcons(Fenetre.getPasseRadioButton(),false);
                 whouere+= " AND etat='1' ";
             }
             else if (Fenetre.getReserveRadioButton().isSelected())
             {
-                Fenetre.SetIcons(Fenetre.getLibreRadioButton(),false);
-                Fenetre.SetIcons(Fenetre.getReserveRadioButton(),true);
-                Fenetre.SetIcons(Fenetre.getPasseRadioButton(),false);
 
                 whouere+= " AND etat='0'";
             }
             else if (Fenetre.getPasseRadioButton().isSelected())
             {
-                Fenetre.SetIcons(Fenetre.getLibreRadioButton(),false);
-                Fenetre.SetIcons(Fenetre.getReserveRadioButton(),false);
-                Fenetre.SetIcons(Fenetre.getPasseRadioButton(),true);
-
                 LocalTime time = LocalTime.now(ZoneId.systemDefault());
                 int h =time.getHour();
                 whouere+= " AND CASE " +
@@ -103,8 +96,7 @@ public class Suite {
 
             if (Fenetre.getToutLesRendezVousRadioButton().isSelected())
             {
-                Fenetre.SetIcons(Fenetre.getToutLesRendezVousRadioButton(),true);
-                Fenetre.SetIcons(Fenetre.getDuRadioButton(),false);
+
                 LocalTime time = LocalTime.now(ZoneId.systemDefault());
                 int h =time.getHour()+1;
                 whouere+= " AND CASE " +
@@ -114,9 +106,6 @@ public class Suite {
             }
             else if (Fenetre.getDuRadioButton().isSelected())
             {
-                Fenetre.SetIcons(Fenetre.getToutLesRendezVousRadioButton(),false);
-                Fenetre.SetIcons(Fenetre.getDuRadioButton(),true);
-
                 whouere+= " AND rdv_date BETWEEN '"+date1+ "' AND '"+date2+"'  ";
             }
 
@@ -137,6 +126,7 @@ public class Suite {
             Fenetre.getDlm().clear();
             Fenetre.getListe().setModel(Fenetre.getDlm());
             Fenetre.getTextArea1().setText("");
+            Fenetre.ResetButton();
 
         });
         Fenetre.getConsulterProfilButton().addActionListener(e -> {
@@ -184,7 +174,21 @@ public class Suite {
                         ex.printStackTrace();
                     }
             }
+        });
+        Fenetre.getRetourButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
+                try {
+                    Fenetre.SetView(false,App);
+                    App.init();
+                    App.Set_frame(true);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            }
         });
     }
 

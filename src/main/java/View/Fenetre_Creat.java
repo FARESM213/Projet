@@ -28,6 +28,7 @@ public class Fenetre_Creat {
     private JPanel HOPME;
     private JLabel Lbl;
     private JPanel panel1;
+    private JButton retourButton;
 
     static JFrame Suite = new JFrame("Suite");
 
@@ -42,8 +43,7 @@ public class Fenetre_Creat {
             e.printStackTrace();
         }
 
-
-
+        retourButton.setIcon(Resize("Images\\return.png",20,20));
         Suite.add(j, BorderLayout.CENTER);
         Suite.add(panel1, BorderLayout.WEST);
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -118,6 +118,10 @@ public class Fenetre_Creat {
         Image newimg = image.getScaledInstance(W, H,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         imageIcon = new ImageIcon(newimg);
         return imageIcon;
+    }
+
+    public JButton getRetourButton() {
+        return retourButton;
     }
 }
 

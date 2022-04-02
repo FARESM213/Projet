@@ -4,6 +4,8 @@ import Model.Medecin;
 import Model.Patient;
 import View.Fenetre_Creat;
 import javax.mail.MessagingException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -16,7 +18,7 @@ public class CreationCompte {
     private final Fenetre_Creat Fenetre = new Fenetre_Creat();
     Application Appli = new Application();
 
-    public CreationCompte( int indice) throws SQLException, ClassNotFoundException {
+    public CreationCompte( int indice,Welcome2 w) throws SQLException, ClassNotFoundException {
         Fenetre.Suu(indice);
         Appli.wow();
         if (indice==0){//MEDECIN
@@ -25,7 +27,7 @@ public class CreationCompte {
                         String str = Fenetre.MDPField();
 
                     if (buff == 0){try {
-                        Application App = new Application(indice);
+                        Application App = new Application(indice,w);
                         App.AjouterMedecin(Fenetre.NomTextField(), Fenetre.LoginTextField(), str, Fenetre.SPEField(), Fenetre.getTextField1(), Photo_const(), Fenetre.getTextField2());
                         App.Loggg();
                     } catch (SQLException | ClassNotFoundException | IOException ex) {
@@ -42,7 +44,7 @@ public class CreationCompte {
                 int buff = ISVALID(indice);
                         if (buff==0){
                             try {
-                                Application App = new Application(indice);
+                                Application App = new Application(indice,w);
                                 String email = Fenetre.getTextField1();
                                 App.AjouterPatient(Fenetre.NomTextField(),Fenetre.LoginTextField(),str,email,Photo_const());
                                 App.Loggg();}
@@ -52,6 +54,14 @@ public class CreationCompte {
             });
 
                  }
+
+        Fenetre.getRetourButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                w.Fenetre.SetView(true);
+                Fenetre.SetView(false);
+            }
+        });
     }
 
 

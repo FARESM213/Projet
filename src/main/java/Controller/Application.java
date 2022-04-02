@@ -6,6 +6,8 @@ import Model.*;
 import View.Login;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -221,10 +223,18 @@ public class Application {
         }catch (MessagingException mex) {mex.printStackTrace();}
     }
 
-    public Application(int i) throws SQLException, ClassNotFoundException {
+    public Application(int i,Welcome2 w) throws SQLException, ClassNotFoundException {
 
         init();
         L.Logt();
+
+        L.getRetourButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Set_frame(false);
+                w.Fenetre.SetView(true);
+            }
+        });
         L.getButton1().addActionListener(e -> {
             int trouve=0;
             if ( i==1)
@@ -277,6 +287,7 @@ public class Application {
                             new CreationCompte_2(i,this);
                         }
                         ind=0;
+                        trouve=4;
                     } break;
                     case 1 :
                     {
@@ -287,6 +298,7 @@ public class Application {
                             sui= new Suite(Application.this,i,Med.get(ind));
 
                         ind=0;
+                        trouve=4;
 
                     } break;
                     case 2 :
@@ -297,6 +309,8 @@ public class Application {
                             mot= new ChangementMdp(Application.this);
                         }
                         ind=0;
+                        trouve=4;
+
                     } break;
                 }
             } catch (SQLException | ClassNotFoundException ex)
@@ -309,6 +323,7 @@ public class Application {
      public void Set_frame(boolean state)
     {
         L.SetView(state);
+        L.passwordField1.setText("");
     }
 
      public void Loggg()

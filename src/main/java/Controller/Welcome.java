@@ -5,7 +5,9 @@ import java.sql.SQLException;
 
 public class Welcome {
 
-    private final Fenetre_Welcome Fenetre= new  Fenetre_Welcome();
+    public final Fenetre_Welcome Fenetre= new  Fenetre_Welcome();
+
+    Application App= new Application();
 
     public  static void main(String[] s)
     {
@@ -18,7 +20,7 @@ public class Welcome {
         Fenetre.getMedecin().addActionListener(e -> {
             Fenetre.SetView(false);
             try {
-                new Welcome2(0);
+                new Welcome2(0,this);
             } catch (SQLException | ClassNotFoundException ex) {
                 ex.printStackTrace();
             }
@@ -26,7 +28,7 @@ public class Welcome {
         Fenetre.getPatient().addActionListener(e -> {
             Fenetre.SetView(false);
             try {
-                new Welcome2(1);
+                new Welcome2(1,this);
             } catch (SQLException | ClassNotFoundException ex) {
                 ex.printStackTrace();
             }
