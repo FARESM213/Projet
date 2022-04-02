@@ -100,7 +100,7 @@ public class CreationCompte_2 {
 
         public byte[] Photo_const() throws IOException {
 
-            File file = new File("C:\\Users\\Usuario\\Desktop\\Projet\\sign.jpg");
+            File file = new File("Images\\chirurgien.png");
 
             FileInputStream fis = null;
             try {
