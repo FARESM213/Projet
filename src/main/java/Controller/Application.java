@@ -23,8 +23,9 @@ public class Application {
     public final List<Medecin> Med = new ArrayList<>();
     public final List<Rdv> Rendezvous = new ArrayList<>();
     private int ind;
-    public static View.Login L =new Login();
 
+
+    public Login L =new Login();
     public Suite sui;
     public ChangementMdp mot;
 
@@ -224,10 +225,8 @@ public class Application {
     }
 
     public Application(int i,Welcome2 w) throws SQLException, ClassNotFoundException {
-
         init();
         L.Logt();
-
         L.getRetourButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

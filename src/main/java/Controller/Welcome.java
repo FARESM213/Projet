@@ -7,14 +7,11 @@ public class Welcome {
 
     public final Fenetre_Welcome Fenetre= new  Fenetre_Welcome();
 
-    Application App= new Application();
-
-    public  static void main(String[] s)
-    {
+    public  static void main(String[] s) throws SQLException, ClassNotFoundException {
         new Welcome();
     }
 
-    public Welcome() {
+    public Welcome() throws SQLException, ClassNotFoundException {
         Fenetre.Suu();
 
         Fenetre.getMedecin().addActionListener(e -> {
