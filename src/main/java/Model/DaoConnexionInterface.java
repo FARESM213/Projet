@@ -14,7 +14,6 @@ public interface DaoConnexionInterface {
     void SuppElement(@NotNull Object O, Object Final, Object FinalB) throws SQLException;
     ResultSet Search (String table, String Elem, String whouere) throws SQLException;
 
-    void tst() throws SQLException, IOException, ClassNotFoundException;
     void coco(String s, String s1, String s2) throws SQLException, ClassNotFoundException;
     void UpdateImage (String table, String champ, Object Depart, Object Final, String genre, int id,Object O) throws SQLException, IOException;
     ArrayList<Object> Selection_distinct(String Table , String Champ) throws SQLException;

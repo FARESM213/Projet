@@ -53,7 +53,6 @@ public class Profil
             if (P.getClass()==Medecin.class) {
 
                 int buff = ISVALID(0);
-                String str = Fenetre.getMdp();
 
                 if (buff==0){
                     Medecin B= new Medecin(((Medecin) P).Get_id(),Fenetre.getNom(),Fenetre.getLogin(),Fenetre.getMdp(),Fenetre.getSpec(),Fenetre.getEmail(),((Medecin) P).getImage(),Fenetre.getHospi());
@@ -71,7 +70,6 @@ public class Profil
             else {
 
                 int buff = ISVALID(1);
-                String str = Fenetre.getMdp();
                 if (buff==0){try
                 {
                     Patient B= new Patient(((Patient) P).Get_id(),Fenetre.getNom(),Fenetre.getLogin(),Fenetre.getMdp(),Fenetre.getEmail(),((Patient) P).getImage());

@@ -107,8 +107,6 @@ public class Fentre_Creat_2 {
     public void MEmdp(boolean indice){mdpME.setVisible(indice);}
     public void MEHOP(boolean indice){HOPME.setVisible(indice);}
 
-
-
     private void createUIComponents() {
         panel1 = new JPanel();
         Lbl= new JLabel(Resize("Images\\app.png",180,180));
@@ -122,6 +120,13 @@ public class Fentre_Creat_2 {
         imageIcon = new ImageIcon(newimg);
         return imageIcon;
     }
+
+
+    public void Color(JTextField F,boolean C){
+        if(C)F.setBackground(Color.RED);
+        else F.setBackground(Color.GREEN);
+    }
+
 }
 
 

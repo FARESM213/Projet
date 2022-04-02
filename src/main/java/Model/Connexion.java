@@ -129,36 +129,6 @@ public class Connexion implements DaoConnexionInterface {
         return stmt.executeQuery("SELECT " + Elem + " FROM " + table + " " + whouere);
     }
 
-    @Override
-    public void tst() throws SQLException, IOException {
-
-        File file = new File("C:\\Users\\33783\\Desktop\\preview-_1_.png");
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        byte [] buf = new byte[1024];
-        for (int number; (number = Objects.requireNonNull(fis).read(buf))!=-1;)
-        {
-            bos.write(buf,0,number);
-        }
-
-        String sql = "UPDATE Patient SET Image= ? WHERE 1";
-        ps = conn.prepareStatement(sql);
-        ps.setBytes(1,bos.toByteArray());
-        ps.executeUpdate();
-        ps.close();
-
-        sql = "UPDATE Medecin SET Image= ? WHERE 1";
-        ps = conn.prepareStatement(sql);
-        ps.setBytes(1,bos.toByteArray());
-        ps.executeUpdate();
-        ps.close();
-    }
-
     public ArrayList<Object> Selection_distinct(String Table, String Champ) throws SQLException
     {
             ArrayList <Object> test = new ArrayList<>();

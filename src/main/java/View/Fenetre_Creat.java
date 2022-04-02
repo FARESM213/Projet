@@ -102,8 +102,8 @@ public class Fenetre_Creat {
 
 
     public void Color(JTextField F,boolean C){
-        if(C==true)F.setBackground(Color.RED);
-        else if (C==false)F.setBackground(Color.GREEN);
+        if(C)F.setBackground(Color.RED);
+        else F.setBackground(Color.GREEN);
     }
 
 

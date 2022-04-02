@@ -5,8 +5,6 @@ import Model.Patient;
 import View.Fentre_Creat_2;
 
 import javax.mail.MessagingException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -93,12 +91,9 @@ public class CreationCompte_2 {
             });
 
         }
-        Fenetre.getRetourButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                App.Set_frame(true);
-                Fenetre.SetView(false);
-            }
+        Fenetre.getRetourButton().addActionListener(e -> {
+            App.Set_frame(true);
+            Fenetre.SetView(false);
         });
     }
 
@@ -171,24 +166,16 @@ public class CreationCompte_2 {
 
         public static boolean isValidPassword(String password)
         {
-
             String regex = "^(?=.*[0-9])"
                     + "(?=.*[a-z])(?=.*[A-Z])"
-                    + "(?=.*[@#$%^&+=])"
+                    + "(?=.*[@#$%^&+=!*'<>:;,])"
                     + "(?=\\S+$).{8,20}$";
 
-            // Compile the ReGex
             Pattern p = Pattern.compile(regex);
 
-            // If the password is empty
-            // return false
             if (password == null) {
                 return false;
             }
-
-            // Pattern class contains matcher() method
-            // to find matching between given password
-            // and regular expression.
             Matcher m = p.matcher(password);
 
             // Return if the password

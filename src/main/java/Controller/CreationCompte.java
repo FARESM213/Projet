@@ -100,7 +100,6 @@ public class CreationCompte {
                 buff++;
                 Fenetre.sethopField("");
                 Fenetre.MEHOP(true,Fenetre.textField2);}
-
         }
 
         return buff;
@@ -173,10 +172,9 @@ public class CreationCompte {
 
     public static boolean isValidPassword(String password)
     {
-
         String regex = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
-                + "(?=.*[@#$%^&+=])"
+                + "(?=.*[@#$%^&+=!*'<>:;,])"
                 + "(?=\\S+$).{8,20}$";
 
         // Compile the ReGex

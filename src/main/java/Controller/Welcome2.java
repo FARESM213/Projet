@@ -1,8 +1,6 @@
 package Controller;
 import View.Fenetre_Welcome2;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 public class Welcome2 {
@@ -31,12 +29,9 @@ public class Welcome2 {
             }
         });
 
-        Fenetre.getRetourButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Fenetre.SetView(false);
-                welcome.Fenetre.SetView(true);
-            }
+        Fenetre.getRetourButton().addActionListener(e -> {
+            Fenetre.SetView(false);
+            welcome.Fenetre.SetView(true);
         });
 }
 }

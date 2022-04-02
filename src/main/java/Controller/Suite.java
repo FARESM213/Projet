@@ -1,21 +1,15 @@
 package Controller;
 
 import Model.Medecin;
-import Model.Patient;
 import View.Fenetre_Suite;
 import View.PieChartExample;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.util.Calendar;
 import java.util.Date;
-
-import static java.util.Calendar.*;
 
 public class Suite {
 
@@ -175,19 +169,13 @@ public class Suite {
                     }
             }
         });
-        Fenetre.getRetourButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                try {
-                    Fenetre.SetView(false,App);
-                    App.init();
-                    App.Set_frame(true);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                } catch (ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                }
+        Fenetre.getRetourButton().addActionListener(e -> {
+            try {
+                Fenetre.SetView(false,App);
+                App.init();
+                App.Set_frame(true);
+            } catch (SQLException | ClassNotFoundException ex) {
+                ex.printStackTrace();
             }
         });
     }
