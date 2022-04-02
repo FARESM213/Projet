@@ -8,6 +8,8 @@ import Model.Rdv;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -69,6 +71,7 @@ public class Fenetre_Profil
         mdp.setVisible(true);
         Email.setVisible(true);
         choisirUneImageButton.setVisible(true);
+        supprimerRdvButton.setVisible(false);
 
         if(P.getClass()==Medecin.class)
         {
@@ -119,11 +122,11 @@ public class Fenetre_Profil
         Image img;
         if(P.getClass()==Patient.class)
         {
-             img =Toolkit.getDefaultToolkit().createImage(((Patient)P).getImage());
+            img =Toolkit.getDefaultToolkit().createImage(((Patient)P).getImage());
         }
         else
         {
-             img =Toolkit.getDefaultToolkit().createImage(((Medecin)P).getImage());
+            img =Toolkit.getDefaultToolkit().createImage(((Medecin)P).getImage());
         }
         ImageIcon icone;
         Image newimg = img.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
@@ -144,6 +147,13 @@ public class Fenetre_Profil
         renit(P);
 
 
+        afficherRdvRadioButton.setIcon(Resize("Images\\Off.png",28,13));
+
+        supprimerRdvButton.setIcon(Resize("Images\\rapport.png",20,20));
+        supprimerRdvButton.setIconTextGap(10);
+
+        modifierInformationsButton.setIcon(Resize("Images\\change.png",20,20));
+        modifierInformationsButton.setIconTextGap(10);
 
         modifierButton.setIcon(Resize("Images\\check.png",20,20));
         modifierButton.setIconTextGap(10);
@@ -160,7 +170,7 @@ public class Fenetre_Profil
         list1.setVisible(false);
         textArea1.setVisible(false);
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Suite.setPreferredSize(new Dimension(820,680));
+        Suite.setPreferredSize(new Dimension(880,680));
         Suite.setResizable(false);
         Suite.pack();
         Suite.setVisible(true);
@@ -312,23 +322,35 @@ public class Fenetre_Profil
 
     public void radio(Application App, Object O)  {
 
-        list1.setVisible(true);
-        textArea1.setVisible(true);
-        supprimerRdvButton.setVisible(true);
-        if(O.getClass()==Medecin.class) {
-            try {
-                setDlm("WHERE medno= "+((Medecin) O).Get_id(),App);
-            } catch (SQLException e) {
-                e.printStackTrace();
+        if (afficherRdvRadioButton.isSelected())
+        {
+            afficherRdvRadioButton.setIcon(Resize("Images\\On.png",28,13));
+            list1.setVisible(true);
+            textArea1.setVisible(true);
+            supprimerRdvButton.setVisible(true);
+            if(O.getClass()==Medecin.class) {
+                try {
+                    setDlm("WHERE medno= "+((Medecin) O).Get_id(),App);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                try {
+                    setDlm("WHERE patno= "+((Patient) O).Get_id(),App);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
-        else {
-            try {
-                setDlm("WHERE patno= "+((Patient) O).Get_id(),App);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        else
+        {
+            supprimerRdvButton.setVisible(false);
+            list1.setVisible(false);
+            textArea1.setVisible(false);
+            afficherRdvRadioButton.setIcon(Resize("Images\\Off.png",28,13));
         }
+
 
     }
 

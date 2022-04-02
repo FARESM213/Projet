@@ -57,7 +57,7 @@ public class Fenetre_Welcome2{
 
         Connexion= new JButton(Resize("Images\\Pillule.png",64,64));
         CreerCompte= new JButton(Resize("Images\\Valise.png",64,64));
-        Crr = new JLabel(Resize("Images\\Creation.jpg",514,432));
+        Crr = new JLabel(Resize("Images\\Creation.jpg",544,385));
 
     }
 }
