@@ -3,13 +3,16 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 
-public class Fenetre_Welcome2 {
+public class Fenetre_Welcome2{
 
     private JLabel Titre;
     private JButton Connexion;
     private JButton CreerCompte;
     private JPanel P;
+    private JLabel Crr;
     static JFrame Welcome2 = new JFrame("Welcome2");
+
+
 
     public void Suu() {
 
@@ -21,23 +24,40 @@ public class Fenetre_Welcome2 {
 
         Welcome2.setContentPane(P);
         Welcome2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Welcome2.setPreferredSize(new Dimension(500,500));
+        Welcome2.setPreferredSize(new Dimension(900,650));
         Welcome2.setResizable(false);
         Welcome2.pack();
         Welcome2.setVisible(true);
-    }
-
-    public JButton getConnexion() {
-        return Connexion;
     }
 
     public JButton getCreerCompte() {
         return CreerCompte;
     }
 
+    public JButton getConnexion() {
+        return Connexion;
+    }
+
+    public ImageIcon Resize(String path, int W , int H)
+    {
+        ImageIcon imageIcon = new ImageIcon(path); // load the image to a imageIcon
+        Image image = imageIcon.getImage();
+        Image newimg = image.getScaledInstance(W, H,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        imageIcon = new ImageIcon(newimg);
+        return imageIcon;
+    }
 
     public void SetView(boolean etat)
     {
         Welcome2.setVisible(etat);
+    }
+
+
+    private void createUIComponents() {
+
+        Connexion= new JButton(Resize("Images\\Pillule.png",64,64));
+        CreerCompte= new JButton(Resize("Images\\Valise.png",64,64));
+        Crr = new JLabel(Resize("Images\\Creation.jpg",514,432));
+
     }
 }

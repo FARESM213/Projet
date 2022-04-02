@@ -74,14 +74,25 @@ public class Suite {
 
             if (Fenetre.getLibreRadioButton().isSelected())
             {
+                Fenetre.SetIcons(Fenetre.getLibreRadioButton(),true);
+                Fenetre.SetIcons(Fenetre.getReserveRadioButton(),false);
+                Fenetre.SetIcons(Fenetre.getPasseRadioButton(),false);
                 whouere+= " AND etat='1' ";
             }
             else if (Fenetre.getReserveRadioButton().isSelected())
             {
+                Fenetre.SetIcons(Fenetre.getLibreRadioButton(),false);
+                Fenetre.SetIcons(Fenetre.getReserveRadioButton(),true);
+                Fenetre.SetIcons(Fenetre.getPasseRadioButton(),false);
+
                 whouere+= " AND etat='0'";
             }
             else if (Fenetre.getPasseRadioButton().isSelected())
             {
+                Fenetre.SetIcons(Fenetre.getLibreRadioButton(),false);
+                Fenetre.SetIcons(Fenetre.getReserveRadioButton(),false);
+                Fenetre.SetIcons(Fenetre.getPasseRadioButton(),true);
+
                 LocalTime time = LocalTime.now(ZoneId.systemDefault());
                 int h =time.getHour();
                 whouere+= " AND CASE " +
@@ -92,6 +103,8 @@ public class Suite {
 
             if (Fenetre.getToutLesRendezVousRadioButton().isSelected())
             {
+                Fenetre.SetIcons(Fenetre.getToutLesRendezVousRadioButton(),true);
+                Fenetre.SetIcons(Fenetre.getDuRadioButton(),false);
                 LocalTime time = LocalTime.now(ZoneId.systemDefault());
                 int h =time.getHour()+1;
                 whouere+= " AND CASE " +
@@ -101,6 +114,9 @@ public class Suite {
             }
             else if (Fenetre.getDuRadioButton().isSelected())
             {
+                Fenetre.SetIcons(Fenetre.getToutLesRendezVousRadioButton(),false);
+                Fenetre.SetIcons(Fenetre.getDuRadioButton(),true);
+
                 whouere+= " AND rdv_date BETWEEN '"+date1+ "' AND '"+date2+"'  ";
             }
 

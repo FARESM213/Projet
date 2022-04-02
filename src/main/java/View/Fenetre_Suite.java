@@ -3,6 +3,7 @@ package View;
 import Controller.Application;
 import Model.Medecin;
 import Model.Rdv;
+import javafx.scene.control.RadioButton;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
@@ -32,12 +33,11 @@ public class Fenetre_Suite {
     private JButton reserverButton;
     ButtonGroup group2 = new ButtonGroup();
 
-    ButtonGroup group3 = new ButtonGroup();
-
     public static JFrame Suite = new JFrame("Suite");
     ButtonGroup group = new ButtonGroup();
-    DefaultListModel<Rdv> dlm = new DefaultListModel<>();
 
+
+    DefaultListModel<Rdv> dlm = new DefaultListModel<>();
 
     public Fenetre_Suite() {
     }
@@ -121,6 +121,12 @@ public class Fenetre_Suite {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        reserveRadioButton =   new JRadioButton(Resize("Images\\RadioOui.png",67,22));
+        passeRadioButton =  new JRadioButton(Resize("Images\\RadioOui.png",67,22));
+        toutLesRendezVousRadioButton =  new JRadioButton(Resize("Images\\RadioOui.png",67,22));
+        duRadioButton =  new JRadioButton(Resize("Images\\RadioOui.png",67,22));
+
         Suite.setContentPane(Test);
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Suite.setPreferredSize(new Dimension(820,680));
@@ -131,6 +137,7 @@ public class Fenetre_Suite {
 
 
     private void createUIComponents(Application App) throws ParseException {
+
 
         SpinnerDateModel model = new SpinnerDateModel();
         spinner1.setModel(model);
@@ -157,7 +164,6 @@ public class Fenetre_Suite {
             Med_cin.addItem(N);
             comboBox1.addItem(N.getHopital());
         }
-
     }
     public  void setButton( String str)
     {
@@ -264,5 +270,30 @@ public class Fenetre_Suite {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public void SetIcons(JRadioButton B, boolean etat)
+    {
+        if (etat)
+        {
+            B= new JRadioButton(Resize("Images\\RadioOui.png",67,22));
+
+        }
+        else
+        {
+            System.out.println("JE passe ici" );
+            B= new JRadioButton(Resize("Images\\RadioNon.png",67,22));
+        }
+    }
+
+
+    public ImageIcon Resize(String path, int W , int H)
+    {
+        ImageIcon imageIcon = new ImageIcon(path); // load the image to a imageIcon
+        Image image = imageIcon.getImage();
+        Image newimg = image.getScaledInstance(W, H,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        imageIcon = new ImageIcon(newimg);
+        return imageIcon;
     }
 }

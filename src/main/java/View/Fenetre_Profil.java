@@ -142,6 +142,20 @@ public class Fenetre_Profil
         }
         createUIComponents(P);
         renit(P);
+
+
+
+        modifierButton.setIcon(Resize("Images\\check.png",20,20));
+        modifierButton.setIconTextGap(10);
+
+        supprimerCompteButton.setIcon(Resize("Images\\delete.png",20,20));
+        supprimerCompteButton.setIconTextGap(10);
+
+        retourButton.setIcon(Resize("Images\\return.png",20,20));
+        retourButton.setIconTextGap(10);
+        choisirUneImageButton.setIcon(Resize("Images\\folder.png",20,20));
+        choisirUneImageButton.setIconTextGap(10);
+
         Suite.setContentPane(T);
         list1.setVisible(false);
         textArea1.setVisible(false);
@@ -153,6 +167,7 @@ public class Fenetre_Profil
     }
 
     private void createUIComponents(Object O) {
+
 
         Nom.setVisible(false);
         Login.setVisible(false);
@@ -398,4 +413,15 @@ public class Fenetre_Profil
     public JButton getSupprimerRdvButton() {
         return supprimerRdvButton;
     }
+
+
+    public ImageIcon Resize(String path, int W , int H)
+    {
+        ImageIcon imageIcon = new ImageIcon(path); // load the image to a imageIcon
+        Image image = imageIcon.getImage();
+        Image newimg = image.getScaledInstance(W, H,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        imageIcon = new ImageIcon(newimg);
+        return imageIcon;
+    }
+
 }

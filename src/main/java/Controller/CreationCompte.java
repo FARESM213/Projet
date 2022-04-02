@@ -141,7 +141,6 @@ public class CreationCompte {
                 if (Objects.equals(N.Get_log(), obj))
                 {
                     oui=1;
-                    System.out.println(" PSEUDO DEJA PRIS ");
                 }
             }
         }
@@ -165,10 +164,8 @@ public class CreationCompte {
     public static boolean isValidPassword(String password)
     {
 
-        String regex = "^(?=.*[0-9])"
-                + "(?=.*[a-z])(?=.*[A-Z])"
-                + "(?=.*[@#$%^&+=])"
-                + "(?=\\S+$).{8,20}$";
+        String regex = "(?=.*[0-9])"
+                + "(?=.*[a-z])(?=.*[A-Z])";
 
         // Compile the ReGex
         Pattern p = Pattern.compile(regex);
@@ -179,13 +176,7 @@ public class CreationCompte {
             return false;
         }
 
-        // Pattern class contains matcher() method
-        // to find matching between given password
-        // and regular expression.
         Matcher m = p.matcher(password);
-
-        // Return if the password
-        // matched the ReGex
 
         return m.matches();}
 }

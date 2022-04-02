@@ -15,18 +15,20 @@ public class Fentre_Creat_2 {
     private JPanel IFMEDECIN;
     private JTextField textField1;
     private JTextField textField2;
-    private JLabel loginME;
-    private JLabel MDPME;
-    private JLabel emailME;
-    private JLabel specialiteME;
-    private JLabel hopitalME;
-    private JLabel NomME;
     private JPanel NOMME;
     private JPanel LOGINME;
     private JPanel mdpME;
     private JPanel EMAILME;
     private JPanel SPEME;
     private JPanel HOPME;
+    private JPanel panel1;
+    private JLabel NomME;
+    private JLabel loginME;
+    private JLabel MDPME;
+    private JLabel emailME;
+    private JLabel specialiteME;
+    private JLabel hopitalME;
+    private JLabel Lbl;
 
     static JFrame Suite = new JFrame("Suite");
 
@@ -40,9 +42,11 @@ public class Fentre_Creat_2 {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-        Suite.setContentPane(j);
+        Suite.add(j, BorderLayout.CENTER);
+        Suite.add(panel1, BorderLayout.WEST);
+        //Suite.setContentPane(j);
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Suite.setPreferredSize(new Dimension(500, 500));
+        Suite.setPreferredSize(new Dimension(800, 500));
         Suite.setResizable(false);
         Suite.pack();
         Suite.setVisible(true);
@@ -94,4 +98,22 @@ public class Fentre_Creat_2 {
     public void MEmdp(boolean indice){mdpME.setVisible(indice);}
     public void MEHOP(boolean indice){HOPME.setVisible(indice);}
 
+
+
+    private void createUIComponents() {
+        panel1 = new JPanel();
+        Lbl= new JLabel(Resize("Images\\app.png",180,180));
+    }
+
+    public ImageIcon Resize(String path, int W , int H)
+    {
+        ImageIcon imageIcon = new ImageIcon(path); // load the image to a imageIcon
+        Image image = imageIcon.getImage();
+        Image newimg = image.getScaledInstance(W, H,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        imageIcon = new ImageIcon(newimg);
+        return imageIcon;
+    }
 }
+
+
+

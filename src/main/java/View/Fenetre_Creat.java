@@ -26,6 +26,8 @@ public class Fenetre_Creat {
     private JPanel EMAILME;
     private JPanel SPEME;
     private JPanel HOPME;
+    private JLabel Lbl;
+    private JPanel panel1;
 
     static JFrame Suite = new JFrame("Suite");
 
@@ -39,9 +41,13 @@ public class Fenetre_Creat {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-        Suite.setContentPane(j);
+
+
+
+        Suite.add(j, BorderLayout.CENTER);
+        Suite.add(panel1, BorderLayout.WEST);
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Suite.setPreferredSize(new Dimension(500, 500));
+        Suite.setPreferredSize(new Dimension(800, 500));
         Suite.setResizable(false);
         Suite.pack();
         Suite.setVisible(true);
@@ -100,7 +106,19 @@ public class Fenetre_Creat {
     }
 
 
+    private void createUIComponents() {
+        panel1 = new JPanel();
+        Lbl= new JLabel(Resize("Images\\app.png",180,180));
+    }
 
-
-
+    public ImageIcon Resize(String path, int W , int H)
+    {
+        ImageIcon imageIcon = new ImageIcon(path); // load the image to a imageIcon
+        Image image = imageIcon.getImage();
+        Image newimg = image.getScaledInstance(W, H,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        imageIcon = new ImageIcon(newimg);
+        return imageIcon;
+    }
 }
+
+
