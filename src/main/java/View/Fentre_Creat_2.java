@@ -24,14 +24,14 @@ public class Fentre_Creat_2 {
     private JPanel SPEME;
     private JPanel HOPME;
     private JPanel panel1;
+    private JLabel Lbl;
+    private JButton retourButton;
     private JLabel NomME;
     private JLabel loginME;
     private JLabel MDPME;
     private JLabel emailME;
     private JLabel specialiteME;
     private JLabel hopitalME;
-    private JLabel Lbl;
-    private JButton retourButton;
 
     static JFrame Suite = new JFrame("Suite");
 
@@ -53,6 +53,7 @@ public class Fentre_Creat_2 {
         Suite.add(panel1, BorderLayout.WEST);
 
         retourButton.setIcon(Resize("Images\\return.png",20,20));
+        creerButton.setIcon(Resize("Images\\equipe.png",20,20));
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Suite.setPreferredSize(new Dimension(800, 500));
         Suite.setResizable(false);

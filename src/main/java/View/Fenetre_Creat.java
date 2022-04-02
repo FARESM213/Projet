@@ -43,6 +43,7 @@ public class Fenetre_Creat {
             e.printStackTrace();
         }
 
+        creerButton.setIcon(Resize("Images\\equipe.png",20,20));
         retourButton.setIcon(Resize("Images\\return.png",20,20));
         Suite.add(j, BorderLayout.CENTER);
         Suite.add(panel1, BorderLayout.WEST);

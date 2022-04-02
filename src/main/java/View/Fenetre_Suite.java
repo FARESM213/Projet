@@ -33,6 +33,10 @@ public class Fenetre_Suite {
     private JButton statistiquesButton;
     private JButton reserverButton;
     private JButton retourButton;
+    private JLabel medecinLabel;
+    private JLabel hopitalLabel;
+    private JLabel dateLabel;
+    private JLabel filtreLabel;
     ButtonGroup group2 = new ButtonGroup();
 
     public static JFrame Suite = new JFrame("Suite");
@@ -189,6 +193,14 @@ public class Fenetre_Suite {
 
         consulterProfilButton.setIcon(Resize("Images\\docteur.png",20,20));
         consulterProfilButton.setIconTextGap(10);
+
+        annulerButton.setIcon(Resize("Images\\plaster.png",20,20));
+        appliquerButton.setIcon(Resize("Images\\submit.png",20,20));
+
+        medecinLabel.setIcon(Resize("Images\\doc.png",20,20));
+        hopitalLabel.setIcon(Resize("Images\\hopital.png",20,20));
+        dateLabel.setIcon(Resize("Images\\date2.png",20,20));
+        filtreLabel.setIcon(Resize("Images\\coeur.png",20,20));
 
         retourButton.setIcon(Resize("Images\\return.png",20,20));
         libreRadioButton.setIcon(Resize("Images\\Off.png",28,13));

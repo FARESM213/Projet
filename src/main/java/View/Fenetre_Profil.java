@@ -325,7 +325,6 @@ public class Fenetre_Profil
         if (afficherRdvRadioButton.isSelected())
         {
             afficherRdvRadioButton.setIcon(Resize("Images\\On.png",28,13));
-
             list1.setVisible(true);
             textArea1.setVisible(true);
             supprimerRdvButton.setVisible(true);
@@ -349,9 +348,9 @@ public class Fenetre_Profil
             supprimerRdvButton.setVisible(false);
             list1.setVisible(false);
             textArea1.setVisible(false);
+            textArea1.setText("");
             afficherRdvRadioButton.setIcon(Resize("Images\\Off.png",28,13));
         }
-
 
     }
 
