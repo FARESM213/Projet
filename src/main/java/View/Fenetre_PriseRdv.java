@@ -109,13 +109,14 @@ public class Fenetre_PriseRdv {
         {
             String nom="";
             for (Medecin N:App.Med) {
-                if (N.Get_id()==O.Get_id())
+             
+                if (N.Get_id()==O.Get_med())
                 {
                     nom=N.Get_nom();
                 }
             }
             nmrLabel.setText(String.valueOf(O.Get_id()));
-            mdcLabel.setText(nom);
+            mdcLabel.setText("Dr. "+nom);
             dtLabel.setText(String.valueOf(O.Get_date()));
             hrrLabel.setText(O.Get_horaire()+" h ");
             hptLabel.setText(O.Get_lieu());

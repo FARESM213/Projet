@@ -28,6 +28,7 @@ public class CreationCompte {
                         Application App = new Application(indice,w);
                         App.AjouterMedecin(Fenetre.NomTextField(), Fenetre.LoginTextField(), str, Fenetre.SPEField(), Fenetre.getTextField1(), Photo_const(), Fenetre.getTextField2());
                         App.Loggg();
+                        Fenetre.renit();
                     } catch (SQLException | ClassNotFoundException | IOException ex) {
                         ex.printStackTrace();
                     }
@@ -45,7 +46,9 @@ public class CreationCompte {
                                 Application App = new Application(indice,w);
                                 String email = Fenetre.getTextField1();
                                 App.AjouterPatient(Fenetre.NomTextField(),Fenetre.LoginTextField(),str,email,Photo_const());
-                                App.Loggg();}
+                                App.Loggg();
+                                Fenetre.renit();
+                            }
                         catch (SQLException | ClassNotFoundException | MessagingException | IOException ex) {ex.printStackTrace();}
                     Fenetre.SetView(false);}
 
@@ -56,6 +59,8 @@ public class CreationCompte {
         Fenetre.getRetourButton().addActionListener(e -> {
             w.Fenetre.SetView(true);
             Fenetre.SetView(false);
+            Fenetre.renit();
+
         });
     }
 

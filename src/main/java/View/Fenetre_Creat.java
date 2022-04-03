@@ -123,6 +123,34 @@ public class Fenetre_Creat {
         return imageIcon;
     }
 
+    public void renit()
+    {
+        j.setVisible(false);
+        LoginTextField.setVisible(false);
+        NomTextField.setVisible(false);
+        creerButton.setVisible(false);
+        MDPField.setVisible(false);
+        SPEField.setVisible(false);
+        IFMEDECIN.setVisible(false);
+        textField1.setVisible(false);
+        textField2.setVisible(false);
+        loginME.setVisible(false);
+        MDPME.setVisible(false);
+        emailME.setVisible(false);
+        specialiteME.setVisible(false);
+        hopitalME.setVisible(false);
+        NomME.setVisible(false);
+        NOMME.setVisible(false);
+        LOGINME.setVisible(false);
+        mdpME.setVisible(false);
+        EMAILME.setVisible(false);
+        SPEME.setVisible(false);
+        HOPME.setVisible(false);
+        Lbl.setVisible(false);
+        panel1.setVisible(false);
+        retourButton.setVisible(false);
+    }
+
     public JButton getRetourButton() {
         return retourButton;
     }

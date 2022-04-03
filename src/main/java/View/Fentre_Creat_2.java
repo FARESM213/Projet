@@ -93,6 +93,35 @@ public class Fentre_Creat_2 {
         return HopiTF.getText();
     }
 
+    public void renit()
+    {
+        j.setVisible(false);
+        LoginTF.setVisible(false);
+        NomTF.setVisible(false);
+        creerButton.setVisible(false);
+        MDPTF.setVisible(false);
+        SPETF.setVisible(false);
+        IFMEDECIN.setVisible(false);
+        EmailTF.setVisible(false);
+        HopiTF.setVisible(false);
+        loginME.setVisible(false);
+        MDPME.setVisible(false);
+        emailME.setVisible(false);
+        specialiteME.setVisible(false);
+        hopitalME.setVisible(false);
+        NomME.setVisible(false);
+        NOMME.setVisible(false);
+        LOGINME.setVisible(false);
+        mdpME.setVisible(false);
+        EMAILME.setVisible(false);
+        SPEME.setVisible(false);
+        HOPME.setVisible(false);
+        Lbl.setVisible(false);
+        panel1.setVisible(false);
+        retourButton.setVisible(false);
+    }
+
+
     public void setLoginTextField(String log) {LoginTF.setText(log);}
     public void setSPEField(String spe) {SPETF.setText(spe);}
     public void sethopField(String log) {HopiTF.setText(log);}

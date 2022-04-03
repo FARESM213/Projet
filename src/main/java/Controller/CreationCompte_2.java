@@ -27,6 +27,7 @@ public class CreationCompte_2 {
                 if (buff == 0){try {
                     App.AjouterMedecin(Fenetre.NomTextField(), Fenetre.LoginTextField(), str, Fenetre.SPEField(), Fenetre.getTextField1(), Photo_const(), Fenetre.getTextField2());
                     App.Loggg();
+                    Fenetre.renit();
                 } catch (SQLException | IOException ex) {
                     ex.printStackTrace();
                 }
@@ -43,7 +44,9 @@ public class CreationCompte_2 {
                     try {
                         String email = Fenetre.getTextField1();
                         App.AjouterPatient(Fenetre.NomTextField(),Fenetre.LoginTextField(),str,email,Photo_const());
-                        App.Loggg();}
+                        App.Loggg();
+                        Fenetre.renit();
+                    }
                     catch (MessagingException | IOException ex) {ex.printStackTrace();}
                     Fenetre.SetView(false);}
             });
@@ -52,6 +55,7 @@ public class CreationCompte_2 {
         Fenetre.getRetourButton().addActionListener(e -> {
             App.Set_frame(true);
             Fenetre.SetView(false);
+            Fenetre.renit();
         });
     }
 
