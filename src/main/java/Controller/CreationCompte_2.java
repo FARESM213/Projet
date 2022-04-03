@@ -17,36 +17,12 @@ public class CreationCompte_2 {
     private final Fentre_Creat_2 Fenetre = new Fentre_Creat_2();
 
     public CreationCompte_2( int indice,Application App) throws SQLException, ClassNotFoundException {
+
         Fenetre.Suu(indice);
         if (indice==0){//MEDECIN
             Fenetre.creerButton().addActionListener(e -> {
                 String str = Fenetre.MDPField();
-                Medecin A = new Medecin();
-                int buff=0;
-                if (isValidText(Fenetre.NomTextField())){Fenetre.MENOM(false);}else {
-                    buff++;
-                    Fenetre.setNomField("");
-                    Fenetre.MENOM(true);}
-                if (isValidText_1(Fenetre.LoginTextField(),App,A)){Fenetre.MELOGIN(false);}else {
-                    buff++;
-                    Fenetre.setLoginTextField("");
-                    Fenetre.MELOGIN(true);}
-                if (isValidText(Fenetre.SPEField())){Fenetre.MESPE(false);}else{
-                    buff++;
-                    Fenetre.setSPEField("");
-                    Fenetre.MESPE(true);}
-                if (isValidText(Fenetre.getTextField1())){Fenetre.MEEMAIL(false);}else {
-                    buff++;
-                    Fenetre.setEmailField("");
-                    Fenetre.MEEMAIL(true);}
-                if (isValidText(Fenetre.getTextField2())){Fenetre.MEHOP(false);}else {
-                    buff++;
-                    Fenetre.sethopField("");
-                    Fenetre.MEHOP(true);}
-                if (isValidText(str)){Fenetre.MEmdp(false);}else {
-                    buff++;
-                    Fenetre.setMdpField("");
-                    Fenetre.MEmdp(true);}
+                int buff = ISVALID(indice,App);
 
                 if (buff == 0){try {
                     App.AjouterMedecin(Fenetre.NomTextField(), Fenetre.LoginTextField(), str, Fenetre.SPEField(), Fenetre.getTextField1(), Photo_const(), Fenetre.getTextField2());
@@ -60,27 +36,9 @@ public class CreationCompte_2 {
         } else if(indice==1){//PATIENT
             Fenetre.creerButton().addActionListener(e ->
             {
-                Patient B = new Patient();
                 String str = Fenetre.MDPField();
-                int buff=0;
-                if (isValidText(Fenetre.NomTextField())){Fenetre.MENOM(false);}else {
-                    buff++;
-                    Fenetre.setNomField("");
-                    Fenetre.MENOM(true);}
-                if (isValidText_1(Fenetre.LoginTextField(),App,B)){Fenetre.MELOGIN(false);}else{
-                    buff++;
-                    Fenetre.setLoginTextField("");
-                    Fenetre.MELOGIN(true);}
-                if (isValidText(Fenetre.getTextField1())){Fenetre.MEEMAIL(false);}else {
-                    Fenetre.setEmailField("");
-                    buff++;
-                    Fenetre.MEEMAIL(true);}
-                if (isValidText(str)){Fenetre.MEmdp(false);}
+                int buff=ISVALID(indice,App);
 
-                else{
-                    Fenetre.setMdpField("");
-                    buff++;
-                    Fenetre.MEmdp(true);}
                 if (buff==0){
                     try {
                         String email = Fenetre.getTextField1();
@@ -97,6 +55,48 @@ public class CreationCompte_2 {
         });
     }
 
+
+    public int ISVALID(int indice, Application Appli){
+
+        Medecin A = new Medecin();
+        Patient B = new Patient();
+        String str = Fenetre.MDPField();
+        int buff=0;
+        if (isValidText(Fenetre.NomTextField())){Fenetre.MENOM(false,Fenetre.NomTF);}else {
+            buff++;
+            Fenetre.setNomField("");
+            Fenetre.MENOM(true,Fenetre.NomTF);}
+        if (isValidEmail(Fenetre.getTextField1())){Fenetre.MEEMAIL(false,Fenetre.EmailTF);}else {
+            Fenetre.setEmailField("");
+            buff++;
+            Fenetre.MEEMAIL(true,Fenetre.EmailTF);}
+        if (isValidPassword(str)){Fenetre.MEmdp(false,Fenetre.MDPTF);}else{
+            Fenetre.setMdpField("");
+            buff++;
+            Fenetre.MEmdp(true,Fenetre.MDPTF);}
+        if (indice==1){
+            if (isValidText_1(Fenetre.LoginTextField(),Appli,B)){Fenetre.MELOGIN(false,Fenetre.LoginTF);}else{
+                buff++;
+                Fenetre.setLoginTextField("");
+                Fenetre.MELOGIN(true,Fenetre.LoginTF);}
+        }else if (indice==0){
+            if (isValidText_1(Fenetre.LoginTextField(),Appli,A)){Fenetre.MELOGIN(false,Fenetre.LoginTF);}else{
+                buff++;
+                Fenetre.setLoginTextField("");
+                Fenetre.MELOGIN(true,Fenetre.LoginTF);}
+            if (isValidText(Fenetre.SPEField())){Fenetre.MESPE(false,Fenetre.SPETF);}else{
+                buff++;
+                Fenetre.setSPEField("");
+                Fenetre.MESPE(true,Fenetre.SPETF);}
+            if (isValidText(Fenetre.getTextField2())){Fenetre.MEHOP(false,Fenetre.HopiTF);}else {
+                buff++;
+                Fenetre.sethopField("");
+                Fenetre.MEHOP(true,Fenetre.HopiTF);}
+
+        }
+
+        return buff;
+    }
 
         public byte[] Photo_const() throws IOException {
 

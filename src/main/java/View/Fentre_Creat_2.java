@@ -7,14 +7,14 @@ public class Fentre_Creat_2 {
 
 
     private JPanel j;
-    private JTextField LoginTextField;
-    private JTextField NomTextField;
+    public JTextField LoginTF;
+    public JTextField NomTF;
     private JButton creerButton;
-    private JPasswordField MDPField;
-    private JTextField SPEField;
+    public JPasswordField MDPTF;
+    public JTextField SPETF;
     private JPanel IFMEDECIN;
-    private JTextField textField1;
-    private JTextField textField2;
+    public JTextField EmailTF;
+    public JTextField HopiTF;
     private JPanel NOMME;
     private JPanel LOGINME;
     private JPanel mdpME;
@@ -72,40 +72,46 @@ public class Fentre_Creat_2 {
         return creerButton;
     }
     public String LoginTextField() {
-        return LoginTextField.getText();
+        return LoginTF.getText();
     }
     public String SPEField() {
-        return SPEField.getText();
+        return SPETF.getText();
     }
     public String NomTextField() {
-        return NomTextField.getText();
+        return NomTF.getText();
     }
     public String MDPField() {
-        return String.valueOf(MDPField.getPassword());
+        return String.valueOf(MDPTF.getPassword());
     }
     public void SetView(boolean etat) {
         Suite.setVisible(etat);
     }
     public String getTextField1() {
-        return textField1.getText();
+        return EmailTF.getText();
     }
     public String getTextField2() {
-        return textField2.getText();
+        return HopiTF.getText();
     }
 
-    public void setLoginTextField(String log) {LoginTextField.setText(log);}
-    public void setSPEField(String spe) {SPEField.setText(spe);}
-    public void sethopField(String log) {textField2.setText(log);}
-    public void setMdpField(String spe) {MDPField.setText(spe);}
-    public void setEmailField(String log) {textField1.setText(log);}
-    public void setNomField(String spe) {NomTextField.setText(spe);}
+    public void setLoginTextField(String log) {LoginTF.setText(log);}
+    public void setSPEField(String spe) {SPETF.setText(spe);}
+    public void sethopField(String log) {HopiTF.setText(log);}
+    public void setMdpField(String spe) {MDPTF.setText(spe);}
+    public void setEmailField(String log) {EmailTF.setText(log);}
+    public void setNomField(String spe) {NomTF.setText(spe);}
 
-    public void MENOM(boolean indice){NOMME.setVisible(indice);}
-    public void MELOGIN(boolean indice){LOGINME.setVisible(indice);}
-    public void MEEMAIL(boolean indice){EMAILME.setVisible(indice);}
-    public void MESPE(boolean indice){SPEME.setVisible(indice);}
-    public void MEmdp(boolean indice){mdpME.setVisible(indice);}
-    public void MEHOP(boolean indice){HOPME.setVisible(indice);}
+    public void MENOM(boolean indice,JTextField F){NOMME.setVisible(indice);Color(F,indice);}
+    public void MELOGIN(boolean indice,JTextField F){LOGINME.setVisible(indice);Color(F,indice);}
+    public void MEEMAIL(boolean indice,JTextField F){EMAILME.setVisible(indice);Color(F,indice);}
+    public void MESPE(boolean indice,JTextField F){SPEME.setVisible(indice);Color(F,indice);}
+    public void MEmdp(boolean indice,JTextField F){mdpME.setVisible(indice);Color(F,indice);}
+    public void MEHOP(boolean indice,JTextField F){HOPME.setVisible(indice);Color(F,indice);}
+
+
+    public void Color(JTextField F,boolean C){
+        if(C==true)F.setBackground(Color.RED);
+        else if (C==false)F.setBackground(Color.GREEN);
+    }
 
     private void createUIComponents() {
         panel1 = new JPanel();
@@ -122,10 +128,6 @@ public class Fentre_Creat_2 {
     }
 
 
-    public void Color(JTextField F,boolean C){
-        if(C)F.setBackground(Color.RED);
-        else F.setBackground(Color.GREEN);
-    }
 
 }
 
