@@ -144,40 +144,6 @@
         </properties>
         <border type="none"/>
         <children>
-          <scrollpane id="7d050">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-1"/>
-              <foreground color="-1"/>
-              <horizontalScrollBarPolicy value="31"/>
-            </properties>
-            <border type="none"/>
-            <children>
-              <component id="287e8" class="javax.swing.JList" binding="Liste">
-                <constraints/>
-                <properties>
-                  <autoscrolls value="true"/>
-                  <background color="-1"/>
-                  <doubleBuffered value="false"/>
-                  <enabled value="true"/>
-                  <fixedCellHeight value="30"/>
-                  <font name="Neumatic Gothic Extra Bold" size="10" style="0"/>
-                  <foreground color="-16777216"/>
-                  <inheritsPopupMenu value="true"/>
-                  <maximumSize width="330" height="320"/>
-                  <minimumSize width="330" height="320"/>
-                  <model/>
-                  <opaque value="true"/>
-                  <preferredSize width="330" height="0"/>
-                  <requestFocusEnabled value="true"/>
-                  <selectionForeground color="-5194891"/>
-                  <selectionMode value="2"/>
-                </properties>
-              </component>
-            </children>
-          </scrollpane>
           <component id="bc738" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
@@ -241,6 +207,33 @@
               <text value="Retour"/>
             </properties>
           </component>
+          <scrollpane id="1d8b4">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-1"/>
+              <foreground color="-1"/>
+              <inheritsPopupMenu value="false"/>
+              <opaque value="true"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="fb93b" class="javax.swing.JList" binding="Liste">
+                <constraints/>
+                <properties>
+                  <background color="-1"/>
+                  <fixedCellHeight value="30"/>
+                  <font name="Neumatic Gothic Extra Bold" size="10" style="1"/>
+                  <foreground color="-16777216"/>
+                  <inheritsPopupMenu value="false"/>
+                  <model/>
+                  <selectionBackground color="-3026474"/>
+                  <selectionForeground color="-16777216"/>
+                </properties>
+              </component>
+            </children>
+          </scrollpane>
         </children>
       </grid>
       <component id="31210" class="javax.swing.JRadioButton" binding="passeRadioButton">

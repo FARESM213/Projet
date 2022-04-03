@@ -4,7 +4,6 @@ import Model.Medecin;
 import Model.Patient;
 import Model.Rdv;
 import View.Fenetre_Profil;
-import View.Fenetre_Suite;
 
 import javax.swing.*;
 import java.io.IOException;

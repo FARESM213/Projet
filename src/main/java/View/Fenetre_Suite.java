@@ -10,6 +10,10 @@ import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 public class Fenetre_Suite {
 
@@ -216,10 +220,20 @@ public class Fenetre_Suite {
         group2.add(duRadioButton);
         group2.add(toutLesRendezVousRadioButton);
 
+         Set set = new HashSet();
+
         for(Medecin N : App.getMed())
         {
             Med_cin.addItem(N);
-            comboBox1.addItem(N.getHopital());
+            if ( !set.contains(N.getHopital()))
+            {
+                set.add(N.getHopital());
+            }
+
+        }
+
+        for (Object o : set) {
+            comboBox1.addItem((String) o);
         }
     }
 

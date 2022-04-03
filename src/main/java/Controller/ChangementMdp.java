@@ -11,7 +11,7 @@ public class ChangementMdp {
     private int id=0;
     private String mdp="";
 
-    private Fenetre_Mdp F= new Fenetre_Mdp();
+    private final Fenetre_Mdp F= new Fenetre_Mdp();
 
     public ChangementMdp(Application App) throws SQLException, ClassNotFoundException {
         F.Suu();
