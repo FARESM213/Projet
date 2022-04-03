@@ -83,7 +83,7 @@
           <requestFocusEnabled value="true"/>
           <rolloverEnabled value="true"/>
           <selected value="false"/>
-          <text value="Tout les rendez vous a venir"/>
+          <text value="Tous les rendez vous a venir"/>
         </properties>
       </component>
       <component id="de313" class="javax.swing.JRadioButton" binding="libreRadioButton" default-binding="true">

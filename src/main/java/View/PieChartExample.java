@@ -17,9 +17,6 @@ import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
-/**
- * @author imssbora
- */
 public class PieChartExample extends JFrame {
     private static final long serialVersionUID = 6294689542092367723L;
 

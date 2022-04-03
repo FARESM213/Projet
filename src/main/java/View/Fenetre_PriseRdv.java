@@ -29,12 +29,18 @@ public class Fenetre_PriseRdv {
     private JLabel hrrLabel;
     private JLabel hptLabel;
 
-    private JLabel motifLabel;
     private JLabel motifLabel1;
 
     private JSpinner spinner1;
     private JSpinner spinner2;
     private JLabel dureeLabel;
+    private JLabel horaireLabel;
+    private JLabel hopitalLabel;
+    private JLabel dateLabel;
+    private JLabel medecinLabel;
+    private JLabel numeroLabel;
+    private JLabel Labelll;
+    private JPanel Pannnnel;
 
     static JFrame Suite = new JFrame("Suite");
 
@@ -46,15 +52,29 @@ public class Fenetre_PriseRdv {
 
     public void Suu(int indice) throws ParseException {
 
+        Labelll.setIcon(Resize("Images\\stethoscope.png",331,446));
         Visible(indice);
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-        Suite.setContentPane(Pnl);
+
+        numeroLabel.setIcon(Resize("Images\\number-blocks.png",20,20));
+        medecinLabel.setIcon(Resize("Images\\med.png",20,20));
+        dateLabel.setIcon(Resize("Images\\date1.png",20,20));
+        motifLabel1.setIcon(Resize("Images\\med.png",20,20));
+        dureeLabel.setIcon(Resize("Images\\hourglass.png",20,20));
+        horaireLabel.setIcon(Resize("Images\\stopwatch.png",20,20));
+        hopitalLabel.setIcon(Resize("Images\\hopital.png",20,20));
+        annulerButton.setIcon(Resize("Images\\return.png",20,20));
+        prendreLeRendezVousButton.setIcon(Resize("Images\\pilules.png",20,20));
+
+
+        Suite.add(Pnl, BorderLayout.WEST);
+        Suite.add(Pannnnel, BorderLayout.EAST);
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Suite.setPreferredSize(new Dimension(500, 500));
+        Suite.setPreferredSize(new Dimension(800, 680));
         Suite.setResizable(false);
         Suite.pack();
         Suite.setVisible(true);
@@ -169,6 +189,16 @@ public class Fenetre_PriseRdv {
     public void Erreur(int min) {
         JOptionPane.showMessageDialog(null,"Il semblerait que vous ayez deja un rdv programmé a "+min+"","Erreur",JOptionPane.INFORMATION_MESSAGE);
 
+    }
+
+
+    public ImageIcon Resize(String path, int W , int H)
+    {
+        ImageIcon imageIcon = new ImageIcon(path); // load the image to a imageIcon
+        Image image = imageIcon.getImage();
+        Image newimg = image.getScaledInstance(W, H,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        imageIcon = new ImageIcon(newimg);
+        return imageIcon;
     }
 
 }
