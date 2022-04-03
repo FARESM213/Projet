@@ -7,14 +7,14 @@ public class Fentre_Creat_2 {
 
 
     private JPanel j;
-    public JTextField LoginTF;
-    public JTextField NomTF;
+    private JTextField LoginTF;
+    private JTextField NomTF;
     private JButton creerButton;
-    public JPasswordField MDPTF;
-    public JTextField SPETF;
+    private JPasswordField MDPTF;
+    private JTextField SPETF;
     private JPanel IFMEDECIN;
-    public JTextField EmailTF;
-    public JTextField HopiTF;
+    private JTextField EmailTF;
+    private JTextField HopiTF;
     private JPanel NOMME;
     private JPanel LOGINME;
     private JPanel mdpME;
@@ -156,8 +156,101 @@ public class Fentre_Creat_2 {
         return imageIcon;
     }
 
+    public JPanel getJ() {
+        return j;
+    }
 
+    public JTextField getLoginTF() {
+        return LoginTF;
+    }
 
+    public JTextField getNomTF() {
+        return NomTF;
+    }
+
+    public JButton getCreerButton() {
+        return creerButton;
+    }
+
+    public JPasswordField getMDPTF() {
+        return MDPTF;
+    }
+
+    public JTextField getSPETF() {
+        return SPETF;
+    }
+
+    public JPanel getIFMEDECIN() {
+        return IFMEDECIN;
+    }
+
+    public JTextField getEmailTF() {
+        return EmailTF;
+    }
+
+    public JTextField getHopiTF() {
+        return HopiTF;
+    }
+
+    public JPanel getNOMME() {
+        return NOMME;
+    }
+
+    public JPanel getLOGINME() {
+        return LOGINME;
+    }
+
+    public JPanel getMdpME() {
+        return mdpME;
+    }
+
+    public JPanel getEMAILME() {
+        return EMAILME;
+    }
+
+    public JPanel getSPEME() {
+        return SPEME;
+    }
+
+    public JPanel getHOPME() {
+        return HOPME;
+    }
+
+    public JPanel getPanel1() {
+        return panel1;
+    }
+
+    public JLabel getLbl() {
+        return Lbl;
+    }
+
+    public JLabel getNomME() {
+        return NomME;
+    }
+
+    public JLabel getLoginME() {
+        return loginME;
+    }
+
+    public JLabel getMDPME() {
+        return MDPME;
+    }
+
+    public JLabel getEmailME() {
+        return emailME;
+    }
+
+    public JLabel getSpecialiteME() {
+        return specialiteME;
+    }
+
+    public JLabel getHopitalME() {
+        return hopitalME;
+    }
+
+    public static JFrame getSuite() {
+        return Suite;
+    }
 }
 
 

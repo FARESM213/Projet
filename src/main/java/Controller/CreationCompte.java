@@ -57,7 +57,7 @@ public class CreationCompte {
                  }
 
         Fenetre.getRetourButton().addActionListener(e -> {
-            w.Fenetre.SetView(true);
+            w.getFenetreW().SetView(true);
             Fenetre.SetView(false);
             Fenetre.renit();
 
@@ -70,36 +70,36 @@ public class CreationCompte {
         Patient B = new Patient();
         String str = Fenetre.MDPField();
         int buff=0;
-        if (isValidText(Fenetre.NomTextField())){Fenetre.MENOM(false,Fenetre.NomTextField);}else {
+        if (isValidText(Fenetre.NomTextField())){Fenetre.MENOM(false,Fenetre.NomTextField1());}else {
             buff++;
             Fenetre.setNomField("");
-            Fenetre.MENOM(true,Fenetre.NomTextField);}
-        if (isValidEmail(Fenetre.getTextField1())){Fenetre.MEEMAIL(false,Fenetre.textField1);}else {
+            Fenetre.MENOM(true,Fenetre.NomTextField1());}
+        if (isValidEmail(Fenetre.getTextField1())){Fenetre.MEEMAIL(false,Fenetre.getTextField11());}else {
             Fenetre.setEmailField("");
             buff++;
-            Fenetre.MEEMAIL(true,Fenetre.textField1);}
-        if (isValidPassword(str)){Fenetre.MEmdp(false,Fenetre.MDPField);}else{
+            Fenetre.MEEMAIL(true,Fenetre.getTextField11());}
+        if (isValidPassword(str)){Fenetre.MEmdp(false,Fenetre.MDPField1());}else{
             Fenetre.setMdpField("");
             buff++;
-            Fenetre.MEmdp(true,Fenetre.MDPField);}
+            Fenetre.MEmdp(true,Fenetre.MDPField1());}
         if (indice==1){
-            if (isValidText_1(Fenetre.LoginTextField(),Appli,B)){Fenetre.MELOGIN(false,Fenetre.LoginTextField);}else{
+            if (isValidText_1(Fenetre.LoginTextField(),Appli,B)){Fenetre.MELOGIN(false,Fenetre.LoginTextField1());}else{
                 buff++;
                 Fenetre.setLoginTextField("");
-                Fenetre.MELOGIN(true,Fenetre.LoginTextField);}
+                Fenetre.MELOGIN(true,Fenetre.LoginTextField1());}
         }else if (indice==0){
-            if (isValidText_1(Fenetre.LoginTextField(),Appli,A)){Fenetre.MELOGIN(false,Fenetre.LoginTextField);}else{
+            if (isValidText_1(Fenetre.LoginTextField(),Appli,A)){Fenetre.MELOGIN(false,Fenetre.LoginTextField1());}else{
                 buff++;
                 Fenetre.setLoginTextField("");
-                Fenetre.MELOGIN(true,Fenetre.LoginTextField);}
-            if (isValidText(Fenetre.SPEField())){Fenetre.MESPE(false,Fenetre.SPEField);}else{
+                Fenetre.MELOGIN(true,Fenetre.LoginTextField1());}
+            if (isValidText(Fenetre.SPEField())){Fenetre.MESPE(false,Fenetre.SPEField1());}else{
                 buff++;
                 Fenetre.setSPEField("");
-                Fenetre.MESPE(true,Fenetre.SPEField);}
-            if (isValidText(Fenetre.getTextField2())){Fenetre.MEHOP(false,Fenetre.textField2);}else {
+                Fenetre.MESPE(true,Fenetre.SPEField1());}
+            if (isValidText(Fenetre.getTextField2())){Fenetre.MEHOP(false,Fenetre.getTextField22());}else {
                 buff++;
                 Fenetre.sethopField("");
-                Fenetre.MEHOP(true,Fenetre.textField2);}
+                Fenetre.MEHOP(true,Fenetre.getTextField22());}
         }
 
         return buff;
@@ -143,7 +143,7 @@ public class CreationCompte {
         int oui=0;
         if (O.getClass()==Medecin.class)
         {
-            for (Medecin N : App.Med) {
+            for (Medecin N : App.getMed()) {
                 if (Objects.equals(N.Get_log(), obj))
                 {
                     oui=1;
@@ -154,7 +154,7 @@ public class CreationCompte {
         }
         else
         {
-            for (Patient N : App.Pat)
+            for (Patient N : App.getPat())
             {
                 if (Objects.equals(N.Get_log(), obj))
                 {

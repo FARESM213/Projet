@@ -17,17 +17,16 @@ import java.util.List;
 
 public class Application {
 
-    public DaoConnexionInterface maconnexion= new Connexion();
-
-    public final List<Patient> Pat = new ArrayList<>();
-    public final List<Medecin> Med = new ArrayList<>();
-    public final List<Rdv> Rendezvous = new ArrayList<>();
+    private DaoConnexionInterface maconnexion= new Connexion();
+    private final List<Patient> Pat = new ArrayList<>();
+    private final List<Medecin> Med = new ArrayList<>();
+    private final List<Rdv> Rendezvous = new ArrayList<>();
     private int ind;
 
 
-    public Login L =new Login();
-    public Suite sui;
-    public ChangementMdp mot;
+    private Login L =new Login();
+    private Suite sui;
+    private ChangementMdp mot;
 
     public Application() {}
 
@@ -246,7 +245,7 @@ public class Application {
         L.Logt();
         L.getRetourButton().addActionListener(e -> {
             Set_frame(false);
-            w.Fenetre.SetView(true);
+            w.getFenetreW().SetView(true);
         });
         L.getButton1().addActionListener(e -> {
             int trouve=0;
@@ -336,7 +335,7 @@ public class Application {
      public void Set_frame(boolean state)
     {
         L.SetView(state);
-        L.passwordField1.setText("");
+        L.getPasswordField().setText("");
     }
 
      public void Loggg()
@@ -351,5 +350,50 @@ public class Application {
                 ", Med=" + Med +
                 ", Rendezvous=" + Rendezvous +
                 '}';
+    }
+
+
+    public List<Medecin> getMed() {
+        return Med;
+    }
+
+    public List<Patient> getPat() {
+        return Pat;
+    }
+
+    public List<Rdv> getRendezvous() {
+        return Rendezvous;
+    }
+
+    public DaoConnexionInterface getMaconnexion() {
+        return maconnexion;
+    }
+
+    public void decomander(Rdv O)
+    {
+        try {
+
+            LocalTime time = LocalTime.now(ZoneId.systemDefault());
+            int h =time.getHour();
+            if (O.Get_date().compareTo(LocalDate.now())>0)
+            {
+                maconnexion.ExecuteRequest("UPDATE Rendez_vous SET etat='1' WHERE rdvno='"+O.Get_id()+"' ");
+                maconnexion.ExecuteRequest("UPDATE Rendez_vous SET patno='0' WHERE rdvno='"+O.Get_id()+"' ");
+                maconnexion.ExecuteRequest("UPDATE Rendez_vous SET rdv_motif=' ' WHERE rdvno='"+O.Get_id()+"' ");
+                maconnexion.ExecuteRequest("UPDATE Rendez_vous SET rdv_duree='0' WHERE rdvno='"+O.Get_id()+"' ");
+            }
+            else if (O.Get_date().compareTo(LocalDate.now())==0)
+            {
+                if (O.Get_horaire()>h)
+                {
+                    maconnexion.ExecuteRequest("UPDATE Rendez_vous SET etat='1' WHERE rdvno='"+O.Get_id()+"' ");
+                    maconnexion.ExecuteRequest("UPDATE Rendez_vous SET patno='0' WHERE rdvno='"+O.Get_id()+"' ");
+                    maconnexion.ExecuteRequest("UPDATE Rendez_vous SET rdv_motif=' ' WHERE rdvno='"+O.Get_id()+"' ");
+                    maconnexion.ExecuteRequest("UPDATE Rendez_vous SET rdv_duree='0' WHERE rdvno='"+O.Get_id()+"' ");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

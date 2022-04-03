@@ -14,7 +14,7 @@ import java.util.Objects;
 
 public class PriseRendezVous
 {
-    Fenetre_PriseRdv Fenetre;
+    private Fenetre_PriseRdv Fenetre;
     public PriseRendezVous(int a, Application App, Rdv O, Suite s,Object P) throws ParseException {
 
         Fenetre =new Fenetre_PriseRdv(a,App,O,P);
@@ -30,7 +30,7 @@ public class PriseRendezVous
                     App.Update_Rdv(O,Integer.parseInt(B),Fenetre.getTextField3().getText(),P);
                     Fenetre.SetView(false);
                     App.init();
-                    s.Fenetre.SetView(true,App);
+                    s.getFenetre().SetView(true,App);
                     Fenetre.renit();
 
                 } catch (SQLException | ClassNotFoundException ex) {
@@ -50,7 +50,7 @@ public class PriseRendezVous
 
                     int trouver=0;
 
-                    for (Rdv N :App.Rendezvous)
+                    for (Rdv N :App.getRendezvous())
                     {
                         if (Objects.equals(N.Get_date(), date1))
                         {
@@ -68,10 +68,10 @@ public class PriseRendezVous
                         {
                             if (horaire > LocalTime.now().getHour())
                             {
-                                App.AjouterRdv(App.Rendezvous.get(App.Rendezvous.size()-1).Get_id()+1,((Medecin)P).Get_id(),0,date1,((Medecin)P).getHopital(),null,Fenetre.getTextField3().getText(),0,horaire,false);
+                                App.AjouterRdv(App.getRendezvous().get(App.getRendezvous().size()-1).Get_id()+1,((Medecin)P).Get_id(),0,date1,((Medecin)P).getHopital(),null,Fenetre.getTextField3().getText(),0,horaire,false);
                                 Fenetre.SetView(false);
                                 App.init();
-                                s.Fenetre.SetView(true,App);
+                                s.getFenetre().SetView(true,App);
                                 Fenetre.renit();
                             }
                             else
@@ -81,10 +81,10 @@ public class PriseRendezVous
                         }
                         else if (date1.compareTo(date)>0)
                         {
-                            App.AjouterRdv(App.Rendezvous.get(App.Rendezvous.size()-1).Get_id()+1,((Medecin)P).Get_id(),0,date1,((Medecin)P).getHopital(),null,Fenetre.getTextField3().getText(),0,horaire,false);
+                            App.AjouterRdv(App.getRendezvous().get(App.getRendezvous().size()-1).Get_id()+1,((Medecin)P).Get_id(),0,date1,((Medecin)P).getHopital(),null,Fenetre.getTextField3().getText(),0,horaire,false);
                             Fenetre.SetView(false);
                             App.init();
-                            s.Fenetre.SetView(true,App);
+                            s.getFenetre().SetView(true,App);
                             Fenetre.renit();
                         }
                         else
@@ -106,8 +106,12 @@ public class PriseRendezVous
         });
         Fenetre.getAnnulerButton().addActionListener(e -> {
             Fenetre.SetView(false);
-            s.Fenetre.SetView(true,App);
+            s.getFenetre().SetView(true,App);
             Fenetre.renit();
         });
+    }
+
+    public Fenetre_PriseRdv getFenetre() {
+        return Fenetre;
     }
 }

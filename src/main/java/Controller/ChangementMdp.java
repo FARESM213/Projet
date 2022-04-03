@@ -7,16 +7,16 @@ import java.util.Objects;
 
 public class ChangementMdp {
 
-    int trouve=-1;
-    int id=0;
-    String mdp="";
+    private int trouve=-1;
+    private int id=0;
+    private String mdp="";
 
-    Fenetre_Mdp F= new Fenetre_Mdp();
+    private Fenetre_Mdp F= new Fenetre_Mdp();
 
     public ChangementMdp(Application App) throws SQLException, ClassNotFoundException {
         F.Suu();
         F.getButton1().addActionListener(e -> {
-            for ( Patient N : App.Pat)
+            for ( Patient N : App.getPat())
             {
                 if  ( (Objects.equals(N.Get_nom(),F.getTextField1()) ))
                 {
@@ -44,7 +44,7 @@ public class ChangementMdp {
                     case 1 : {
                         if (F.Fenetre_confirm()==0)
                         {
-                            App.maconnexion.UpdateElement("Patient","patpassword",mdp,F.getPasswordField1(),"patno",id);
+                            App.getMaconnexion().UpdateElement("Patient","patpassword",mdp,F.getPasswordField1(),"patno",id);
                             F.setMDP(false);
                             App.init();
                             App.Set_frame(true);

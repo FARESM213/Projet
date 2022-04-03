@@ -13,7 +13,6 @@ public class Rdv {
     private int rdv_duree;
     private int rdv_horaire;
     private boolean etat;
-
     private String  Type;
 
 

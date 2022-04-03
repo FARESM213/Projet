@@ -11,7 +11,7 @@ public class Fenetre_Welcome2{
     private JPanel P;
     private JLabel Crr;
     private JButton retourButton;
-    static JFrame Welcome2 = new JFrame("Welcome");
+    static private JFrame Welcome2 = new JFrame("Welcome");
 
 
     public Fenetre_Welcome2() {

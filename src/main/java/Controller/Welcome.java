@@ -3,11 +3,14 @@
 package Controller;
 
 import View.Fenetre_Welcome;
+
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Welcome {
 
-    public final Fenetre_Welcome Fenetre= new  Fenetre_Welcome();
+    private final Fenetre_Welcome Fenetre= new  Fenetre_Welcome();
 
     public  static void main(String[] s)  {
         new Welcome();
@@ -35,4 +38,7 @@ public class Welcome {
 
     }
 
+    public Fenetre_Welcome getFenetre() {
+        return Fenetre;
+    }
 }

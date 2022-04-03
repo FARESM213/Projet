@@ -6,14 +6,14 @@ import java.awt.*;
 public class Fenetre_Creat {
 
     private JPanel j;
-    public JTextField LoginTextField;
-    public JTextField NomTextField;
+    private JTextField LoginTextField;
+    private JTextField NomTextField;
     private JButton creerButton;
-    public JPasswordField MDPField;
-    public JTextField SPEField;
+    private JPasswordField MDPField;
+    private JTextField SPEField;
     private JPanel IFMEDECIN;
-    public JTextField textField1;
-    public JTextField textField2;
+    private JTextField textField1;
+    private JTextField textField2;
     private JLabel loginME;
     private JLabel MDPME;
     private JLabel emailME;
@@ -86,6 +86,25 @@ public class Fenetre_Creat {
     }
     public String getTextField2() {
         return textField2.getText();
+    }
+
+    public JTextField LoginTextField1() {
+         return LoginTextField;
+    }
+    public JTextField SPEField1() {
+        return SPEField;
+    }
+    public JTextField NomTextField1() {
+        return NomTextField;
+    }
+    public JPasswordField MDPField1() {
+        return MDPField;
+    }
+    public JTextField getTextField11() {
+        return textField1;
+    }
+    public JTextField getTextField22() {
+        return textField2;
     }
 
     public void setLoginTextField(String log) {LoginTextField.setText(log);}

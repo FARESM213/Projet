@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class Welcome2 {
 
-    final Fenetre_Welcome2 Fenetre= new Fenetre_Welcome2();
+    final private Fenetre_Welcome2 Fenetre= new Fenetre_Welcome2();
 
     public Welcome2(int indice, Welcome welcome) throws SQLException, ClassNotFoundException {
 
@@ -31,7 +31,10 @@ public class Welcome2 {
 
         Fenetre.getRetourButton().addActionListener(e -> {
             Fenetre.SetView(false);
-            welcome.Fenetre.SetView(true);
+            welcome.getFenetre().SetView(true);
         });
 }
+    public Fenetre_Welcome2 getFenetreW() {
+        return Fenetre;
+    }
 }

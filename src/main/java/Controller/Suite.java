@@ -14,8 +14,7 @@ import java.util.Date;
 
 public class Suite {
 
-    public Fenetre_Suite Fenetre = new Fenetre_Suite();
-
+    private Fenetre_Suite Fenetre = new Fenetre_Suite();
     public Suite(Application App, int i,Object A) throws SQLException, ClassNotFoundException
     {
         Suite S= this;
@@ -132,14 +131,7 @@ public class Suite {
         });
 
         Fenetre.getAnnulerButton().addActionListener(e -> {
-
-            Fenetre.getGroup().clearSelection();
-            Fenetre.getGroup2().clearSelection();
-            Fenetre.getDlm().clear();
-            Fenetre.getListe().setModel(Fenetre.getDlm());
-            Fenetre.getTextArea1().setText("");
-            Fenetre.ResetButton();
-
+            REnit();
         });
         Fenetre.getConsulterProfilButton().addActionListener(e -> {
             try {
@@ -149,7 +141,7 @@ public class Suite {
             }
             Fenetre.setSuite(false);
             Profil F = new Profil(App,A,S);
-            F.Fenetre.SetView(true);
+            F.getFenetre().SetView(true);
         });
         Fenetre.getStatistiquesButton().addActionListener(e->{
 
@@ -160,11 +152,11 @@ public class Suite {
 
         Fenetre.getReserverButton().addActionListener(e -> {
 
-            /*try {
+            try {
                 App.init();
             } catch (SQLException | ClassNotFoundException ex) {
                 ex.printStackTrace();
-            }*/
+            }
 
             if (A.getClass()== Patient.class)
             {
@@ -177,9 +169,9 @@ public class Suite {
                     try {
                         Fenetre.setSuite(false);
                         PriseRendezVous F =new PriseRendezVous(i,App,Fenetre.getListe().getSelectedValue(),S,A);
-                        F.Fenetre.getPrendreLeRendezVousButton().setText("Prendre le Rendez-vous");
+                        F.getFenetre().getPrendreLeRendezVousButton().setText("Prendre le Rendez-vous");
                         Fenetre.getTextArea1().setText("");
-                        F.Fenetre.SetView(true);
+                        F.getFenetre().SetView(true);
                     } catch (ParseException ex) {
                         ex.printStackTrace();
                     }
@@ -190,8 +182,8 @@ public class Suite {
                     try {
                         Fenetre.setSuite(false);
                         PriseRendezVous F =new PriseRendezVous(i,App,null,S,A);
-                        F.Fenetre.getPrendreLeRendezVousButton().setText("Creer le creneau");
-                        F.Fenetre.SetView(true);
+                        F.getFenetre().getPrendreLeRendezVousButton().setText("Creer le creneau");
+                        F.getFenetre().SetView(true);
                     } catch (ParseException ex) {
                         ex.printStackTrace();
                     }
@@ -207,5 +199,17 @@ public class Suite {
             }
         });
     }
+    public Fenetre_Suite getFenetre() {
+        return Fenetre;
+    }
 
+    void REnit ()
+    {
+        Fenetre.getGroup().clearSelection();
+        Fenetre.getGroup2().clearSelection();
+        Fenetre.getDlm().clear();
+        Fenetre.getListe().setModel(Fenetre.getDlm());
+        Fenetre.getTextArea1().setText("");
+        Fenetre.ResetButton();
+    }
 }

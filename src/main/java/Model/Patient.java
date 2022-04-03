@@ -6,7 +6,6 @@ public class Patient {
     private String login_patient;
     private String mdp_patient;
     private String email_patient;
-
     private byte[] image;
 
 

@@ -4,9 +4,14 @@ import Model.Medecin;
 import Model.Patient;
 import Model.Rdv;
 import View.Fenetre_Profil;
+import View.Fenetre_Suite;
+
 import javax.swing.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,8 +19,8 @@ import java.lang.String;
 
 public class Profil
 {
-    public Fenetre_Profil Fenetre= new Fenetre_Profil();
-    Application Appli = new Application();
+    private Fenetre_Profil Fenetre= new Fenetre_Profil();
+    private Application Appli = new Application();
     public Profil(Application App, Object P,Suite S)
     {
         Fenetre.Suu(App, P);
@@ -44,7 +49,7 @@ public class Profil
         Fenetre.getModifierInformationsButton().addActionListener(e -> Fenetre.Visible(P));
         Fenetre.getRetourButton().addActionListener(e -> {
             Fenetre.SetView(false);
-            S.Fenetre.setSuite(true);
+            S.getFenetre().setSuite(true);
         });
         Fenetre.getAfficherRdvRadioButton().addActionListener(e -> Fenetre.radio(App,P));
 
@@ -81,14 +86,14 @@ public class Profil
                 }}
 
             }
-           /* try {
+            try {
                 App.init();
             } catch (SQLException | ClassNotFoundException ex) {
                 ex.printStackTrace();
             }
 
             Fenetre.SetView(false);
-            S.Fenetre.setSuite(true);*/
+            S.getFenetre().setSuite(true);
         });
 
         Fenetre.getchoisirUneImageButton().addActionListener(e -> {
@@ -96,7 +101,7 @@ public class Profil
             {
                 try
                 {
-                    App.maconnexion.UpdateImage("Patient","Image","","","patno",((Patient) P).Get_id(),P);
+                    App.getMaconnexion().UpdateImage("Patient","Image","","","patno",((Patient) P).Get_id(),P);
                     App.init();
                     Fenetre.renit(P);
                 } catch (SQLException | ClassNotFoundException | IOException ex) {
@@ -106,7 +111,7 @@ public class Profil
             else
             {
                 try {
-                    App.maconnexion.UpdateImage("Medecin","Image","","","medno",((Medecin) P).Get_id(),P);
+                    App.getMaconnexion().UpdateImage("Medecin","Image","","","medno",((Medecin) P).Get_id(),P);
                     App.init();
                     Fenetre.renit(P);
                 } catch (SQLException | ClassNotFoundException | IOException ex) {
@@ -118,52 +123,80 @@ public class Profil
         Fenetre.getSupprimerRdvButton().addActionListener(e -> {
 
             Rdv A = (Rdv) Fenetre.getList1().getSelectedValue();
-            try {
-                App.SuppRdv(A);
-                App.init();
+            if(P.getClass()==Medecin.class)
+            {
+                try {
+                    App.SuppRdv(A);
+                    App.init();
+                    DefaultListModel model = (DefaultListModel) Fenetre.getList1().getModel();
+                    int selectedIndex = Fenetre.getList1().getSelectedIndex();
+                    if (selectedIndex != -1) {
+                        model.remove(selectedIndex);
+                    }
+                } catch (SQLException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            else
+            {
+                LocalTime time = LocalTime.now(ZoneId.systemDefault());
+                int h =time.getHour();
+                if (  (A.Get_date().compareTo(LocalDate.now())>0) || (  (A.Get_date().compareTo(LocalDate.now())==0) && (A.Get_horaire()>h)  )   )
+                {
+                    App.decomander(A);
+                }
+                else
+                {
+                    try {
+                        App.SuppRdv(A);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                try {
+                    App.init();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
                 DefaultListModel model = (DefaultListModel) Fenetre.getList1().getModel();
                 int selectedIndex = Fenetre.getList1().getSelectedIndex();
                 if (selectedIndex != -1) {
                     model.remove(selectedIndex);
                 }
-            } catch (SQLException | ClassNotFoundException ex) {
-                ex.printStackTrace();
             }
+
         });
 
-
-
+        S.REnit();
     }
-
     public int ISVALID(int indice){
         Medecin A = new Medecin();
         Patient B = new Patient();
         String str = Fenetre.getMdp();
         int buff=0;
-        if (isValidText(Fenetre.getNom())){Fenetre.MessNOM(false,Fenetre.Nom);}else {
+        if (isValidText(Fenetre.getNom())){Fenetre.MessNOM(false,Fenetre.getNom1());}else {
             buff++;
-            Fenetre.MessNOM(true,Fenetre.Nom);}
-        if (isValidEmail(Fenetre.getEmail())){Fenetre.MessEMAIL(false,Fenetre.Email);}else {
+            Fenetre.MessNOM(true,Fenetre.getNom1());}
+        if (isValidEmail(Fenetre.getEmail())){Fenetre.MessEMAIL(false,Fenetre.getEmail1());}else {
             buff++;
-            Fenetre.MessEMAIL(true,Fenetre.Email);}
-        if (isValidPassword(str)){Fenetre.Messmdp(false,Fenetre.mdp);}else{
+            Fenetre.MessEMAIL(true,Fenetre.getEmail1());}
+        if (isValidPassword(str)){Fenetre.Messmdp(false,Fenetre.getMdp1());}else{
             buff++;
-            Fenetre.Messmdp(true,Fenetre.mdp);}
+            Fenetre.Messmdp(true,Fenetre.getMdp1());}
         if (indice==1){
-            if (isValidText_1(Fenetre.getLogin(),Appli,B)){Fenetre.MessLOGIN(false,Fenetre.Login);}else{
+            if (isValidText_1(Fenetre.getLogin(),Appli,B)){Fenetre.MessLOGIN(false,Fenetre.getLogin1());}else{
                 buff++;
-                Fenetre.MessLOGIN(true,Fenetre.Login);}
+                Fenetre.MessLOGIN(true,Fenetre.getLogin1());}
         }else if (indice==0){
-            if (isValidText_1(Fenetre.getLogin(),Appli,A)){Fenetre.MessLOGIN(false,Fenetre.Login);}else{
+            if (isValidText_1(Fenetre.getLogin(),Appli,A)){Fenetre.MessLOGIN(false,Fenetre.getLogin1());}else{
                 buff++;
-                Fenetre.MessLOGIN(true,Fenetre.Login);}
-            if (isValidText(Fenetre.getSpec())){Fenetre.MessSPE(false,Fenetre.Spec);}else{
+                Fenetre.MessLOGIN(true,Fenetre.getLogin1());}
+            if (isValidText(Fenetre.getSpec())){Fenetre.MessSPE(false,Fenetre.getSpec1());}else{
                 buff++;
-                Fenetre.MessSPE(true,Fenetre.Spec);}
-            if (isValidText(Fenetre.getHospi())){Fenetre.MessHOP(false,Fenetre.hospi);}else {
+                Fenetre.MessSPE(true,Fenetre.getSpec1());}
+            if (isValidText(Fenetre.getHospi())){Fenetre.MessHOP(false,Fenetre.getHospi1());}else {
                 buff++;
-                Fenetre.MessHOP(true,Fenetre.hospi);}
-
+                Fenetre.MessHOP(true,Fenetre.getHospi1());}
         }
 
         return buff;
@@ -176,7 +209,7 @@ public class Profil
         int oui=0;
         if (O.getClass()==Medecin.class)
         {
-            for (Medecin N : App.Med) {
+            for (Medecin N : App.getMed()) {
                 if (Objects.equals(N.Get_log(), obj))
                 {
                     oui=1;
@@ -187,7 +220,7 @@ public class Profil
         }
         else
         {
-            for (Patient N : App.Pat)
+            for (Patient N : App.getPat())
             {
                 if (Objects.equals(N.Get_log(), obj))
                 {
@@ -239,4 +272,8 @@ public class Profil
         // matched the ReGex
 
         return m.matches();}
+
+    public Fenetre_Profil getFenetre() {
+        return Fenetre;
+    }
 }

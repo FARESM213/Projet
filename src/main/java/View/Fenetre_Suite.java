@@ -35,10 +35,10 @@ public class Fenetre_Suite {
     private JLabel hopitalLabel;
     private JLabel dateLabel;
     private JLabel filtreLabel;
-    ButtonGroup group2 = new ButtonGroup();
+    private ButtonGroup group2 = new ButtonGroup();
 
     public static JFrame Suite = new JFrame("Principale");
-    ButtonGroup group = new ButtonGroup();
+    private ButtonGroup group = new ButtonGroup();
 
 
     DefaultListModel<Rdv> dlm = new DefaultListModel<>();
@@ -77,10 +77,10 @@ public class Fenetre_Suite {
     public void setDlm(String whouere, Application App) throws SQLException {
         ResultSet rs;
         dlm.clear();
-        rs=App.maconnexion.Search("rendez_vous","rdvno",whouere);
+        rs=App.getMaconnexion().Search("rendez_vous","rdvno",whouere);
         while (rs.next())
         {
-            for(Rdv N : App.Rendezvous )
+            for(Rdv N : App.getRendezvous() )
             {
                 if (rs.getInt(1)==N.Get_id())
                 {
@@ -101,12 +101,12 @@ public class Fenetre_Suite {
                 String Medecin="";
                 if (list1.getSelectedValue()!=null)
                 {
-                    for (Model.Patient N :App.Pat)
+                    for (Model.Patient N :App.getPat())
                     {
                         if(list1.getSelectedValue().Get_pat()==N.Get_id())
                             Patient=N.Get_nom();
                     }
-                    for (Medecin N :App.Med)
+                    for (Medecin N :App.getMed())
                     {
                         if(list1.getSelectedValue().Get_med()==N.Get_id())
                             Medecin=N.Get_nom();
@@ -216,7 +216,7 @@ public class Fenetre_Suite {
         group2.add(duRadioButton);
         group2.add(toutLesRendezVousRadioButton);
 
-        for(Medecin N : App.Med)
+        for(Medecin N : App.getMed())
         {
             Med_cin.addItem(N);
             comboBox1.addItem(N.getHopital());

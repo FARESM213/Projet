@@ -10,7 +10,7 @@ public class Fenetre_Mdp {
     private JTextField textField1;
     private JPasswordField passwordField1;
     private JPasswordField passwordField2;
-    static JFrame MDP = new JFrame("Mot de passe ");
+    static private JFrame MDP = new JFrame("Mot de passe ");
 
     public Fenetre_Mdp(){}
 

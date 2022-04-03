@@ -18,13 +18,14 @@ import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 public class PieChartExample extends JFrame {
+
     private static final long serialVersionUID = 6294689542092367723L;
 
     public PieChartExample(String title,Application App) throws SQLException
     {
         super(title);
         PieDataset dataset = createDataset(App);
-        JFreeChart chart = ChartFactory.createPieChart("Repartition des rendez_vous  : ("+App.Rendezvous.size()+")", dataset, true, true, false);
+        JFreeChart chart = ChartFactory.createPieChart("Repartition des rendez_vous  : ("+App.getRendezvous().size()+")", dataset, true, true, false);
         PieSectionLabelGenerator labelGenerator = new StandardPieSectionLabelGenerator(" {0} : ({2})", new DecimalFormat("0"), new DecimalFormat("0%"));
         ((PiePlot) chart.getPlot()).setLabelGenerator(labelGenerator);
         ChartPanel panel = new ChartPanel(chart);
@@ -40,7 +41,7 @@ public class PieChartExample extends JFrame {
         DefaultPieDataset dataset=new DefaultPieDataset();
 
         ArrayList<Object> Localite;
-        Localite=App.maconnexion.Selection_distinct("Rendez_vous","loc");
+        Localite=App.getMaconnexion().Selection_distinct("Rendez_vous","loc");
         ArrayList<Integer> Types = new ArrayList<>();
         for (int i=0;i<Localite.size();i++)
         {
@@ -48,7 +49,7 @@ public class PieChartExample extends JFrame {
         }
         for (int i=0;i<Localite.size();i++)
         {
-            for (Rdv N :App.Rendezvous)
+            for (Rdv N :App.getRendezvous())
             {
                 if (Objects.equals(N.Get_lieu(), Localite.get(i)))
                 {

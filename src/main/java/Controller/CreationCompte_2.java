@@ -35,8 +35,7 @@ public class CreationCompte_2 {
             });
 
         } else if(indice==1){//PATIENT
-
-           Fenetre.creerButton().addActionListener(e ->
+            Fenetre.creerButton().addActionListener(e ->
             {
                 String str = Fenetre.MDPField();
                 int buff=ISVALID(indice,App);
@@ -51,7 +50,6 @@ public class CreationCompte_2 {
                     catch (MessagingException | IOException ex) {ex.printStackTrace();}
                     Fenetre.SetView(false);}
             });
-
 
         }
         Fenetre.getRetourButton().addActionListener(e -> {
@@ -68,38 +66,36 @@ public class CreationCompte_2 {
         Patient B = new Patient();
         String str = Fenetre.MDPField();
         int buff=0;
-        if (isValidText(Fenetre.NomTextField())){Fenetre.MENOM(false,Fenetre.NomTF);}else {
+        if (isValidText(Fenetre.NomTextField())){Fenetre.MENOM(false,Fenetre.getNomTF());}else {
             buff++;
             Fenetre.setNomField("");
-            Fenetre.MENOM(true,Fenetre.NomTF);}
-        if (isValidEmail(Fenetre.getTextField1())){Fenetre.MEEMAIL(false,Fenetre.EmailTF);}else {
+            Fenetre.MENOM(true,Fenetre.getNomTF());}
+        if (isValidEmail(Fenetre.getTextField1())){Fenetre.MEEMAIL(false,Fenetre.getEmailTF());}else {
             Fenetre.setEmailField("");
             buff++;
-            Fenetre.MEEMAIL(true,Fenetre.EmailTF);}
-        if (isValidPassword(str)){Fenetre.MEmdp(false,Fenetre.MDPTF);}else{
+            Fenetre.MEEMAIL(true,Fenetre.getEmailTF());}
+        if (isValidPassword(str)){Fenetre.MEmdp(false,Fenetre.getMDPTF());}else{
             Fenetre.setMdpField("");
             buff++;
-            Fenetre.MEmdp(true,Fenetre.MDPTF);}
+            Fenetre.MEmdp(true,Fenetre.getMDPTF());}
         if (indice==1){
-            if (isValidText_1(Fenetre.LoginTextField(),Appli,B)){Fenetre.MELOGIN(false,Fenetre.LoginTF);}else{
+            if (isValidText_1(Fenetre.LoginTextField(),Appli,B)){Fenetre.MELOGIN(false,Fenetre.getLoginTF());}else{
                 buff++;
                 Fenetre.setLoginTextField("");
-                Fenetre.MELOGIN(true,Fenetre.LoginTF);
-                Fenetre.setLoginTextField("");}
+                Fenetre.MELOGIN(true,Fenetre.getLoginTF());}
         }else if (indice==0){
-            if (isValidText_1(Fenetre.LoginTextField(),Appli,A)){Fenetre.MELOGIN(false,Fenetre.LoginTF);}else{
+            if (isValidText_1(Fenetre.LoginTextField(),Appli,A)){Fenetre.MELOGIN(false,Fenetre.getLoginTF());}else{
                 buff++;
                 Fenetre.setLoginTextField("");
-                Fenetre.MELOGIN(true,Fenetre.LoginTF);
-                Fenetre.setLoginTextField("");}
-            if (isValidText(Fenetre.SPEField())){Fenetre.MESPE(false,Fenetre.SPETF);}else{
+                Fenetre.MELOGIN(true,Fenetre.getLoginTF());}
+            if (isValidText(Fenetre.SPEField())){Fenetre.MESPE(false,Fenetre.getSPETF());}else{
                 buff++;
                 Fenetre.setSPEField("");
-                Fenetre.MESPE(true,Fenetre.SPETF);}
-            if (isValidText(Fenetre.getTextField2())){Fenetre.MEHOP(false,Fenetre.HopiTF);}else {
+                Fenetre.MESPE(true,Fenetre.getSPETF());}
+            if (isValidText(Fenetre.getTextField2())){Fenetre.MEHOP(false,Fenetre.getHopiTF());}else {
                 buff++;
                 Fenetre.sethopField("");
-                Fenetre.MEHOP(true,Fenetre.HopiTF);}
+                Fenetre.MEHOP(true,Fenetre.getHopiTF());}
 
         }
 
@@ -135,7 +131,7 @@ public class CreationCompte_2 {
             int oui=0;
             if (O.getClass()==Medecin.class)
             {
-                for (Medecin N : App.Med) {
+                for (Medecin N : App.getMed()) {
                     if (Objects.equals(N.Get_log(), obj))
                     {
                         oui=1;
@@ -146,7 +142,7 @@ public class CreationCompte_2 {
             }
             else
             {
-                for (Patient N : App.Pat)
+                for (Patient N : App.getPat())
                 {
                     if (Objects.equals(N.Get_log(), obj))
                     {

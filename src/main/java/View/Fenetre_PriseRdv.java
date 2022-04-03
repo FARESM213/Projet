@@ -40,7 +40,7 @@ public class Fenetre_PriseRdv {
     private JLabel Labelll;
     private JPanel Pannnnel;
 
-    static JFrame Suite = new JFrame("Prise de Rendez-vous");
+    static private JFrame Suite = new JFrame("Prise de Rendez-vous");
 
     public Fenetre_PriseRdv(int indice, Application App, Rdv O,Object M) throws ParseException
     {
@@ -108,7 +108,7 @@ public class Fenetre_PriseRdv {
         if (M.getClass()== Patient.class)
         {
             String nom="";
-            for (Medecin N:App.Med) {
+            for (Medecin N:App.getMed()) {
              
                 if (N.Get_id()==O.Get_med())
                 {
@@ -123,7 +123,7 @@ public class Fenetre_PriseRdv {
             prendreLeRendezVousButton.setText("Prendre le Rendez-vous");
 
             int min=3;
-            for (Rdv N :App.Rendezvous)
+            for (Rdv N :App.getRendezvous())
             {
                 if (Objects.equals(N.Get_date(), O.Get_date()) &&(N.Get_horaire()>O.Get_horaire()) && (N.Get_id()!=O.Get_id()))
                 {
@@ -141,7 +141,7 @@ public class Fenetre_PriseRdv {
         }
         else
         {
-            int nom=App.Rendezvous.get(App.Rendezvous.size()-1).Get_id()+1;
+            int nom=App.getRendezvous().get(App.getRendezvous().size()-1).Get_id()+1;
             nmrLabel.setText(String.valueOf(nom));
             mdcLabel.setText(((Medecin)M).Get_nom());
             dtLabel.setVisible(false);

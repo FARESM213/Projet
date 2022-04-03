@@ -5,12 +5,12 @@ import java.awt.*;
 
 public class Login extends JPanel{
 
-    public  JPanel PannelMain;
+    private  JPanel PannelMain;
     public JFrame Log = new JFrame("Login");
 
-    public JButton button1;
-    public JTextField textField1;
-    public JPasswordField passwordField1;
+    private JButton button1;
+    private JTextField textField1;
+    private JPasswordField passwordField1;
     private JLabel Img;
     private JButton retourButton;
 
@@ -78,5 +78,9 @@ public class Login extends JPanel{
 
     private void createUIComponents() {
         Img= new JLabel(Resize("Images\\Medecin.jpg",300,300));
+    }
+
+    public JPasswordField getPasswordField() {
+        return  passwordField1;
     }
 }

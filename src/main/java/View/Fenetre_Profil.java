@@ -17,12 +17,12 @@ public class Fenetre_Profil
 {
     private JPanel T;
     private JButton supprimerCompteButton;
-    public JTextField Nom;
-    public JTextField Login;
-    public JPasswordField mdp;
-    public JTextField hospi;
-    public JTextField Email;
-    public JTextField Spec;
+    private JTextField Nom;
+    private JTextField Login;
+    private JPasswordField mdp;
+    private JTextField hospi;
+    private JTextField Email;
+    private JTextField Spec;
     private JRadioButton afficherRdvRadioButton;
     private JList<Rdv> list1;
     private JTextArea textArea1;
@@ -49,7 +49,7 @@ public class Fenetre_Profil
     private JPanel MEHOP;
     private JScrollPane pennee;
 
-    public static JFrame Suite = new JFrame("Profil");
+    private static JFrame Suite = new JFrame("Profil");
 
     DefaultListModel<Rdv> dlm = new DefaultListModel<>();
     public Fenetre_Profil() {
@@ -262,6 +262,27 @@ public class Fenetre_Profil
         return Spec.getText();
     }
 
+    public JPasswordField getMdp1() {
+        return (mdp);
+    }
+
+    public JTextField getNom1() {
+        return Nom;
+    }
+
+    public JTextField getLogin1() {
+        return Login;
+    }
+
+
+    public JTextField getEmail1() {
+        return Email;
+    }
+
+    public JTextField getSpec1() {
+        return Spec;
+    }
+
     public JRadioButton getAfficherRdvRadioButton() {
         return afficherRdvRadioButton;
     }
@@ -290,6 +311,11 @@ public class Fenetre_Profil
     public String getHospi() {
         return hospi.getText();
     }
+
+    public JTextField getHospi1() {
+        return hospi;
+    }
+
 
     public void radio(Application App, Object O)  {
 
@@ -336,10 +362,10 @@ public class Fenetre_Profil
     public void setDlm(String whouere, Application App) throws SQLException {
         ResultSet rs;
         dlm.clear();
-        rs=App.maconnexion.Search("rendez_vous","rdvno",whouere);
+        rs=App.getMaconnexion().Search("rendez_vous","rdvno",whouere);
         while (rs.next())
         {
-            for(Rdv N : App.Rendezvous )
+            for(Rdv N : App.getRendezvous() )
             {
                 if (rs.getInt(1)==N.Get_id())
                 {
@@ -359,12 +385,12 @@ public class Fenetre_Profil
                 String Medecin="";
                 if (list1.getSelectedValue()!=null)
                 {
-                    for (Model.Patient N :App.Pat)
+                    for (Model.Patient N :App.getPat())
                     {
                         if(list1.getSelectedValue().Get_pat()==N.Get_id())
                             Patient=N.Get_nom();
                     }
-                    for (Medecin N :App.Med)
+                    for (Medecin N :App.getMed())
                     {
                         if(list1.getSelectedValue().Get_med()==N.Get_id())
                             Medecin=N.Get_nom();
