@@ -63,14 +63,29 @@ public class PriseRendezVous
 
                     if(trouver==0)
                     {
-                        if (horaire > LocalTime.now().getHour())
+                        LocalDate date = LocalDate.now();
+                        if (Objects.equals(date, date1))
+                        {
+                            if (horaire > LocalTime.now().getHour())
+                            {
+                                App.AjouterRdv(App.Rendezvous.get(App.Rendezvous.size()-1).Get_id()+1,((Medecin)P).Get_id(),0,date1,((Medecin)P).getHopital(),null,Fenetre.getTextField3().getText(),0,horaire,false);
+                                Fenetre.SetView(false);
+                                App.init();
+                                s.Fenetre.SetView(true,App);
+                                Fenetre.renit();
+                            }
+                            else
+                            {
+                                Fenetre.Erreur_2();
+                            }
+                        }
+                        else if (date1.compareTo(date)>0)
                         {
                             App.AjouterRdv(App.Rendezvous.get(App.Rendezvous.size()-1).Get_id()+1,((Medecin)P).Get_id(),0,date1,((Medecin)P).getHopital(),null,Fenetre.getTextField3().getText(),0,horaire,false);
                             Fenetre.SetView(false);
                             App.init();
                             s.Fenetre.SetView(true,App);
                             Fenetre.renit();
-
                         }
                         else
                         {
