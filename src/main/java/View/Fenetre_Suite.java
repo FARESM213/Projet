@@ -7,8 +7,6 @@ import Model.Rdv;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -39,51 +37,39 @@ public class Fenetre_Suite {
     private JLabel filtreLabel;
     ButtonGroup group2 = new ButtonGroup();
 
-    public static JFrame Suite = new JFrame("Suite");
+    public static JFrame Suite = new JFrame("Principale");
     ButtonGroup group = new ButtonGroup();
 
 
     DefaultListModel<Rdv> dlm = new DefaultListModel<>();
 
     public Fenetre_Suite() {
-        toutLesRendezVousRadioButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            SetIcons(toutLesRendezVousRadioButton,toutLesRendezVousRadioButton.isSelected());
-            SetIcons(duRadioButton,duRadioButton.isSelected());
-            }
-        });
-        duRadioButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                SetIcons(duRadioButton,duRadioButton.isSelected());
-                SetIcons(toutLesRendezVousRadioButton,toutLesRendezVousRadioButton.isSelected());
-            }
-        });
-        libreRadioButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                SetIcons(libreRadioButton,libreRadioButton.isSelected());
-                SetIcons(reserveRadioButton,reserveRadioButton.isSelected());
-                SetIcons(passeRadioButton,passeRadioButton.isSelected());
 
-            }
+        Suite.setIconImage(Resize("Images\\Medecin.jpg",20,20).getImage());
+
+        toutLesRendezVousRadioButton.addActionListener(e -> {
+        SetIcons(toutLesRendezVousRadioButton,toutLesRendezVousRadioButton.isSelected());
+        SetIcons(duRadioButton,duRadioButton.isSelected());
         });
-        reserveRadioButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                SetIcons(libreRadioButton,libreRadioButton.isSelected());
-                SetIcons(reserveRadioButton,reserveRadioButton.isSelected());
-                SetIcons(passeRadioButton,passeRadioButton.isSelected());
-            }
+        duRadioButton.addActionListener(e -> {
+            SetIcons(duRadioButton,duRadioButton.isSelected());
+            SetIcons(toutLesRendezVousRadioButton,toutLesRendezVousRadioButton.isSelected());
         });
-        passeRadioButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                SetIcons(libreRadioButton,libreRadioButton.isSelected());
-                SetIcons(reserveRadioButton,reserveRadioButton.isSelected());
-                SetIcons(passeRadioButton,passeRadioButton.isSelected());
-            }
+        libreRadioButton.addActionListener(e -> {
+            SetIcons(libreRadioButton,libreRadioButton.isSelected());
+            SetIcons(reserveRadioButton,reserveRadioButton.isSelected());
+            SetIcons(passeRadioButton,passeRadioButton.isSelected());
+
+        });
+        reserveRadioButton.addActionListener(e -> {
+            SetIcons(libreRadioButton,libreRadioButton.isSelected());
+            SetIcons(reserveRadioButton,reserveRadioButton.isSelected());
+            SetIcons(passeRadioButton,passeRadioButton.isSelected());
+        });
+        passeRadioButton.addActionListener(e -> {
+            SetIcons(libreRadioButton,libreRadioButton.isSelected());
+            SetIcons(reserveRadioButton,reserveRadioButton.isSelected());
+            SetIcons(passeRadioButton,passeRadioButton.isSelected());
         });
 
     }
@@ -235,10 +221,6 @@ public class Fenetre_Suite {
             Med_cin.addItem(N);
             comboBox1.addItem(N.getHopital());
         }
-    }
-    public  void setButton( String str)
-    {
-        reserveRadioButton.setText(str);
     }
 
     public void setSuite(boolean suite) {

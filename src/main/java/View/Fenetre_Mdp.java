@@ -10,7 +10,7 @@ public class Fenetre_Mdp {
     private JTextField textField1;
     private JPasswordField passwordField1;
     private JPasswordField passwordField2;
-    static JFrame MDP = new JFrame("MDP");
+    static JFrame MDP = new JFrame("Mot de passe ");
 
     public Fenetre_Mdp(){}
 
@@ -21,6 +21,8 @@ public class Fenetre_Mdp {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
+        MDP.setIconImage(new ImageIcon("Images\\Medecin.jpg").getImage());
+
         MDP.setContentPane(Wow);
         MDP.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         MDP.setPreferredSize(new Dimension(300,300));

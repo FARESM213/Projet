@@ -6,10 +6,7 @@ import Model.Rdv;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -42,7 +39,7 @@ public class Fenetre_PriseRdv {
     private JLabel Labelll;
     private JPanel Pannnnel;
 
-    static JFrame Suite = new JFrame("Suite");
+    static JFrame Suite = new JFrame("Prise de Rendez-vous");
 
     public Fenetre_PriseRdv(int indice, Application App, Rdv O,Object M) throws ParseException
     {
@@ -59,6 +56,8 @@ public class Fenetre_PriseRdv {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
+
+        Suite.setIconImage(Resize("Images\\Medecin.jpg",20,20).getImage());
 
         numeroLabel.setIcon(Resize("Images\\number-blocks.png",20,20));
         medecinLabel.setIcon(Resize("Images\\med.png",20,20));
@@ -80,7 +79,7 @@ public class Fenetre_PriseRdv {
         Suite.setVisible(true);
     }
 
-    private void createUIComponents(Application App,Rdv O, int indice,Object M) throws ParseException
+    private void createUIComponents(Application App,Rdv O, int indice,Object M)
     {
         if (indice==1)
         {

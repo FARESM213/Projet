@@ -2,8 +2,6 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Fentre_Creat_2 {
 
@@ -33,7 +31,7 @@ public class Fentre_Creat_2 {
     private JLabel specialiteME;
     private JLabel hopitalME;
 
-    static JFrame Suite = new JFrame("Suite");
+    static JFrame Suite = new JFrame("Creation Compte");
 
     public Fentre_Creat_2() {
     }
@@ -51,6 +49,8 @@ public class Fentre_Creat_2 {
         }
         Suite.add(j, BorderLayout.CENTER);
         Suite.add(panel1, BorderLayout.WEST);
+
+        Suite.setIconImage((Resize("Images\\Medecin.jpg",20,20).getImage()));
 
         retourButton.setIcon(Resize("Images\\return.png",20,20));
         creerButton.setIcon(Resize("Images\\equipe.png",20,20));

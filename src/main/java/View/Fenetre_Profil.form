@@ -417,23 +417,6 @@
           <text value="Mes Rendez_vous : "/>
         </properties>
       </component>
-      <component id="e5348" class="javax.swing.JList" binding="list1" default-binding="true">
-        <constraints>
-          <grid row="17" column="1" row-span="1" col-span="2" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-        </constraints>
-        <properties>
-          <background color="-1"/>
-          <fixedCellHeight value="30"/>
-          <font name="Neumatic Gothic Extra Bold" size="10" style="1"/>
-          <foreground color="-16777216"/>
-          <inheritsPopupMenu value="false"/>
-          <model/>
-          <selectionBackground color="-3026474"/>
-          <selectionForeground color="-16777216"/>
-        </properties>
-      </component>
       <component id="5429d" class="javax.swing.JLabel" binding="tssLabel">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -473,6 +456,33 @@
           <html.disable class="java.lang.Boolean" value="false"/>
         </clientProperties>
       </component>
+      <scrollpane id="8666f" binding="pennee">
+        <constraints>
+          <grid row="17" column="1" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-1"/>
+          <foreground color="-1"/>
+          <inheritsPopupMenu value="false"/>
+          <opaque value="false"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="f6214" class="javax.swing.JList" binding="list1">
+            <constraints/>
+            <properties>
+              <background color="-1"/>
+              <fixedCellHeight value="30"/>
+              <font name="Neumatic Gothic Extra Bold" size="10" style="1"/>
+              <foreground color="-16777216"/>
+              <inheritsPopupMenu value="false"/>
+              <model/>
+              <selectionBackground color="-3026474"/>
+              <selectionForeground color="-16777216"/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
     </children>
   </grid>
 </form>

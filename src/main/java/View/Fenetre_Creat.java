@@ -30,7 +30,7 @@ public class Fenetre_Creat {
     private JPanel panel1;
     private JButton retourButton;
 
-    static JFrame Suite = new JFrame("Suite");
+    static JFrame Suite = new JFrame("Creation compte");
 
     public Fenetre_Creat() {
     }
@@ -42,6 +42,8 @@ public class Fenetre_Creat {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
+
+        Suite.setIconImage(Resize("Images\\Medecin.jpg",20,20).getImage());
 
         creerButton.setIcon(Resize("Images\\equipe.png",20,20));
         retourButton.setIcon(Resize("Images\\return.png",20,20));

@@ -8,8 +8,7 @@ import Model.Rdv;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -48,11 +47,14 @@ public class Fenetre_Profil
     private JPanel MEEMAIL;
     private JPanel MESPE;
     private JPanel MEHOP;
+    private JScrollPane pennee;
 
-    public static JFrame Suite = new JFrame("Suite");
+    public static JFrame Suite = new JFrame("Profil");
 
     DefaultListModel<Rdv> dlm = new DefaultListModel<>();
     public Fenetre_Profil() {
+
+        Suite.setIconImage(Resize("Images\\Medecin.jpg",20,20).getImage());
 
     }
 
@@ -65,6 +67,7 @@ public class Fenetre_Profil
 
     public  void Visible(Object P)
     {
+
 
         Nom.setVisible(true);
         Login.setVisible(true);
@@ -169,6 +172,8 @@ public class Fenetre_Profil
         Suite.setContentPane(T);
         list1.setVisible(false);
         textArea1.setVisible(false);
+        pennee.setVisible(false);
+
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Suite.setPreferredSize(new Dimension(880,680));
         Suite.setResizable(false);
@@ -177,7 +182,6 @@ public class Fenetre_Profil
     }
 
     private void createUIComponents(Object O) {
-
 
         Nom.setVisible(false);
         Login.setVisible(false);
@@ -236,10 +240,6 @@ public class Fenetre_Profil
         }
     }
 
-    public JPanel getT() {
-        return T;
-    }
-
     public JButton getSupprimerCompteButton() {
         return supprimerCompteButton;
     }
@@ -272,9 +272,6 @@ public class Fenetre_Profil
         return list1;
     }
 
-    public JTextArea getTextArea1() {
-        return textArea1;
-    }
 
     public JButton getModifierInformationsButton() {
         return modifierInformationsButton;
@@ -282,30 +279,6 @@ public class Fenetre_Profil
 
     public JButton getRetourButton() {
         return retourButton;
-    }
-
-    public JLabel getNmLabel() {
-        return nmLabel;
-    }
-
-    public JLabel getLgLabel() {
-        return lgLabel;
-    }
-
-    public JLabel getMpLabel() {
-        return mpLabel;
-    }
-
-    public JLabel getEmlLabel() {
-        return emlLabel;
-    }
-
-    public JLabel getSpeLabel() {
-        return speLabel;
-    }
-
-    public JLabel getSpecialiteLabel() {
-        return specialiteLabel;
     }
 
     public JButton getModifierButton() {
@@ -326,6 +299,7 @@ public class Fenetre_Profil
         {
             afficherRdvRadioButton.setIcon(Resize("Images\\On.png",28,13));
             list1.setVisible(true);
+            pennee.setVisible(true);
             textArea1.setVisible(true);
             supprimerRdvButton.setVisible(true);
             if(O.getClass()==Medecin.class) {
@@ -347,6 +321,7 @@ public class Fenetre_Profil
         {
             supprimerRdvButton.setVisible(false);
             list1.setVisible(false);
+            pennee.setVisible(false);
             textArea1.setVisible(false);
             textArea1.setText("");
             afficherRdvRadioButton.setIcon(Resize("Images\\Off.png",28,13));

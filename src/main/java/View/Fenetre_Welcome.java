@@ -9,7 +9,7 @@ public class Fenetre_Welcome {
     private JCheckBox Medecin;
     private JCheckBox Patient;
 
-    static JFrame Suite = new JFrame("Suite");
+    static JFrame Suite = new JFrame("Welcome");
 
     public Fenetre_Welcome(){}
 
@@ -20,6 +20,8 @@ public class Fenetre_Welcome {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
+
+        Suite.setIconImage(Resize("Images\\Medecin.jpg",20,20).getImage());
 
         Suite.setContentPane(panel1);
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

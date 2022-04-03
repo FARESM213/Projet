@@ -33,11 +33,6 @@ public class Patient {
 
     }
 
-    void Set_id (int id) { id_patient=id;}
-    void Set_nom (String nom) {nom_patient=nom;}
-    void Set_log (String login) {login_patient=login;}
-    void Set_mdp (String mdp) {mdp_patient=mdp;}
-
     public int Get_id() { return id_patient;}
     public String Get_nom() { return nom_patient;}
     public String Get_log() { return login_patient;}

@@ -2,13 +2,12 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Login extends JPanel{
 
     public  JPanel PannelMain;
     public JFrame Log = new JFrame("Login");
+
     public JButton button1;
     public JTextField textField1;
     public JPasswordField passwordField1;
@@ -23,6 +22,7 @@ public class Login extends JPanel{
             e.printStackTrace();
         }
         createUIComponents();
+        Log.setIconImage((Resize("Images\\Medecin.jpg",20,20).getImage()));
         retourButton.setIcon(Resize("Images\\return.png",20,20));
         Log.setContentPane(PannelMain);
         Log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

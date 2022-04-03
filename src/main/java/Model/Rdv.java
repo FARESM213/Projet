@@ -35,19 +35,6 @@ public class Rdv {
 
     }
 
-
-    void Set_id (int id) { id_rdv=id;}
-    void Set_med (int med) {id_med=med;}
-    void Set_pat (int pat) {id_pat=pat;}
-    void Set_lieu (String lieu) {rdv_lieu=lieu;}
-    void Set_motif (String motif) {rdv_motif=motif;}
-    void Set_duree(int duree) {rdv_duree=duree;}
-    void Set_horaire (int horarire) {rdv_horaire=horarire;}
-    void Set_date (LocalDate date) {rdv_date=date;}
-    void Set_etat (boolean e) {etat=e;}
-
-
-
     public int Get_id() { return id_rdv;}
     public int Get_med() { return id_med;}
     public int Get_pat() { return id_pat;}

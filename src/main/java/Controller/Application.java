@@ -6,8 +6,6 @@ import Model.*;
 import View.Login;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -227,12 +225,9 @@ public class Application {
     public Application(int i,Welcome2 w) throws SQLException, ClassNotFoundException {
         init();
         L.Logt();
-        L.getRetourButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Set_frame(false);
-                w.Fenetre.SetView(true);
-            }
+        L.getRetourButton().addActionListener(e -> {
+            Set_frame(false);
+            w.Fenetre.SetView(true);
         });
         L.getButton1().addActionListener(e -> {
             int trouve=0;

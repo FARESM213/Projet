@@ -2,8 +2,6 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Fenetre_Welcome2{
 
@@ -13,7 +11,7 @@ public class Fenetre_Welcome2{
     private JPanel P;
     private JLabel Crr;
     private JButton retourButton;
-    static JFrame Welcome2 = new JFrame("Welcome2");
+    static JFrame Welcome2 = new JFrame("Welcome");
 
 
     public Fenetre_Welcome2() {
@@ -27,6 +25,8 @@ public class Fenetre_Welcome2{
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
+
+        Welcome2.setIconImage(Resize("Images\\Medecin.jpg",20,20).getImage());
 
         retourButton.setIcon(Resize("Images\\return.png",20,20));
         Welcome2.setContentPane(P);

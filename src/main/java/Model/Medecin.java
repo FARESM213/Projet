@@ -38,11 +38,6 @@ public class Medecin {
         image=img;
         hopital=h;
     }
-    void Set_id (int id) { id_medecin=id;}
-    void Set_nom (String nom) {nom_medecin=nom;}
-    void Set_log (String login) {login_medecin=login;}
-    void Set_mdp (String mdp) {mdp_medecin=mdp;}
-    void Set_job (String job) {med_job=job;}
 
     public int Get_id() { return id_medecin;}
     public String Get_nom () { return nom_medecin;}
