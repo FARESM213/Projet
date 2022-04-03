@@ -107,7 +107,18 @@ public class Suite {
             }
             else if (Fenetre.getDuRadioButton().isSelected())
             {
-                whouere+= " AND rdv_date BETWEEN '"+date1+ "' AND '"+date2+"'  ";
+                if (date1.compareTo(date2)<0)
+                {
+                    whouere+= " AND rdv_date BETWEEN '"+date1+ "' AND '"+date2.plusDays(1)+"'  ";
+                }
+                else if (date1.compareTo(date2)>0)
+                {
+                    whouere+= " AND rdv_date BETWEEN '"+date1.plusDays(1)+ "' AND '"+date2+"'  ";
+                }
+                else if (date1.equals(date2))
+                {
+                    whouere+= " AND rdv_date='"+date1+ "' ";
+                }
             }
 
             try
