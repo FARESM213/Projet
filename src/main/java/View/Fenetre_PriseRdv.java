@@ -2,6 +2,7 @@ package View;
 
 import Controller.Application;
 import Model.Medecin;
+import Model.Patient;
 import Model.Rdv;
 
 import javax.swing.*;
@@ -43,14 +44,14 @@ public class Fenetre_PriseRdv {
 
     public Fenetre_PriseRdv(int indice, Application App, Rdv O,Object M) throws ParseException
     {
-        Suu(indice);
+        Suu(indice,M);
         createUIComponents(App,O,indice,M);
     }
 
-    public void Suu(int indice) throws ParseException {
+    public void Suu(int indice,Object M) throws ParseException {
 
         Labelll.setIcon(Resize("Images\\stethoscope.png",331,446));
-        Visible(indice);
+        Visible(indice,M);
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
@@ -73,15 +74,38 @@ public class Fenetre_PriseRdv {
         Suite.add(Pnl, BorderLayout.WEST);
         Suite.add(Pannnnel, BorderLayout.EAST);
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Suite.setPreferredSize(new Dimension(800, 680));
+        Suite.setPreferredSize(new Dimension(800, 550));
         Suite.setResizable(false);
         Suite.pack();
         Suite.setVisible(true);
     }
 
+    public void renit()
+    {
+         annulerButton.setVisible(false);
+         Pnl.setVisible(false);
+         comboBox1.setVisible(false)   ;
+         nmrLabel.setVisible(false)     ;
+         mdcLabel.setVisible(false)      ;
+         dtLabel.setVisible(false)        ;
+         hrrLabel.setVisible(false);
+         hptLabel.setVisible(false) ;
+         motifLabel1.setVisible(false);
+         spinner1.setVisible(false);
+         spinner2.setVisible(false);
+         dureeLabel.setVisible(false);
+         horaireLabel.setVisible(false);
+         hopitalLabel.setVisible(false);
+         dateLabel.setVisible(false);
+         medecinLabel.setVisible(false);
+         numeroLabel.setVisible(false);
+         Labelll.setVisible(false);
+         Pannnnel.setVisible(false);
+    }
+
     private void createUIComponents(Application App,Rdv O, int indice,Object M)
     {
-        if (indice==1)
+        if (M.getClass()== Patient.class)
         {
             String nom="";
             for (Medecin N:App.Med) {
@@ -151,9 +175,9 @@ public class Fenetre_PriseRdv {
     }
 
 
-    public void Visible(int indice) throws ParseException
+    public void Visible(int indice,Object M) throws ParseException
     {
-        if (indice ==0)
+        if (Medecin.class == M.getClass())
         {
             SpinnerDateModel model = new SpinnerDateModel();
             spinner1.setModel(model);
@@ -186,7 +210,7 @@ public class Fenetre_PriseRdv {
     }
 
     public void Erreur(int min) {
-        JOptionPane.showMessageDialog(null,"Il semblerait que vous ayez deja un rdv programmé a "+min+"","Erreur",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null,"Il semblerait que vous ayez deja un rdv programmé a "+min+" h ","Creneau non disponible",JOptionPane.INFORMATION_MESSAGE);
 
     }
 
@@ -200,5 +224,10 @@ public class Fenetre_PriseRdv {
         return imageIcon;
     }
 
+    public void Erreur_2() {
+
+        JOptionPane.showMessageDialog(null,"Desolé, le creneau que vous voulez creer n'est plus disponible ","Creneau non disponible",JOptionPane.INFORMATION_MESSAGE);
+
+    }
 }
 

@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Medecin;
+import Model.Patient;
 import View.Fenetre_Suite;
 import View.PieChartExample;
 
@@ -24,6 +25,12 @@ public class Suite {
         }
         Fenetre.Suu(App,i);
         Fenetre.getAppliquerButton().addActionListener(e -> {
+
+            try {
+                App.init();
+            } catch (SQLException | ClassNotFoundException ex) {
+                ex.printStackTrace();
+            }
 
             String whouere="";
 
@@ -124,7 +131,11 @@ public class Suite {
 
         });
         Fenetre.getConsulterProfilButton().addActionListener(e -> {
-
+            try {
+                App.init();
+            } catch (SQLException | ClassNotFoundException ex) {
+                ex.printStackTrace();
+            }
             Fenetre.setSuite(false);
             Profil F = new Profil(App,A,S);
             F.Fenetre.SetView(true);
@@ -138,7 +149,13 @@ public class Suite {
 
         Fenetre.getReserverButton().addActionListener(e -> {
 
-            if (i==1)
+            /*try {
+                App.init();
+            } catch (SQLException | ClassNotFoundException ex) {
+                ex.printStackTrace();
+            }*/
+
+            if (A.getClass()== Patient.class)
             {
                 if (!Fenetre.getElementListe())
                 {

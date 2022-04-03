@@ -9,13 +9,15 @@ import javax.mail.internet.MimeMessage;
 import java.io.*;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.List;
 
 
 public class Application {
 
-    public DaoConnexionInterface maconnexion;
+    public DaoConnexionInterface maconnexion= new Connexion();
 
     public final List<Patient> Pat = new ArrayList<>();
     public final List<Medecin> Med = new ArrayList<>();
@@ -64,9 +66,7 @@ public class Application {
 
     public void Update_Rdv(Rdv A, Object selectedItem, String text, Object p) throws SQLException {
 
-        int durree=A.Get_horaire()+A.Get_duree();
-
-        //System.out.println(durree);
+        int durree=A.Get_horaire()+(Integer)selectedItem;
         maconnexion.ExecuteRequest("UPDATE Rendez_vous SET etat=0 WHERE rdvno='"+A.Get_id()+"'");
         maconnexion.ExecuteRequest("UPDATE Rendez_vous SET rdv_duree='"+selectedItem+"' WHERE rdvno='"+A.Get_id()+"'");
         maconnexion.ExecuteRequest("UPDATE Rendez_vous SET rdv_motif='"+text+"' WHERE rdvno='"+A.Get_id()+"'");
@@ -85,10 +85,18 @@ public class Application {
 
     public void init() throws SQLException, ClassNotFoundException
         {
-        Pat.clear();
-        Med.clear();
-        Rendezvous.clear();
-        wow();
+            wow();
+            LocalDate date = LocalDate.now();
+            LocalTime time = LocalTime.now(ZoneId.systemDefault());
+            int h =time.getHour();
+            maconnexion.ExecuteRequest("UPDATE rendez_vous SET etat='0' WHERE CASE " +
+                    "WHEN rdv_date ='"+date+"' THEN rdv_date <= '"+date+"' AND rdv_horaire <='"+h+"'" +
+                    "WHEN rdv_date <'"+date+"' THEN rdv_date < '"+date+"'"+
+                    " END");
+            Pat.clear();
+            Med.clear();
+            Rendezvous.clear();
+            wow();
     }
 
     public void SuppMedecin(int id, String mdp) throws SQLException
@@ -165,6 +173,12 @@ public class Application {
             System.out.println("PROBLEME");
         }
 
+        try {
+            init();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
     public void AjouterMedecin(String nom, String login, String mdp, String job,String mail,byte [ ] img,String hopital) throws SQLException {
 
@@ -198,6 +212,11 @@ public class Application {
     {
         Rendezvous.add(new Rdv(id,med,0,date,motif,duree,horaire,lieu,etat,type));
         maconnexion.ajouterElement(Rendezvous.get(Rendezvous.size()-1));
+        try {
+            init();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
     void EnvoyerEmail(String Recever,String nom)
     {

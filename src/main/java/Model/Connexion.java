@@ -148,7 +148,6 @@ public class Connexion implements DaoConnexionInterface {
 
     public void ExecuteRequest(String S ) throws SQLException {
         stmt.executeUpdate(S);
-
     }
 }
 
