@@ -50,7 +50,7 @@ public class Fenetre_Creat {
         Suite.add(j, BorderLayout.CENTER);
         Suite.add(panel1, BorderLayout.WEST);
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Suite.setPreferredSize(new Dimension(800, 500));
+        Suite.setPreferredSize(new Dimension(960, 600));
         Suite.setResizable(false);
         Suite.pack();
         Suite.setVisible(true);

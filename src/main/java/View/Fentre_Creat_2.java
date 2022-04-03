@@ -55,7 +55,7 @@ public class Fentre_Creat_2 {
         retourButton.setIcon(Resize("Images\\return.png",20,20));
         creerButton.setIcon(Resize("Images\\equipe.png",20,20));
         Suite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Suite.setPreferredSize(new Dimension(800, 500));
+        Suite.setPreferredSize(new Dimension(960, 600));
         Suite.setResizable(false);
         Suite.pack();
         Suite.setVisible(true);
