@@ -67,8 +67,6 @@ public class Fenetre_Profil
 
     public  void Visible(Object P)
     {
-
-
         Nom.setVisible(true);
         Login.setVisible(true);
         mdp.setVisible(true);
