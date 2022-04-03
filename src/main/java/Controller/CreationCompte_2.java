@@ -35,7 +35,8 @@ public class CreationCompte_2 {
             });
 
         } else if(indice==1){//PATIENT
-            Fenetre.creerButton().addActionListener(e ->
+
+           Fenetre.creerButton().addActionListener(e ->
             {
                 String str = Fenetre.MDPField();
                 int buff=ISVALID(indice,App);
@@ -50,6 +51,7 @@ public class CreationCompte_2 {
                     catch (MessagingException | IOException ex) {ex.printStackTrace();}
                     Fenetre.SetView(false);}
             });
+
 
         }
         Fenetre.getRetourButton().addActionListener(e -> {
@@ -82,12 +84,14 @@ public class CreationCompte_2 {
             if (isValidText_1(Fenetre.LoginTextField(),Appli,B)){Fenetre.MELOGIN(false,Fenetre.LoginTF);}else{
                 buff++;
                 Fenetre.setLoginTextField("");
-                Fenetre.MELOGIN(true,Fenetre.LoginTF);}
+                Fenetre.MELOGIN(true,Fenetre.LoginTF);
+                Fenetre.setLoginTextField("");}
         }else if (indice==0){
             if (isValidText_1(Fenetre.LoginTextField(),Appli,A)){Fenetre.MELOGIN(false,Fenetre.LoginTF);}else{
                 buff++;
                 Fenetre.setLoginTextField("");
-                Fenetre.MELOGIN(true,Fenetre.LoginTF);}
+                Fenetre.MELOGIN(true,Fenetre.LoginTF);
+                Fenetre.setLoginTextField("");}
             if (isValidText(Fenetre.SPEField())){Fenetre.MESPE(false,Fenetre.SPETF);}else{
                 buff++;
                 Fenetre.setSPEField("");

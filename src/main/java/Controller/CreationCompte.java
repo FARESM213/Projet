@@ -13,7 +13,7 @@ import java.lang.String;
 
 public class CreationCompte {
 
-    private final Fenetre_Creat Fenetre = new Fenetre_Creat();
+    private Fenetre_Creat Fenetre = new Fenetre_Creat();
     Application Appli = new Application();
 
     public CreationCompte( int indice,Welcome2 w) throws SQLException, ClassNotFoundException {
@@ -21,8 +21,8 @@ public class CreationCompte {
         Appli.wow();
         if (indice==0){//MEDECIN
             Fenetre.creerButton().addActionListener(e -> {
-                        int buff = ISVALID(indice);
-                        String str = Fenetre.MDPField();
+                  int buff = ISVALID(indice);
+                  String str = Fenetre.MDPField();
 
                     if (buff == 0){try {
                         Application App = new Application(indice,w);
@@ -32,7 +32,7 @@ public class CreationCompte {
                     } catch (SQLException | ClassNotFoundException | IOException ex) {
                         ex.printStackTrace();
                     }
-                    Fenetre.SetView(false);}
+                    Fenetre.SetView(false);}else   buff = ISVALID(indice);
             });
 
 
@@ -50,7 +50,7 @@ public class CreationCompte {
                                 Fenetre.renit();
                             }
                         catch (SQLException | ClassNotFoundException | MessagingException | IOException ex) {ex.printStackTrace();}
-                    Fenetre.SetView(false);}
+                    Fenetre.SetView(false);}else buff = ISVALID(indice);
 
             });
 
@@ -104,6 +104,15 @@ public class CreationCompte {
 
         return buff;
     }
+
+    public int Clean(int indice){
+
+
+
+        return 0;
+    }
+
+
 
     public byte[] Photo_const() throws IOException {
 
