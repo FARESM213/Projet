@@ -49,7 +49,7 @@ public class Suite {
 
             if(spe!=null )
             {
-                whouere+="INNER JOIN Medecin WHERE loc='"+spe+"' AND loc=hopital ";
+                whouere+="LEFT JOIN Medecin ON rendez_vous.loc=Medecin.hopital WHERE loc='"+spe+"'";
             }
             else
             {

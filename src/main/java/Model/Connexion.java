@@ -125,8 +125,8 @@ public class Connexion implements DaoConnexionInterface {
     public ResultSet Search(String table, String Elem, String whouere) throws SQLException
     {
         stmt = conn.createStatement();
-        System.out.println("SELECT " + Elem + " FROM " + table + " " + whouere);
-        return stmt.executeQuery("SELECT " + Elem + " FROM " + table + " " + whouere);
+        System.out.println("SELECT DISTINCT " + Elem + " FROM " + table + " " + whouere);
+        return stmt.executeQuery("SELECT DISTINCT " + Elem + " FROM " + table + " " + whouere);
     }
 
     public ArrayList<Object> Selection_distinct(String Table, String Champ) throws SQLException
